@@ -1,0 +1,14 @@
+<section>
+  <h1>HTML Preview</h1>
+
+  <h4>Templates</h4> 
+
+  <button ng-click="setTemplate('partials/starter-template.html')">Materialize Starter</button>
+
+  <button ng-click="setTemplate('partials/one-page.html')">One-Page Starter</button>
+
+  <!-- {{ $parent.chosenPalette }} -->
+
+  <div ng-include="chosenTemplate"></div>
+
+</section>

@@ -1,0 +1,11 @@
+.color {
+  margin: 10px 2.5px;
+  height:40px;
+  width: 80px;
+  float: left;
+  display: inline-block;
+}
+
+.clear {
+  clear: both;
+}
