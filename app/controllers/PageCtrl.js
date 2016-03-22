@@ -27,7 +27,7 @@ app.controller("PageCtrl",
     };
 
 
-    $scope.chosenPalette = [];
+    $scope.chosenPalette = null;
 
     $scope.setChosenPalette = (palette) => {
       $scope.chosenPalette = palette;

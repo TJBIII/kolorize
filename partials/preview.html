@@ -3,6 +3,12 @@
 
   <h4>Templates</h4> 
 
+  <div ng-repeat="color in $parent.chosenPalette.colors">
+    <div class="color" style="background-color: {{color}}">{{color}}</div>
+  </div>
+
+  <div class="clear"></div>
+
   <button ng-click="setTemplate('partials/starter-template.html')">Materialize Starter</button>
 
   <button ng-click="setTemplate('partials/one-page.html')">One-Page Starter</button>
