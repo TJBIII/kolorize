@@ -9,6 +9,12 @@
 
   <!-- {{ $parent.chosenPalette }} -->
 
-  <div ng-include="chosenTemplate"></div>
+  <button ng-click="cycleColors()">Generate Previews</button>
+
+  <div id="output"></div>
+
+  <div id="template-node">
+    <div ng-include="chosenTemplate"></div>
+  </div>
 
 </section>
