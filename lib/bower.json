@@ -23,6 +23,8 @@
     "angular": "^1.5.2",
     "angular-route": "^1.5.2",
     "firebase": "^2.4.1",
-    "angularfire": "^1.1.4"
+    "angularfire": "^1.1.4",
+    "jquery-ui": "^1.11.4",
+    "angular-ui-sortable": "^0.13.4"
   }
 }

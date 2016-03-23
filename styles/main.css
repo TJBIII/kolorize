@@ -3,7 +3,12 @@
   height:40px;
   width: 80px;
   float: left;
-  display: inline-block;
+  display: block;
+}
+
+#palette {
+  border: 2px solid black;
+  height: 60px;
 }
 
 .clear {
