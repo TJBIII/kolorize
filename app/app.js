@@ -1,7 +1,7 @@
 "use strict";
 
 let app = angular.module("Kolorize", ["ngRoute", "firebase"])
-  .constant('firebaseURL', "https://kolorize.firebaseio.com/");)
+  .constant('firebaseURL', "https://kolorize.firebaseio.com/");
 
 
 /*
@@ -17,3 +17,54 @@ let isAuth = (authFactory) => new Promise((resolve, reject) => {
     reject();
   }
 });
+
+
+/*
+  Set up routes for app
+ */
+app.config(["$routeProvider",
+  function ($routeProvider) {
+    $routeProvider.
+      when("/login", {
+        templateUrl: "partials/login.html",
+        controller: "LoginCtrl"
+      }).
+      when("/logout", {
+        templateUrl: "partials/login.html",
+        controller: "LoginCtrl"
+      }).
+      when("/palettes", {
+        templateUrl: "partials/palettes.html",
+        controller: "PaletteCtrl",
+        resolve: { isAuth }
+      }).
+      when("/preview", {
+        templateUrl: "partials/preview.html",
+        controller: "PreviewCtrl",
+        resolve: { isAuth }
+      }).
+      otherwise({
+        redirectTo: "/"
+      });
+  }]);
+
+
+/*
+  When the application first loads, redirect the user to the login
+  form if there is no authentication
+ */
+app.run([
+  "$location",
+  "firebaseURL",
+
+  function ($location, firebaseURL) {
+    let appRef = new Firebase(firebaseURL);
+
+    appRef.onAuth(authData => {
+      if (!authData) {
+        console.log("onAuth detected unauthenticated client");
+        $location.path("/login");
+      }
+    });
+  }
+]);

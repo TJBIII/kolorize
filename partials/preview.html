@@ -1,0 +1,24 @@
+<section>
+  <h1>HTML Preview</h1>
+
+  <h4>Templates</h4> 
+
+  <div ng-repeat="color in $parent.chosenPalette.colors">
+    <div class="color" style="background-color: {{color}}">{{color}}</div>
+  </div>
+
+  <div class="clear"></div>
+
+  <button ng-click="setTemplate('partials/starter-template.html')">Materialize Starter</button>
+
+  <button ng-click="setTemplate('partials/one-page.html')">One-Page Starter</button>
+
+  <button ng-click="generatePreviews()">Generate Previews</button>
+
+  <div id="output"></div>
+
+  <div id="template-node">
+    <div ng-include="chosenTemplate"></div>
+  </div>
+
+</section>

@@ -1,0 +1,26 @@
+<article class="palette-list">
+
+  <header><h1>Palettes</h1></header>
+
+  <section>
+
+    <div ng-repeat="palette in palettes">
+      <!-- <a href="#/palette/{{ palette.id }}">{{ palette.colors}}</a> -->
+      <h4>{{palette.name || "Unamed Palette"}}</h4>
+      <div ng-repeat="color in palette.colors">
+        <div class="color" style="background-color: {{color}}">{{color}}</div>
+      </div>
+
+      <a href="#/preview" ng-click="setChosenPalette(palette)"><button>Preview</button></a>
+      <!-- clear before the next palette -->
+      <div class="clear"></div>
+    </div>
+
+    <div style="margin-top: 40px;">
+      <a href="#/palettes/new">Create New Palette</a>
+    </div>
+
+  </section>
+
+</article>
+
