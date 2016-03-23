@@ -37,6 +37,10 @@ app.config(["$routeProvider",
         templateUrl: "partials/palettes.html",
         controller: "PaletteCtrl",
         resolve: { isAuth }
+      }).when("/new-palette", {
+        templateUrl: "partials/new-palette.html",
+        controller: "NewPaletteCtrl",
+        resolve: { isAuth }
       }).
       when("/preview", {
         templateUrl: "partials/preview.html",
