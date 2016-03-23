@@ -6,9 +6,8 @@ app.controller("PreviewCtrl",
   "$location",
   "$http",
   "firebaseURL",
-  "$q",
 
-  function ($scope, $location, $http, firebaseURL, $q) {
+  function ($scope, $location, $http, firebaseURL) {
 
     $scope.chosenTemplate = 'partials/starter-template.html';
 
@@ -17,13 +16,6 @@ app.controller("PreviewCtrl",
     }
 
     const node = document.getElementById('template-node');
-
-    //array to hold all of the generated preview images
-    let imgs = [];
-
-    //array of colors from the palette
-    //only take the first 3 colors
-    let colors = $scope.$parent.chosenPalette.colors.slice(0, 3);
 
 
     let permutator = function (inputArr) {
@@ -69,6 +61,14 @@ app.controller("PreviewCtrl",
 
     $scope.generatePreviews = function() {
 
+
+      //array of colors from the palette
+      //only take the first 3 colors
+      let colors = $scope.$parent.chosenPalette.colors.slice(0, 3);
+
+      //array to hold all of the generated preview images
+      let imgs = [];
+
       console.log("Generating Previews");
       var start = new Date().getTime();
 
@@ -96,6 +96,9 @@ app.controller("PreviewCtrl",
         var end = new Date().getTime();
         var time = end - start;
         console.log('Execution time: ' + time);
+
+        //remove old previews (if any) and place new ones on the page
+        $('#output').html('');
         imgs.forEach((element) => $('#output').append(element));
       })
     };

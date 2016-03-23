@@ -8,10 +8,10 @@
     </div>
   </div> -->
   <ul ui-sortable ng-model="palette">
-      <li class="color" ng-repeat="color in palette" class="item" style="background-color: {{color}}">
-        {{color}}
-      </li>
-    </ul>
+    <li class="color" ng-repeat="color in palette" style="background-color: {{color}}">
+      {{color}}
+    </li>
+  </ul>
   <div class="clear"></div>
 
   <button ng-click="savePalette()">Save Palette</button>

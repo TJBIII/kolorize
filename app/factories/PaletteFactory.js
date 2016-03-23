@@ -7,7 +7,7 @@ app.factory("paletteFactory", ($q, $http, authFactory, firebaseURL) =>
       $http
         .get(`${firebaseURL}/palettes.json?orderBy="uid"&equalTo="${user.uid}"`)
         .success(
-          songCollection => resolve(songCollection),
+          palettes => resolve(palettes),
           error => reject(error)
         );
     })

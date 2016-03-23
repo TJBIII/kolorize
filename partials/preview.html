@@ -3,9 +3,15 @@
 
   <h4>Templates</h4> 
 
-  <div ng-repeat="color in $parent.chosenPalette.colors">
+<!--   <div ng-repeat="color in $parent.chosenPalette.colors">
     <div class="color" style="background-color: {{color}}">{{color}}</div>
-  </div>
+  </div> -->
+
+  <ul ui-sortable ng-model="$parent.chosenPalette.colors">
+    <li class="color" ng-repeat="color in $parent.chosenPalette.colors" style="background-color: {{color}}">
+      {{color}}
+    </li>
+  </ul>
 
   <div class="clear"></div>
 
