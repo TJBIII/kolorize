@@ -1,0 +1,25 @@
+{
+  "name": "kolorize",
+  "version": "1.0.0",
+  "description": "A color picker and HTML preview tool",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/TJBIII/kolorize.git"
+  },
+  "author": "Thomas Buida <thomasbuida@gmail.com>",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/TJBIII/kolorize/issues"
+  },
+  "homepage": "https://github.com/TJBIII/kolorize#readme",
+  "devDependencies": {
+    "gulp": "^3.9.1",
+    "gulp-jshint": "^2.0.0",
+    "jshint": "^2.9.1",
+    "jshint-stylish": "^2.1.0"
+  }
+}

@@ -1,0 +1,28 @@
+{
+  "name": "Kolorize",
+  "homepage": "https://github.com/TJBIII/kolorize",
+  "authors": [
+    "Thomas Buida <thomasbuida@gmail.com>"
+  ],
+  "description": "A color picker and HTML preview tool",
+  "main": "",
+  "moduleType": [
+    "es6",
+    "node"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "jquery": "^2.2.2",
+    "angular": "^1.5.2",
+    "angular-route": "^1.5.2",
+    "firebase": "^2.4.1",
+    "angularfire": "^1.1.4"
+  }
+}
