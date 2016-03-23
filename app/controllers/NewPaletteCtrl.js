@@ -17,9 +17,15 @@ app.controller("NewPaletteCtrl",
 
 
     $scope.add = function () {
+      //dont allow duplicate colors
+      for (let color in $scope.palette){
+        if ($scope.colorPicker === $scope.palette[color]){
+          return;
+        }
+      }
       $scope.palette.push($scope.colorPicker);
     }
-
+    
 
     $scope.savePalette = function () {
       let user = authFactory.getUser();

@@ -2,9 +2,16 @@
   <h1>Create New Palette</h1>
 
   <input type="text" ng-model="paletteName" placeholder="New Palette Name">
-  <div ng-repeat="color in palette">
-    <div class="color" style="background-color: {{color}}">{{color}}</div>
-  </div>
+  <!-- <div ui-sortable ng-model="palette">
+    <div ng-repeat="color in palette">
+      <div class="color" style="background-color: {{color}}">{{color}}</div>
+    </div>
+  </div> -->
+  <ul ui-sortable ng-model="palette">
+      <li class="color" ng-repeat="color in palette" class="item" style="background-color: {{color}}">
+        {{color}}
+      </li>
+    </ul>
   <div class="clear"></div>
 
   <button ng-click="savePalette()">Save Palette</button>
