@@ -1,0 +1,18 @@
+<section>
+  <h1>Create New Palette</h1>
+
+  <input type="text" ng-model="paletteName" placeholder="New Palette Name">
+  <div ng-repeat="color in palette">
+    <div class="color" style="background-color: {{color}}">{{color}}</div>
+  </div>
+  <div class="clear"></div>
+
+  <button ng-click="savePalette()">Save Palette</button>
+
+
+  <h6>Add from Color Picker</h6>
+  <input type="color" ng-model="colorPicker"/>
+  <button ng-click="add()">Add to Palette</button> 
+
+
+</section>
