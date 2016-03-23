@@ -27,7 +27,8 @@ app.controller("PageCtrl",
     };
 
 
-    $scope.chosenPalette = null;
+    //defualt palette;
+    $scope.chosenPalette = { colors: ['#2a4d69','#4b86b4','#adcbe3','#e7eff6'] };
 
     $scope.setChosenPalette = function (palette) {
       $scope.chosenPalette = palette;
