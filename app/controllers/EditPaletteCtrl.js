@@ -51,18 +51,8 @@ app.controller("EditPaletteCtrl",
 
 
       let paletteRef = new Firebase(`${firebaseURL}palettes/${id}`);
-
       // Modify the name and colors but leave everything else unchanged
       paletteRef.update(updatedPalette);
-
-
-        // update the palette on Firebase
-      // $http.put(`${firebaseURL}palettes/${id}.json`, 
-      //   JSON.stringify(updatedPalette))
-      //   .then(
-      //     () => $location.url("/palettes"),      // Handle resolve
-      //     (response) => console.log(response)  // Handle reject
-      //   );
     }
 
 

@@ -16,11 +16,12 @@ app.controller("NewPaletteCtrl",
     $scope.palette = [];
     $scope.paletteName = "";
 
+
     $scope.compliment = function () {
-      console.log($scope.colorPicker);
       let rgbArr = colorspaceFactory.hexToRgb($scope.colorPicker);
       colorspaceFactory.compliment(rgbArr);
     }
+    
 
     $scope.add = function () {
       //dont allow more than 8 colors in a palette
