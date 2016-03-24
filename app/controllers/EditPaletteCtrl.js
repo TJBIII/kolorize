@@ -12,7 +12,6 @@ app.controller("EditPaletteCtrl",
     $scope.colorPicker = "#ffffff";
     $scope.palette = $scope.$parent.chosenPalette;
 
-    console.log("scope.palette", $scope.palette);
 
 
     $scope.add = function () {
@@ -27,14 +26,15 @@ app.controller("EditPaletteCtrl",
           return;
         }
       }
+      //add the color to the palette
       $scope.palette.colors.push($scope.colorPicker);
-      $scope.updatePalette();
+      //update the palette on firebaseURL
+      // $scope.updatePalette();
     }
 
 
 
-
-    $scope.updatePalette = function () {
+    $scope.updateFirebase = function () {
     
       console.log("palette", $scope.palette.id);
 
@@ -43,39 +43,32 @@ app.controller("EditPaletteCtrl",
       let colorsStr = $scope.palette.colors.join(',');
 
 
+      let updatedPalette = {
+        name: $scope.palette.name,
+        colors: colorsStr
+      };
+
+
+
       let paletteRef = new Firebase(`${firebaseURL}palettes/${id}`);
 
       // Modify the name and colors but leave everything else unchanged
-      paletteRef.update({ name: $scope.palette.name, colors: colorsStr });
+      paletteRef.update(updatedPalette);
 
 
-
-      // $.ajax({
-      //   url: firebaseURL +`${id}`,
-      //   method: 'POST'
-      // })
-      // .done(function() {
-      //   console.log("palette updated on firebase");
-      // })
-      // .fail(function() {
-      //   console.log("error while updating palette on firebase");
-      // });
+        // update the palette on Firebase
+      // $http.put(`${firebaseURL}palettes/${id}.json`, 
+      //   JSON.stringify(updatedPalette))
+      //   .then(
+      //     () => $location.url("/palettes"),      // Handle resolve
+      //     (response) => console.log(response)  // Handle reject
+      //   );
+    }
 
 
+    //if a color is added or they order is changed, update firebase
+    $scope.$watch('palette.colors', $scope.updateFirebase, true);
 
-      // update the palette on Firebase
-      // $http.post(`${firebaseURL}palettes/${id}.json`,
-
-      //   // Remember to stringify objects/arrays before
-      //   // sending them to an API
-      //   JSON.stringify($scope.palette)
-
-      // // The $http.post() method returns a promise, so you can use then()
-      // ).then(
-      //   () => $location.url("/palettes"),      // Handle resolve
-      //   (response) => console.log(response)  // Handle reject
-      // );
-    };
 
 
     $scope.delete = function (palette) {

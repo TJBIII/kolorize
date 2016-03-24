@@ -1,6 +1,9 @@
 <section>
   <h1>Edit</h1>
 
+  <input type="text" ng-model="palette.name" placeholder="Palette Name" ng-blur="updateFirebase()">
+  <!-- <input type="text" ng-model="palette.name" placeholder="Palette Name" > -->
+
   <ul ui-sortable ng-model="$parent.chosenPalette.colors">
     <li class="color" ng-repeat="color in $parent.chosenPalette.colors" style="background-color: {{color}}">
       {{color}}
@@ -8,7 +11,7 @@
   </ul>
 
   <div class="clear"></div>
-  
+
   <a ng-click="delete(palette)"><button>Delete</button></a>
 
 <!-- copied from new-palette html -->
