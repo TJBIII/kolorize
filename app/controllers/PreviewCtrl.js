@@ -10,6 +10,19 @@ app.controller("PreviewCtrl",
   function ($scope, $location, $http, firebaseURL) {
 
     $scope.chosenTemplate = 'partials/starter-template.html';
+    $scope.blurMode = false;
+
+
+    $scope.toggleBlur = function () {
+      if ($scope.blurMode){
+        $('#output').children().removeClass('blurred');
+        $scope.blurMode = false;
+      } else {
+        $('#output').children().addClass('blurred');
+        $scope.blurMode = true;
+      }
+    }
+
 
     $scope.setTemplate = function (str) {
       $scope.chosenTemplate = str;
@@ -60,6 +73,9 @@ app.controller("PreviewCtrl",
 
 
     $scope.generatePreviews = function() {
+      //start the preloader spinner
+      // $('#loader').addClass('active');
+
 
 
       //array of colors from the palette
