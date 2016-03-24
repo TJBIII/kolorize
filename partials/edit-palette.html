@@ -1,0 +1,27 @@
+<section>
+  <h1>Edit</h1>
+
+  <input type="text" ng-model="palette.name" placeholder="Palette Name" ng-blur="updateFirebase()">
+  <!-- <input type="text" ng-model="palette.name" placeholder="Palette Name" > -->
+
+  <ul ui-sortable ng-model="$parent.chosenPalette.colors">
+    <li class="color" ng-repeat="color in $parent.chosenPalette.colors" style="background-color: {{color}}">
+      {{color}}
+    </li>
+  </ul>
+
+  <div class="clear"></div>
+
+  <a ng-click="delete(palette)"><button>Delete</button></a>
+
+<!-- copied from new-palette html -->
+  <h6>Add from Color Picker</h6>
+  <input type="color" ng-model="colorPicker"/>
+  <button ng-click="add()">Add to Palette</button> 
+
+
+  <h6>Add from Image</h6>
+  <input type="file" id="imageLoader" name="imageLoader"/>
+  <canvas id="imageCanvas"></canvas>
+<!-- end copied from new-palette html -->
+</section>

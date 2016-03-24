@@ -10,6 +10,9 @@ app.controller("PageCtrl",
 
   function ($scope, $location, $http, authFactory, firebaseURL) {
 
+    $scope.palettes = [];
+
+
     // Local variables
     let ref = new Firebase(firebaseURL);
 
