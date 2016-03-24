@@ -1,0 +1,11 @@
+<section>
+  <h1>Edit</h1>
+
+
+  <ul ui-sortable ng-model="$parent.chosenPalette.colors">
+    <li class="color" ng-repeat="color in $parent.chosenPalette.colors" style="background-color: {{color}}">
+      {{color}}
+    </li>
+  </ul>
+
+</section>

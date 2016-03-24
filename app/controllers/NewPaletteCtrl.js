@@ -17,6 +17,11 @@ app.controller("NewPaletteCtrl",
 
 
     $scope.add = function () {
+      //dont allow more than 8 colors in a palette
+      if ($scope.palette.length >= 8){
+        console.log("only 8 colors per palette allowed");
+        return
+      }
       //dont allow duplicate colors
       for (let color in $scope.palette){
         if ($scope.colorPicker === $scope.palette[color]){
@@ -51,31 +56,38 @@ app.controller("NewPaletteCtrl",
     };
 
 
-    // $(function () {
-      let imageLoader = $('#imageLoader');
 
-      imageLoader.change(handleImage);
-
-      let canvas = $('#imageCanvas')[0];
-      let ctx = canvas.getContext('2d');
-
-
-
-      function handleImage(e){
-        var reader = new FileReader();
-        reader.onload = function(event){
-            var img = new Image();
-            img.onload = function(){
-                canvas.width = img.width;
-                canvas.height = img.height;
-                ctx.drawImage(img,0,0);
-            }
-            img.src = event.target.result;
-        }
-        reader.readAsDataURL(e.target.files[0]);     
+    let deleteColor = function (hexStr) {
+      let colorIdx = $scope.palette.indexOf(hexStr);
+      if (colorIdx >= 0) {
+        $scope.palette.splice(colorIdx, 1);
       }
-    // })
+      $scope.$apply();
+    }
 
+
+    let imageLoader = $('#imageLoader');
+
+    imageLoader.change(handleImage);
+
+    let canvas = $('#imageCanvas')[0];
+    let ctx = canvas.getContext('2d');
+
+
+
+    function handleImage(e){
+      var reader = new FileReader();
+      reader.onload = function(event){
+          var img = new Image();
+          img.onload = function(){
+              canvas.width = img.width;
+              canvas.height = img.height;
+              ctx.drawImage(img,0,0);
+          }
+          img.src = event.target.result;
+      }
+      reader.readAsDataURL(e.target.files[0]);     
+    }
 
   }
 
