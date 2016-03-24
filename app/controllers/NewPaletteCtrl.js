@@ -41,7 +41,7 @@ app.controller("NewPaletteCtrl",
       };
       console.log("newPalette", newPalette);
 
-      // POST the song to Firebase
+      // POST the palette to Firebase
       $http.post(`${firebaseURL}/palettes.json`,
 
         // Remember to stringify objects/arrays before
