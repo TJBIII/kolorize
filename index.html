@@ -13,7 +13,7 @@
 
   <div ng-controller="PageCtrl">
     <nav ng-include="'partials/nav.html'"></nav>
-    <div ng-view></div>
+    <div class="container" ng-view></div>
   </div>
 
   <script src="lib/bower_components/jquery/dist/jquery.min.js"></script>
@@ -29,6 +29,7 @@
   <script src="app/app.js"></script>
   <script src="app/factories/AuthFactory.js"></script>
   <script src="app/factories/PaletteFactory.js"></script>
+  <script src="app/factories/ColorspaceFactory.js"></script>
   <script src="app/controllers/PageCtrl.js"></script>
   <script src="app/controllers/LoginCtrl.js"></script>
   <script src="app/controllers/PaletteCtrl.js"></script>
