@@ -9,8 +9,9 @@ app.controller("NewPaletteCtrl",
   "$location",
   "colorspaceFactory",
   "imgProcessFactory",
+  "kmeansFactory",
 
-  function ($scope, $http, firebaseURL, authFactory, $location, colorspaceFactory, imgProcessFactory) {
+  function ($scope, $http, firebaseURL, authFactory, $location, colorspaceFactory, imgProcessFactory, kmeansFactory) {
 
     $scope.colorPicker = "#ffffff";
 
@@ -100,7 +101,13 @@ app.controller("NewPaletteCtrl",
     }
 
 
-    $scope.processImage = () => imgProcessFactory.processImg(ctx);
+    $scope.processImage = () => {
+      let points = imgProcessFactory.processImg(ctx);
+
+      let results = kmeansFactory.kmeans(points, 3, 10);
+      console.log("results", results);
+
+    }
 
 
   }
