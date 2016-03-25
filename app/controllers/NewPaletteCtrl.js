@@ -17,6 +17,7 @@ app.controller("NewPaletteCtrl",
 
     $scope.palette = [];
     $scope.paletteName = "";
+    $scope.clusterColors;
 
 
     $scope.compliment = function () {
@@ -106,6 +107,12 @@ app.controller("NewPaletteCtrl",
 
       let results = kmeansFactory.kmeans(points, 3, 10);
       console.log("results", results);
+
+      while (!results) {
+        results = kmeansFactory.kmeans(points, 3, 10);
+      }
+
+      $scope.clusterColors = results.map((clusters) => colorspaceFactory.rgbToHex(clusters[0]))
 
     }
 
