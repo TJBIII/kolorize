@@ -1,6 +1,11 @@
 "use strict";
 
-app.factory("colorspaceFactory", () => {
+app.factory("colorspaceFactory", function () {
+
+  function componentToHex (c) {
+      var hex = Math.floor(c).toString(16);
+      return hex.length == 1 ? "0" + hex : hex;
+    }
 
   return {
 
@@ -122,16 +127,11 @@ app.factory("colorspaceFactory", () => {
     },
 
 
-    componentToHex(c) {
-      var hex = Math.floor(c).toString(16);
-      return hex.length == 1 ? "0" + hex : hex;
-    },
-
-
     rgbToHex(point) {
       var hexColor = "#" + componentToHex(point[0]) + componentToHex(point[1]) + componentToHex(point[2]);
       return hexColor;
     },
+
 
     hexToRgb(hex) {
       hex = hex.replace(/[^0-9A-F]/gi, '');

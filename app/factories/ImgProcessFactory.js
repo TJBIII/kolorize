@@ -20,7 +20,7 @@ app.factory("imgProcessFactory", () => {
         var b = data[i+2];
         points.push([r,g,b]);
       }
-      console.log("points", points);
+      // console.log("points", points);
 
       return points
     },

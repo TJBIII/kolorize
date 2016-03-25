@@ -1,6 +1,6 @@
 "use strict";
 
-app.factory("colorspaceFactory", () => {
+app.factory("colorscaleFactory", () => {
 
   return {
     saturationScaleHSL(hslArr, percentStep) {
