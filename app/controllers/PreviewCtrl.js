@@ -10,6 +10,31 @@ app.controller("PreviewCtrl",
   function ($scope, $location, $http, firebaseURL) {
 
     $scope.chosenTemplate = 'partials/starter-template.html';
+    $scope.blurMode = false;
+
+
+    $scope.toggleBlur = function () {
+      if ($scope.blurMode){
+        $('#output').children().removeClass('blurred');
+        $scope.blurMode = false;
+      } else {
+        $('#output').children().addClass('blurred');
+        $scope.blurMode = true;
+      }
+    };
+
+
+    $(document).ready(function(){
+      // the "href" attribute of .modal-trigger must specify the modal ID that wants to be triggered
+      $('.modal-trigger').leanModal({
+        dismissible: false, // Modal can be dismissed by clicking outside of the modal
+        opacity: .5, // Opacity of modal background
+        in_duration: 300, // Transition in duration
+        out_duration: 200, // Transition out duration
+      });
+    });
+         
+
 
     $scope.setTemplate = function (str) {
       $scope.chosenTemplate = str;
@@ -60,8 +85,6 @@ app.controller("PreviewCtrl",
 
 
     $scope.generatePreviews = function() {
-
-
       //array of colors from the palette
       //only take the first 3 colors
       let colors = $scope.$parent.chosenPalette.colors.slice(0, 3);
@@ -73,24 +96,41 @@ app.controller("PreviewCtrl",
       var start = new Date().getTime();
 
       let colorPermutations = permutator(colors);
+      let numColorPermutations = colorPermutations.length;
+
       let currentPermutation;
+
+      let $nav = $('.navbar');
+      let $footer = $('footer.page-footer');
+      let $body = $('.templateBody');
+      let $loaderProgress = $('#loader-progress');
+
 
       //pass generator function to getPreviews
       getPreviews(function* () {
         for (let idx in colorPermutations){
 
           currentPermutation = colorPermutations[idx];
+
           //change css for next preview snapshot
-          $('.navbar').css('backgroundColor', currentPermutation[0]);
-          $('footer.page-footer').css('backgroundColor',  currentPermutation[1]);
-          $('.templateBody').css('backgroundColor',  currentPermutation[2]);
+          $nav.css('backgroundColor', currentPermutation[0]);
+          $footer.css('backgroundColor',  currentPermutation[1]);
+          $body.css('backgroundColor',  currentPermutation[2]);
 
           
           let dataUrl = yield processDom();
           var img = new Image();
           img.src = dataUrl;
           imgs.push(img);
-          console.log("idx", idx);
+          // console.log("idx", idx);
+
+          //update the loader modal progress bar
+          //idx starts at 0 so add 1 to get number of completed previews
+          let percentComplete = ((parseInt(idx)+1)/numColorPermutations)*100;
+          // console.log("percentComplete", percentComplete);
+          $loaderProgress.css('width', `${percentComplete}%`);
+
+
         }
         console.log("done");
         var end = new Date().getTime();
@@ -100,6 +140,10 @@ app.controller("PreviewCtrl",
         //remove old previews (if any) and place new ones on the page
         $('#output').html('');
         imgs.forEach((element) => $('#output').append(element));
+
+        //close the loader modal and reset progress to zero
+        $('#loader-modal').closeModal();
+        $loaderProgress.css('width', `0%`);
       })
     };
 

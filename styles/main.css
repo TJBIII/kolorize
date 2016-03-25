@@ -15,12 +15,18 @@
   clear: both;
 }
 
-#output img {
+#output img{
   max-height: 400px;
   border: 1px solid black;
   margin: 10px;
-  filter: blur(10px);
-  -webkit-filter: blur(10px);
+/*  filter: blur(4px);
+  -webkit-filter: blur(4px);*/
+}
+
+
+.blurred {
+  filter: blur(4px);
+  -webkit-filter: blur(4px);
 }
 
 #output img:hover {
@@ -28,7 +34,7 @@
   -webkit-filter: none;
 }
 
-/* Styles for html templates*/
+/* Styles for html templates
 .navbar {
   background-color: black;
 }
