@@ -19,10 +19,11 @@
 
   <button ng-click="setTemplate('partials/one-page.html')">One-Page Starter</button>
 
-  <button ng-click="generatePreviews()">Generate Previews</button>
+  <button data-target="loader-modal" class="modal-trigger" ng-click="generatePreviews()">Generate Previews</button>
+  
   <button ng-click="toggleBlur()">Toggle Blur</button>
 
-  <!-- <div ng-include="'partials/loadingSpinner.html'"></div> -->
+  <div ng-include="'partials/loader.html'"></div>
  
   <div id="output"></div>
 

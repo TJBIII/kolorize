@@ -21,7 +21,19 @@ app.controller("PreviewCtrl",
         $('#output').children().addClass('blurred');
         $scope.blurMode = true;
       }
-    }
+    };
+
+
+    $(document).ready(function(){
+      // the "href" attribute of .modal-trigger must specify the modal ID that wants to be triggered
+      $('.modal-trigger').leanModal({
+        dismissible: false, // Modal can be dismissed by clicking outside of the modal
+        opacity: .5, // Opacity of modal background
+        in_duration: 300, // Transition in duration
+        out_duration: 200, // Transition out duration
+      });
+    });
+         
 
 
     $scope.setTemplate = function (str) {
@@ -89,6 +101,8 @@ app.controller("PreviewCtrl",
       var start = new Date().getTime();
 
       let colorPermutations = permutator(colors);
+      let numColorPermutations = colorPermutations.length;
+
       let currentPermutation;
 
       //pass generator function to getPreviews
@@ -107,6 +121,11 @@ app.controller("PreviewCtrl",
           img.src = dataUrl;
           imgs.push(img);
           console.log("idx", idx);
+
+          //update the loader modal progress bar
+          $('#loader-progress').css('width', `${(idx/numColorPermutations)*100}%`);
+
+
         }
         console.log("done");
         var end = new Date().getTime();
@@ -116,6 +135,9 @@ app.controller("PreviewCtrl",
         //remove old previews (if any) and place new ones on the page
         $('#output').html('');
         imgs.forEach((element) => $('#output').append(element));
+
+        //close the loader modal
+        $('#loader-modal').closeModal();
       })
     };
 
