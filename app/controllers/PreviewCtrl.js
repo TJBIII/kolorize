@@ -85,11 +85,6 @@ app.controller("PreviewCtrl",
 
 
     $scope.generatePreviews = function() {
-      //start the preloader spinner
-      // $('#loader').addClass('active');
-
-
-
       //array of colors from the palette
       //only take the first 3 colors
       let colors = $scope.$parent.chosenPalette.colors.slice(0, 3);
@@ -105,25 +100,35 @@ app.controller("PreviewCtrl",
 
       let currentPermutation;
 
+      let $nav = $('.navbar');
+      let $footer = $('footer.page-footer');
+      let $body = $('.templateBody');
+      let $loaderProgress = $('#loader-progress');
+
+
       //pass generator function to getPreviews
       getPreviews(function* () {
         for (let idx in colorPermutations){
 
           currentPermutation = colorPermutations[idx];
+
           //change css for next preview snapshot
-          $('.navbar').css('backgroundColor', currentPermutation[0]);
-          $('footer.page-footer').css('backgroundColor',  currentPermutation[1]);
-          $('.templateBody').css('backgroundColor',  currentPermutation[2]);
+          $nav.css('backgroundColor', currentPermutation[0]);
+          $footer.css('backgroundColor',  currentPermutation[1]);
+          $body.css('backgroundColor',  currentPermutation[2]);
 
           
           let dataUrl = yield processDom();
           var img = new Image();
           img.src = dataUrl;
           imgs.push(img);
-          console.log("idx", idx);
+          // console.log("idx", idx);
 
           //update the loader modal progress bar
-          $('#loader-progress').css('width', `${(idx/numColorPermutations)*100}%`);
+          //idx starts at 0 so add 1 to get number of completed previews
+          let percentComplete = ((parseInt(idx)+1)/numColorPermutations)*100;
+          // console.log("percentComplete", percentComplete);
+          $loaderProgress.css('width', `${percentComplete}%`);
 
 
         }
@@ -136,8 +141,9 @@ app.controller("PreviewCtrl",
         $('#output').html('');
         imgs.forEach((element) => $('#output').append(element));
 
-        //close the loader modal
+        //close the loader modal and reset progress to zero
         $('#loader-modal').closeModal();
+        $loaderProgress.css('width', `0%`);
       })
     };
 
