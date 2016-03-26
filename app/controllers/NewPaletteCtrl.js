@@ -106,13 +106,8 @@ app.controller("NewPaletteCtrl",
       let points = imgProcessFactory.processImg(ctx);
 
       let results = kmeansFactory.kmeans(points, 7, 10);
-      console.log("results", results);
 
-      // //results variable will be false if a cluster center got stuck
-      // while (!results) {
-      //   //restart kmeans
-      //   results = kmeansFactory.kmeans(points, 3, 10);
-      // }
+      console.log("results", results);
 
       //convert the cluster centers from rgb arrays to hex values
       $scope.clusterColors = results.map((clusters) => colorspaceFactory.rgbToHex(clusters[0]))

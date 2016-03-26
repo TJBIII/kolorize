@@ -105,7 +105,7 @@ app.factory("kmeansFactory", () => {
 
             // return false to reinitiate kmeans function when stuck in a local minimum
             if (count > 200){
-              console.log("clusters - restarted", clusters);
+              // console.log("clusters - restarted", clusters);
               return false;
             }
 
