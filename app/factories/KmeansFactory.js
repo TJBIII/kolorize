@@ -37,90 +37,111 @@ app.factory("kmeansFactory", () => {
 
   return {
     kmeans (points, k, minDiff) {
-      let pointsLength = points.length,
-        clusters = [],
-        visited = [],
-        index,
-        found;
 
-      //keep track of the loop in case we get stuck in a local minimum 
-      let count = 0;
 
-      while (clusters.length < k) {
-        index = parseInt(Math.random() * pointsLength);
-        found = false;
-        for (let i = 0; i < visited.length; i++){
-          if (index === visited[i]) {
-            found = true;
+      function cluster (points, k, minDiff) {
+        let pointsLength = points.length,
+          clusters = [],
+          visited = [],
+          index,
+          found;
+
+        //keep track of the loop in case we get stuck in a local minimum 
+        let count = 0;
+
+        while (clusters.length < k) {
+          index = parseInt(Math.random() * pointsLength);
+          found = false;
+          for (let i = 0; i < visited.length; i++){
+            if (index === visited[i]) {
+              found = true;
+              break;
+            }
+          }
+
+          if (!found) {
+            visited.push(index);
+            // console.log("points[index]", points[index]);
+            clusters.push([points[index], [points[index]]]);
+          }
+
+        }
+
+
+        //for every point, find which mean it is closest too
+        let pointsLists;
+
+
+        while (true) {
+          pointsLists = [];
+          for (let i = 0; i < k; i++) {
+            pointsLists.push([]);
+          }
+
+          for (let j = 0; j < pointsLength; j++) {
+            let p = points[j],
+                smallestDistance = 1e5,
+                currentIndex = 0;
+
+            for (let i = 0; i < k; i ++ ) {
+              let distance = calculateDistance(p, clusters[i][0]);
+              if (distance < smallestDistance){
+                smallestDistance = distance;
+                currentIndex = i;
+              }
+            }
+            pointsLists[currentIndex].push(p);
+          }
+
+
+          let difference = 0;
+          for (let i = 0; i < k; i++) {
+            let old = clusters[i];
+            let list = pointsLists[i];
+            //console.log("pointsLists[i]", pointsLists[i] );
+            let center = calculateCenter(pointsLists[i], 3);
+            //console.log("center", center);
+            count++;
+
+            // return false to reinitiate kmeans function when stuck in a local minimum
+            if (count > 200){
+              console.log("clusters - restarted", clusters);
+              return false;
+            }
+
+            let newCluster = [center, (pointsLists[i])];
+            let distance = calculateDistance(old[0], center);
+
+            clusters[i] = newCluster;
+            difference = difference > distance ? difference : distance;
+          }
+
+
+          //break once the difference between the old center and the new center is less than the minDiff
+          if (difference < minDiff){
             break;
           }
         }
 
-        if (!found) {
-          visited.push(index);
-          // console.log("points[index]", points[index]);
-          clusters.push([points[index], [points[index]]]);
-        }
-
+        return clusters;
       }
 
+      
+      let results = false;
 
-      //for every point, find which mean it is closest too
-      let pointsLists;
+      //results variable will be false if a cluster center got stuck
+      while (!results || (results.length !== k)) {
+        //restart kmeans
+        results = cluster(points, k, minDiff);
 
-
-      while (true) {
-        pointsLists = [];
-        for (let i = 0; i < k; i++) {
-          pointsLists.push([]);
-        }
-
-        for (let j = 0; j < pointsLength; j++) {
-          let p = points[j],
-              smallestDistance = 1e5,
-              currentIndex = 0;
-
-          for (let i = 0; i < k; i ++ ) {
-            let distance = calculateDistance(p, clusters[i][0]);
-            if (distance < smallestDistance){
-              smallestDistance = distance;
-              currentIndex = i;
-            }
-          }
-          pointsLists[currentIndex].push(p);
-        }
-
-
-        let difference = 0;
-        for (let i = 0; i < k; i++) {
-          let old = clusters[i];
-          let list = pointsLists[i];
-          //console.log("pointsLists[i]", pointsLists[i] );
-          let center = calculateCenter(pointsLists[i], 3);
-          //console.log("center", center);
-          count++;
-
-          // return false to reinitiate kmeans function when stuck in a local minimum
-          if (count > 200){
-            console.log("clusters", clusters);
-            return false;
-          }
-
-          let newCluster = [center, (pointsLists[i])];
-          let distance = calculateDistance(old[0], center);
-
-          clusters[i] = newCluster;
-          difference = difference > distance ? difference : distance;
-        }
-
-
-        //break once the difference between the old center and the new center is less than the minDiff
-        if (difference < minDiff){
-          break;
+        //if we get a set of clusters back instead of false, make sure each cluster group has points belonging to it (if it doesn't we will get #NaNNaNNaN as a color)
+        if (results){
+          results = results.filter( c => c[1].length > 0)
+          // console.log("results.length", results.length);
         }
       }
 
-      return clusters;
+      return results
     }
   }
 
