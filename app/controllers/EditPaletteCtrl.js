@@ -61,7 +61,7 @@ app.controller("EditPaletteCtrl",
 
 
 
-    $scope.delete = function (palette) {
+    $scope.deletePalette = function (palette) {
       //remove palette from palettes array
       let paletteIndex = $scope.$parent.palettes.indexOf(palette);
       if (paletteIndex >= 0) {
