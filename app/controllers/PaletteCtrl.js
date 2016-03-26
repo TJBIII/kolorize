@@ -12,6 +12,8 @@ app.controller("PaletteCtrl", [
     //empty palettes in parent scope to push updated data set into below
     $scope.$parent.palettes = [];
 
+    $scope.search = {};
+
     // Invoke the promise that reads from Firebase
     paletteFactory().then(
       // Handle resolve() from the promise

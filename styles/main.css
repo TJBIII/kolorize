@@ -1,9 +1,10 @@
 .color {
-  margin: 10px 2.5px;
+  margin: 0 2.5px;
   height:40px;
   width: 80px;
   float: left;
   display: block;
+  border: 1px solid black;
 }
 
 
