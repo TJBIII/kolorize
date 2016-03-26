@@ -1,14 +1,38 @@
 .color {
-  margin: 10px 2.5px;
+  margin: 0 2.5px;
   height:40px;
   width: 80px;
   float: left;
   display: block;
+  border: 1px solid black;
 }
+
 
 #palette {
   border: 2px solid black;
   height: 60px;
+}
+
+.row li.color-card {
+  padding-top: 40px;
+  padding-bottom: 0;
+  margin:10px;
+  cursor: pointer;
+}
+
+
+.card-reveal a{
+  margin: 10px 0;
+  display: block;
+}
+
+.card-reveal a:hover{
+  color: #333;
+}
+
+
+.template-border {
+  border: 1px solid black;
 }
 
 .clear {

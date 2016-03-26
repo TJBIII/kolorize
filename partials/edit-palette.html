@@ -4,15 +4,34 @@
   <input type="text" ng-model="palette.name" placeholder="Palette Name" ng-blur="updateFirebase()">
   <!-- <input type="text" ng-model="palette.name" placeholder="Palette Name" > -->
 
-  <ul ui-sortable ng-model="$parent.chosenPalette.colors">
+  <!-- <ul ui-sortable ng-model="$parent.chosenPalette.colors">
     <li class="color" ng-repeat="color in $parent.chosenPalette.colors" style="background-color: {{color}}">
       {{color}}
     </li>
+  </ul> -->
+
+<div class="row">
+  <ul ui-sortable ng-model="$parent.chosenPalette.colors">
+    <li class="card color-card col s2" ng-repeat="color in $parent.chosenPalette.colors" style="background-color: {{color}}">
+      <div class="activator card-image waves-effect waves-block waves-light">
+      </div>
+      <div class="card-content">
+        <span class="card-title activator grey-text text-darken-4">Options</span>
+      </div>
+      <div class="card-reveal">
+        <span class="card-title grey-text text-darken-4">
+          <i class="material-icons right">close</i></span>
+          <a>Tweak</a>
+          <a ng-click="deleteColor(color)">Delete</a>
+          <a>Copy Hex</a> 
+      </div>
+    </li>
   </ul>
+</div>
 
   <div class="clear"></div>
 
-  <a ng-click="delete(palette)"><button>Delete</button></a>
+  <a ng-click="deletePalette(palette)"><button>Delete Palette</button></a>
 
 <!-- copied from new-palette html -->
   <h6>Add from Color Picker</h6>
