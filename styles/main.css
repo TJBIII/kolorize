@@ -16,6 +16,17 @@
   padding-top: 40px;
   padding-bottom: 0;
   margin:10px;
+  cursor: pointer;
+}
+
+
+.card-reveal a{
+  margin: 10px 0;
+  display: block;
+}
+
+.card-reveal a:hover{
+  color: #333;
 }
 
 
