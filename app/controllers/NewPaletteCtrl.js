@@ -152,7 +152,10 @@ app.controller("NewPaletteCtrl",
 
     $scope.flickrSearch = () => {
       console.log("searching flickr");
-      $http.get(`https://api.flickr.com/services/rest/?method=flickr.photos.search&api_key=411834a7e0dbf2349b1e95012621e5e2&tags=${$scope.searchTerm}&format=json&nojsoncallback=1&per_page=20&media=photos`).then( (response) => {
+
+      let tags = $scope.searchTerm.replace(/\s/, ",");
+      
+      $http.get(`https://api.flickr.com/services/rest/?method=flickr.photos.search&api_key=411834a7e0dbf2349b1e95012621e5e2&tags=${tags}&format=json&nojsoncallback=1&per_page=20&media=photos`).then( (response) => {
           //data is an array of photo objects
           let data = response.data.photos.photo;
 
