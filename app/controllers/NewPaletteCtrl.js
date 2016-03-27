@@ -14,18 +14,19 @@ app.controller("NewPaletteCtrl",
 
   function ($scope, $http, firebaseURL, authFactory, $location, colorspaceFactory, imgProcessFactory, kmeansFactory, colorscaleFactory) {
 
-    $scope.colorPicker = "#badace";
+    $scope.colorPicker = "#ffffff";
 
     $scope.palette = [];
     $scope.paletteName = "";
     $scope.clusterColors;
     $scope.saturationScale = null;
+    $scope.complimentaryColor = null;
 
 
     $scope.updateScales = function () {
       let hslcolorPicker = colorspaceFactory.RGB2HSL(colorspaceFactory.hexToRgb($scope.colorPicker));
 
-      let hslSaturationScale = colorscaleFactory.saturationScaleHSL(hslcolorPicker, 0.1);
+      let hslSaturationScale = colorscaleFactory.saturationScaleHSL(hslcolorPicker, 0.1, 10);
       console.log("hslSaturationScale", hslSaturationScale);
 
       let rgbSaturationScale = hslSaturationScale.map((hslArr) => colorspaceFactory.hslToRgb(hslArr));
@@ -33,17 +34,19 @@ app.controller("NewPaletteCtrl",
       // console.log("rgbSaturationScale", rgbSaturationScale);   
       let hexSaturationScale = rgbSaturationScale.map((rgbArr) => colorspaceFactory.rgbToHex(rgbArr));
 
+      console.log("hexscale", hexSaturationScale);
+
       $scope.saturationScale = hexSaturationScale;    
     }
 
 
     $scope.compliment = function () {
       let rgbArr = colorspaceFactory.hexToRgb($scope.colorPicker);
-      colorspaceFactory.compliment(rgbArr);
+      $scope.complimentaryColor = colorspaceFactory.rgbToHex(colorspaceFactory.compliment(rgbArr));
     }
     
 
-    $scope.add = function () {
+    $scope.add = function (newColor) {
       //dont allow more than 8 colors in a palette
       if ($scope.palette.length >= 8){
         console.log("only 8 colors per palette allowed");
@@ -51,11 +54,11 @@ app.controller("NewPaletteCtrl",
       }
       //dont allow duplicate colors
       for (let color in $scope.palette){
-        if ($scope.colorPicker === $scope.palette[color]){
+        if (newColor === $scope.palette[color]){
           return;
         }
       }
-      $scope.palette.push($scope.colorPicker);
+      $scope.palette.push(newColor);
     }
     
 
@@ -84,12 +87,20 @@ app.controller("NewPaletteCtrl",
 
 
 
-    let deleteColor = function (hexStr) {
+    $scope.deleteColor = function (hexStr) {
+      // console.log("color to delete", color);
       let colorIdx = $scope.palette.indexOf(hexStr);
       if (colorIdx >= 0) {
         $scope.palette.splice(colorIdx, 1);
       }
-      $scope.$apply();
+      // $scope.$apply();
+    }
+
+
+    $scope.setColor = function (color) {
+      $scope.colorPicker = color;
+      $scope.updateScales();
+      $scope.compliment();
     }
 
 
