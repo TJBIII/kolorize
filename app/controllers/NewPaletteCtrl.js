@@ -21,6 +21,8 @@ app.controller("NewPaletteCtrl",
     $scope.clusterColors;
     $scope.saturationScale = null;
     $scope.complimentaryColor = null;
+    $scope.imageUploaded = false;
+    $scope.k = 3;
 
 
     $scope.updateScales = function () {
@@ -115,6 +117,8 @@ app.controller("NewPaletteCtrl",
 
 
     function handleImage(e){
+      $scope.imageUploaded = true;
+      $scope.$apply();
       var reader = new FileReader();
       reader.onload = function(event){
           var img = new Image();
@@ -132,8 +136,9 @@ app.controller("NewPaletteCtrl",
 
     $scope.processImage = () => {
       let points = imgProcessFactory.processImg(ctx);
+      let k = parseInt($scope.k)
 
-      let results = kmeansFactory.kmeans(points, 7, 10);
+      let results = kmeansFactory.kmeans(points, k, 10);
 
       console.log("results", results);
 
