@@ -30,6 +30,11 @@
   color: #333;
 }
 
+.create-btn {
+  text-align: center;
+  margin: 2.1rem;
+}
+
 
 .template-border {
   border: 1px solid black;
