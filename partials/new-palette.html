@@ -85,8 +85,11 @@
     <button ng-click="processImage()" class="waves-effect waves-light btn">Process</button>
   </span>
 
-
-
-
+  <input type="text" ng-model="searchTerm" placeholder="Search...">
+  <button ng-click="flickrSearch()" class="waves-effect waves-light btn">Search</button>
+  
+  <span ng-repeat="imgSrc in searchImgResults">
+    <img ng-click="analyze(imgSrc)" ng-src="{{imgSrc}}">
+  </span>
   
 </section>

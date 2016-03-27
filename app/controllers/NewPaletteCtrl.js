@@ -18,11 +18,14 @@ app.controller("NewPaletteCtrl",
 
     $scope.palette = [];
     $scope.paletteName = "";
-    $scope.clusterColors;
+    $scope.clusterColors = null;
     $scope.saturationScale = null;
     $scope.complimentaryColor = null;
     $scope.imageUploaded = false;
     $scope.k = 3;
+
+    $scope.searchTerm;
+    $scope.searchImgResults;
 
 
     $scope.updateScales = function () {
@@ -135,6 +138,7 @@ app.controller("NewPaletteCtrl",
 
 
     $scope.processImage = () => {
+      console.log("processing");
       let points = imgProcessFactory.processImg(ctx);
       let k = parseInt($scope.k)
 
@@ -144,10 +148,50 @@ app.controller("NewPaletteCtrl",
 
       //convert the cluster centers from rgb arrays to hex values
       $scope.clusterColors = results.map((clusters) => colorspaceFactory.rgbToHex(clusters[0]))
-
     }
 
+    $scope.flickrSearch = () => {
+      console.log("searching flickr");
 
-  }
+      let tags = $scope.searchTerm.replace(/\s/, ",");
+      
+      $http.get(`https://api.flickr.com/services/rest/?method=flickr.photos.search&api_key=411834a7e0dbf2349b1e95012621e5e2&tags=${tags}&format=json&nojsoncallback=1&per_page=20&media=photos`).then( (response) => {
+          //data is an array of photo objects
+          let data = response.data.photos.photo;
+
+          $scope.searchImgResults = data.map((obj) => `https://farm${obj.farm}.staticflickr.com/${obj.server}/${obj.id}_${obj.secret}_m.jpg`);
+          
+        }, (error) => console.log("error", error))
+    };
+
+    $scope.analyze = function (imgSrc) {
+      //https://developer.mozilla.org/en-US/docs/Web/HTML/CORS_enabled_image
+      console.log("imgSrc", imgSrc);
+      var img = new Image();
+      img.crossOrigin = "Anonymous";
+
+
+      img.onload = function() {
+        canvas.width = img.width;
+        canvas.height = img.height;
+        ctx.drawImage( img, 0, 0 );
+        localStorage.setItem( "savedImageData", canvas.toDataURL("image/png") );
+        console.log("onload");
+        $scope.processImage();
+        $scope.$apply();
+      }
+
+      img.src= imgSrc;
+
+      if ( img.complete || img.complete === undefined ) {
+        console.log("complete");
+        img.src = "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw==";
+        img.src = src;
+      }
+
+      $scope.imageUploaded = true;
+    }
+
+}
 
 ]);
