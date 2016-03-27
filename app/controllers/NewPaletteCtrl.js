@@ -24,6 +24,9 @@ app.controller("NewPaletteCtrl",
     $scope.imageUploaded = false;
     $scope.k = 3;
 
+    $scope.searchTerm;
+    $scope.searchImgResults;
+
 
     $scope.updateScales = function () {
       let hslcolorPicker = colorspaceFactory.RGB2HSL(colorspaceFactory.hexToRgb($scope.colorPicker));
@@ -144,10 +147,30 @@ app.controller("NewPaletteCtrl",
 
       //convert the cluster centers from rgb arrays to hex values
       $scope.clusterColors = results.map((clusters) => colorspaceFactory.rgbToHex(clusters[0]))
-
     }
 
+    $scope.flickrSearch = () => {
+      $http.get('https://api.flickr.com/services/rest/?method=flickr.photos.search&api_key=411834a7e0dbf2349b1e95012621e5e2&tags=mountains&format=json&nojsoncallback=1&per_page=10').then( (response) => {
+          //data is an array of photo objects
+          let data = response.data.photos.photo;
 
-  }
+          $scope.searchImgResults = data.map((obj) => `https://farm${obj.farm}.staticflickr.com/${obj.server}/${obj.id}_${obj.secret}_s.jpg`);
+          
+        })
+    };
+
+    $scope.analyze = (imgSrc) => {
+      console.log("imgSrc", imgSrc);
+
+      var img = new Image();
+          img.onload = function(){
+              imgProcessFactory.fitImageOn(canvas, img, ctx);
+          }
+        img.src = imgSrc;
+        img.crossOrigin = "anonymous";
+        $scope.processImage();
+    }
+
+}
 
 ]);
