@@ -4,6 +4,7 @@
   <input type="text" ng-model="paletteName" placeholder="New Palette Name">
 
 
+  <button class="waves-effect waves-light btn" ng-click="savePalette()">Save Palette</button>
   <!-- <ul ui-sortable ng-model="palette">
     <li class="color" ng-repeat="color in palette" style="background-color: {{color}}">
       {{color}}
@@ -43,7 +44,7 @@
   <span ng-if="complimentaryColor">
     <h4>Complimentary Color</h4>
     <ul>
-      <li class="color" ng-click="add(complimentaryColor)" ng-model="colorPicker" style="background-color: {{complimentaryColor}}">
+      <li class="color" ng-click="setColor(complimentaryColor)" ng-model="colorPicker" style="background-color: {{complimentaryColor}}">
         {{complimentaryColor}}
       </li>
     </ul>
@@ -55,12 +56,11 @@
 
 
 
-  <button ng-click="savePalette()">Save Palette</button>
 
 
   <h6>Add from Color Picker</h6>
   <input type="color" ng-model="colorPicker" ng-change="updateScales()"/>
-  <button ng-click="add(colorPicker)">Add to Palette</button> 
+  <button ng-click="add(colorPicker)" class="waves-effect waves-light btn">Add to Palette</button> 
 
 
   <h6>Add from Image</h6>
@@ -72,10 +72,18 @@
   <div class="clear"></div>
 
   <input type="file" id="imageLoader" name="imageLoader"/>
-  <button ng-click="processImage()">Process</button>
   <div>
     <canvas id="imageCanvas" width=300 height=300></canvas>
   </div>
+        
+  <span ng-if="imageUploaded">
+    <form action="#">
+      <p class="range-field">
+        <input ng-model="$parent.k" type="range" id="test5" min="3" max="8" />
+      </p>
+    </form>
+    <button ng-click="processImage()" class="waves-effect waves-light btn">Process</button>
+  </span>
 
 
 
