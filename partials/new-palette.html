@@ -2,46 +2,81 @@
   <h1>Create New Palette</h1>
 
   <input type="text" ng-model="paletteName" placeholder="New Palette Name">
-  <!-- <div ui-sortable ng-model="palette">
-    <div ng-repeat="color in palette">
-      <div class="color" style="background-color: {{color}}">{{color}}</div>
-    </div>
-  </div> -->
-  <ul ui-sortable ng-model="palette">
+
+
+  <!-- <ul ui-sortable ng-model="palette">
     <li class="color" ng-repeat="color in palette" style="background-color: {{color}}">
       {{color}}
     </li>
-  </ul>
+  </ul> -->
+
+  <div class="row">
+    <ul ui-sortable ng-model="palette">
+      <li class="card color-card col s2" id="{{color}}" ng-repeat="color in palette" style="background-color: {{color}}">
+        <div class="activator card-image waves-effect waves-block waves-light">
+        </div>
+        <div class="card-content">
+          <span class="card-title activator grey-text text-darken-4">Options</span>
+        </div>
+        <div class="card-reveal">
+          <span class="card-title grey-text text-darken-4">
+            <i class="material-icons right">close</i></span>
+            <a>Tweak</a>
+            <a ng-click="deleteColor(color)">Delete</a>
+            <a>Copy Hex</a> 
+        </div>
+      </li>
+    </ul>
+  </div>
+
   <div class="clear"></div>
 
-  <!-- <div id="trash">
-    <i class="large material-icons">delete</i>
-  </div> -->
+  <h4 ng-if="saturationScale">Saturation Scale</h4>
+    <ul ng-model="saturationScale">
+      <li class="color" ng-click="add(color)" ng-repeat="color in saturationScale" style="background-color: {{color}}">
+        {{color}}
+      </li>
+    </ul>
+
+  <div class="clear"></div>
+
+  <span ng-if="complimentaryColor">
+    <h4>Complimentary Color</h4>
+    <ul>
+      <li class="color" ng-click="add(complimentaryColor)" ng-model="colorPicker" style="background-color: {{complimentaryColor}}">
+        {{complimentaryColor}}
+      </li>
+    </ul>
+  </span>
 
 
-  <button ng-click="compliment()">Compliment</button>
+  <div class="clear"></div>
+
+
+
 
   <button ng-click="savePalette()">Save Palette</button>
 
 
   <h6>Add from Color Picker</h6>
-  <input type="color" ng-model="colorPicker"/>
-  <button ng-click="add()">Add to Palette</button> 
+  <input type="color" ng-model="colorPicker" ng-change="updateScales()"/>
+  <button ng-click="add(colorPicker)">Add to Palette</button> 
 
 
   <h6>Add from Image</h6>
+  <ul>
+    <li class="color" ng-click="setColor(color)" ng-repeat="color in clusterColors" style="background-color: {{color}}">
+      {{color}}
+    </li>
+  </ul>
+  <div class="clear"></div>
+
   <input type="file" id="imageLoader" name="imageLoader"/>
   <button ng-click="processImage()">Process</button>
   <div>
     <canvas id="imageCanvas" width=300 height=300></canvas>
   </div>
 
-  <ul>
-    <li class="color" ng-repeat="color in clusterColors" style="background-color: {{color}}">
-      {{color}}
-    </li>
-  </ul>
-  <div class="clear"></div>
 
 
 

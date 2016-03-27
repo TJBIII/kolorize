@@ -3,7 +3,7 @@
 app.factory("colorscaleFactory", () => {
 
   return {
-    saturationScaleHSL(hslArr, percentStep) {
+    saturationScaleHSL(hslArr, percentStep, numOfSteps) {
       //percent step given as a decimal eg. 0.05, 0.1, etc
 
       //Write as percentages, current start at 100%
@@ -15,11 +15,17 @@ app.factory("colorscaleFactory", () => {
 
       var hslScale = [];
 
-      while (newS > .0001){
+      for (let i = 0; i < numOfSteps; i++) {
         newS = s * (1-current);
-        current += percentStep;
+        current += percentStep
         hslScale.push([h, newS, l]);
       }
+
+      // while (newS > .0001){
+      //   newS = s * (1-current);
+      //   current += percentStep;
+      //   hslScale.push([h, newS, l]);
+      // }
       
       return hslScale;
     }
