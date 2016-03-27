@@ -2,21 +2,42 @@
   <h1>Create New Palette</h1>
 
   <input type="text" ng-model="paletteName" placeholder="New Palette Name">
-  <!-- <div ui-sortable ng-model="palette">
-    <div ng-repeat="color in palette">
-      <div class="color" style="background-color: {{color}}">{{color}}</div>
-    </div>
-  </div> -->
-  <ul ui-sortable ng-model="palette">
+
+
+  <!-- <ul ui-sortable ng-model="palette">
     <li class="color" ng-repeat="color in palette" style="background-color: {{color}}">
       {{color}}
     </li>
-  </ul>
+  </ul> -->
+
+  <div class="row">
+    <ul ui-sortable ng-model="palette">
+      <li class="card color-card col s2" ng-repeat="color in palette" style="background-color: {{color}}">
+        <div class="activator card-image waves-effect waves-block waves-light">
+        </div>
+        <div class="card-content">
+          <span class="card-title activator grey-text text-darken-4">Options</span>
+        </div>
+        <div class="card-reveal">
+          <span class="card-title grey-text text-darken-4">
+            <i class="material-icons right">close</i></span>
+            <a>Tweak</a>
+            <a ng-click="deleteColor(color)">Delete</a>
+            <a>Copy Hex</a> 
+        </div>
+      </li>
+    </ul>
+  </div>
+
   <div class="clear"></div>
 
-  <!-- <div id="trash">
-    <i class="large material-icons">delete</i>
-  </div> -->
+
+    <ul ng-model="saturationScale">
+      <li class="color" ng-repeat="color in saturationScale" style="background-color: {{color}}">
+        {{color}}
+      </li>
+    </ul>
+
 
 
   <button ng-click="compliment()">Compliment</button>
@@ -25,7 +46,7 @@
 
 
   <h6>Add from Color Picker</h6>
-  <input type="color" ng-model="colorPicker"/>
+  <input type="color" ng-model="colorPicker" ng-change="updateScales()"/>
   <button ng-click="add()">Add to Palette</button> 
 
 

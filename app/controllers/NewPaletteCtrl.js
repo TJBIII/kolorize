@@ -10,14 +10,31 @@ app.controller("NewPaletteCtrl",
   "colorspaceFactory",
   "imgProcessFactory",
   "kmeansFactory",
+  "colorscaleFactory",
 
-  function ($scope, $http, firebaseURL, authFactory, $location, colorspaceFactory, imgProcessFactory, kmeansFactory) {
+  function ($scope, $http, firebaseURL, authFactory, $location, colorspaceFactory, imgProcessFactory, kmeansFactory, colorscaleFactory) {
 
-    $scope.colorPicker = "#ffffff";
+    $scope.colorPicker = "#badace";
 
     $scope.palette = [];
     $scope.paletteName = "";
     $scope.clusterColors;
+    $scope.saturationScale = null;
+
+
+    $scope.updateScales = function () {
+      let hslcolorPicker = colorspaceFactory.RGB2HSL(colorspaceFactory.hexToRgb($scope.colorPicker));
+
+      let hslSaturationScale = colorscaleFactory.saturationScaleHSL(hslcolorPicker, 0.1);
+      console.log("hslSaturationScale", hslSaturationScale);
+
+      let rgbSaturationScale = hslSaturationScale.map((hslArr) => colorspaceFactory.hslToRgb(hslArr));
+
+      // console.log("rgbSaturationScale", rgbSaturationScale);   
+      let hexSaturationScale = rgbSaturationScale.map((rgbArr) => colorspaceFactory.rgbToHex(rgbArr));
+
+      $scope.saturationScale = hexSaturationScale;    
+    }
 
 
     $scope.compliment = function () {
