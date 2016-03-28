@@ -1,7 +1,6 @@
 <section>
   <h1>HTML Preview</h1>
 
-  <h4>Templates</h4> 
 
 <!--   <div ng-repeat="color in $parent.chosenPalette.colors">
     <div class="color" style="background-color: {{color}}">{{color}}</div>
@@ -14,14 +13,16 @@
   </ul>
 
   <div class="clear"></div>
+  <h4>Templates</h4> 
 
-  <button ng-click="setTemplate('partials/starter-template.html')">Materialize Starter</button>
+  <button class="waves-effect waves-light btn" ng-click="setTemplate('previews/starter-template.html')">Materialize Starter</button>
 
-  <button ng-click="setTemplate('partials/one-page.html')">One-Page Starter</button>
+  <button class="waves-effect waves-light btn" ng-click="setTemplate('previews/one-page.html')">One-Page Starter</button>
+    
 
-  <button data-target="loader-modal" class="modal-trigger" ng-click="generatePreviews()">Generate Previews</button>
+  <button data-target="loader-modal" class="modal-trigger waves-effect waves-light btn" ng-click="generatePreviews()">Generate Previews</button>
   
-  <button ng-click="toggleBlur()">Toggle Blur</button>
+  <button class="waves-effect waves-light btn" ng-click="toggleBlur()">Toggle Blur</button>
 
   <div ng-include="'partials/loader.html'"></div>
  
