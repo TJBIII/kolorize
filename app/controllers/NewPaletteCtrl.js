@@ -12,9 +12,11 @@ app.controller("NewPaletteCtrl",
   "kmeansFactory",
   "colorscaleFactory",
 
-  function ($scope, $http, firebaseURL, authFactory, $location, colorspaceFactory, imgProcessFactory, kmeansFactory, colorscaleFactory) {
+  function ($scope, $http, firebaseURL, authFactory, $location, colorspace, imgProcess, kmeans, colorscale) {
 
     $scope.colorPicker = "#ffffff";
+    $scope.pickerLightness;
+    $scope.pickerSaturation;
 
     $scope.palette = [];
     $scope.paletteName = "";
@@ -24,27 +26,25 @@ app.controller("NewPaletteCtrl",
     $scope.imageUploaded = false;
     $scope.k = 3;
 
-    $scope.pickerLightness;
 
     $scope.searchTerm;
     $scope.searchImgResults;
 
 
     $scope.updateScales = function () {
-      let hslcolorPicker = colorspaceFactory.hexToHsl($scope.colorPicker);
+      let hslcolorPicker = colorspace.hexToHsl($scope.colorPicker);
 
-      let hslSaturationScale = colorscaleFactory.saturationScaleHSL(hslcolorPicker, 0.1, 10);
-      let hexSaturationScale = hslSaturationScale.map((hslArr) => colorspaceFactory.hslToHex(hslArr));
+      let hslSaturationScale = colorscale.saturationScaleHSL(hslcolorPicker, 0.1, 10);
+      let hexSaturationScale = hslSaturationScale.map((hslArr) => colorspace.hslToHex(hslArr));
 
-      console.log("hexscale", hexSaturationScale);
-
+      // console.log("hexscale", hexSaturationScale);
       $scope.saturationScale = hexSaturationScale;    
     }
 
 
     $scope.compliment = function () {
-      let rgbArr = colorspaceFactory.hexToRgb($scope.colorPicker);
-      $scope.complimentaryColor = colorspaceFactory.rgbToHex(colorspaceFactory.compliment(rgbArr));
+      let rgbArr = colorspace.hexToRgb($scope.colorPicker);
+      $scope.complimentaryColor = colorspace.rgbToHex(colorspace.compliment(rgbArr));
     }
     
 
@@ -106,20 +106,20 @@ app.controller("NewPaletteCtrl",
     }
 
     $scope.setLightness = function () {
-      $scope.pickerLightness = colorspaceFactory.getLightnessFromHex($scope.colorPicker);
+      $scope.pickerLightness = colorspace.getLightnessFromHex($scope.colorPicker);
     }
 
     $scope.calcFromLightness = function () {
       let hex = $scope.colorPicker;
-      let hsl = colorspaceFactory.getHSLFromHex(hex);
+      let hsl = colorspace.hexToHsl(hex);
       let h = hsl[0];
       let s = hsl[1] * 100;
       let l = parseInt($scope.pickerLightness);
 
-      let rgb = colorspaceFactory.hslToRgb([h,s,l]);
+      let rgb = colorspace.hslToRgb([h,s,l]);
 
-      let hexColor = colorspaceFactory.rgbToHex(rgb);
-      console.log("hexColor", hexColor);
+      let hexColor = colorspace.rgbToHex(rgb);
+      // console.log("hexColor", hexColor);
 
       return hexColor;
     }
@@ -145,7 +145,7 @@ app.controller("NewPaletteCtrl",
               // canvas.width = img.width;
               // canvas.height = img.height;
               // ctx.drawImage(img,0,0);
-              imgProcessFactory.fitImageOn(canvas, img, ctx);
+              imgProcess.fitImageOn(canvas, img, ctx);
           }
           img.src = event.target.result;
       }
@@ -155,15 +155,15 @@ app.controller("NewPaletteCtrl",
 
     $scope.processImage = () => {
       console.log("processing");
-      let points = imgProcessFactory.processImg(ctx);
+      let points = imgProcess.processImg(ctx);
       let k = parseInt($scope.k)
 
-      let results = kmeansFactory.kmeans(points, k, 10);
+      let results = kmeans.kmeans(points, k, 10);
 
       console.log("results", results);
 
       //convert the cluster centers from rgb arrays to hex values
-      $scope.clusterColors = results.map((clusters) => colorspaceFactory.rgbToHex(clusters[0]))
+      $scope.clusterColors = results.map((clusters) => colorspace.rgbToHex(clusters[0]))
     }
 
     $scope.flickrSearch = () => {

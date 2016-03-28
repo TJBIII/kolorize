@@ -170,7 +170,7 @@ app.factory("colorspaceFactory", function () {
     },
 
 
-    RGB2HSL(rgbArr){
+    rgbToHsl(rgbArr){
       // console.log("hsl:", [h,s,l])
       return RGB2HSL(rgbArr);
     },
@@ -217,23 +217,10 @@ app.factory("colorspaceFactory", function () {
 
     },
 
-    getHSLFromHex (hex) {
-      let rgb = hexToRgb(hex);
-
-      let hsl = RGB2HSL(rgb);
-
-      return hsl;
-    },
-
-
     getLightnessFromHex (hex) {
-      let rgb = hexToRgb(hex);
-
-      let hsl = RGB2HSL(rgb);
-
+      let hsl = RGB2HSL(hexToRgb(hex));
       //multiply by 100 to be in set [0,100]
       return hsl[2] * 100;
     }
-
   };
 });
