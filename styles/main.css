@@ -50,7 +50,8 @@ input[type="color"] {
 }
 
 .forked {
-  display: inline;
+  background-color: #fff;
+  color: #bbb;
 }
 
 .template-border {
