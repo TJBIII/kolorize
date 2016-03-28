@@ -28,7 +28,12 @@
 
       <div class="col s4">
         <a href="#/preview" ng-click="setChosenPalette(palette)"><button class="waves-effect waves-light btn grey lighten-1">Preview</button></a>
-        <a href="#/edit-palette" ng-click="setChosenPalette(palette)"><button class="waves-effect waves-light btn grey lighten-1">Edit</button></a>
+        <span ng-if="userId === palette.uid">
+          <a href="#/edit-palette" ng-click="setChosenPalette(palette)"><button class="waves-effect waves-light btn grey lighten-1">Edit</button></a>
+        </span>
+        <span ng-if="userId !== palette.uid">
+          <a href="#/palettes" ng-click="fork(palette)"><button class="waves-effect waves-light btn grey lighten-1">Fork</button></a>
+        </span>
       </div>
       <!-- clear before the next palette -->
       <div class="clear"></div>

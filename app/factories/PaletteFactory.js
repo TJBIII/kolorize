@@ -15,9 +15,10 @@ app.factory("paletteFactory", function ($q, $http, authFactory, firebaseURL){
     },
 
     getAllPalettes() {
+      //get all non-forked palettes
       return $q((resolve, reject) => {// Return a promise for our async XHR
         $http
-          .get(`${firebaseURL}/palettes.json`)
+          .get(`${firebaseURL}/palettes.json?orderBy="forked"&equalTo=false`)
           .success(
             palettes => resolve(palettes),
             error => reject(error)

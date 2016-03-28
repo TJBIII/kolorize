@@ -2,17 +2,19 @@
 
 app.controller("BrowseCtrl", [
   "$scope",
+  "$http",
   "$location",
   "paletteFactory",
   "firebaseURL",
+  "authFactory",
 
-  function ($scope, $location, paletteFactory, firebaseURL) {
-    // Default property values for keys bound to input fields
-    $scope.newPalette = "";
+  function ($scope, $http, $location, paletteFactory, firebaseURL, authFactory) {
     //empty palettes in parent scope to push updated data set into below
     $scope.$parent.palettes = [];
 
     $scope.search = {};
+
+    $scope.userId = authFactory.getUser().uid;
 
     // Invoke the promise that reads from Firebase
     paletteFactory.getAllPalettes().then(
@@ -26,14 +28,44 @@ app.controller("BrowseCtrl", [
           paletteCollection[key].colors = paletteCollection[key].colors.split(',');
           $scope.$parent.palettes.push(paletteCollection[key]);
        })
-
-        // paletteArr.forEach(hex => {
-        // paletteCollection[key].id = key;
-        // $scope.palettes.push(paletteCollection[key]);
       },
       // Handle reject() from the promise
       err => console.log(err)
     );
+
+
+    $scope.fork = function (palette) {
+
+      let newPalette = {
+        name: palette.name,
+        colors: palette.colors.join(','),
+        uid: $scope.userId, 
+        forked: true
+      };
+
+      console.log("new forked palette", newPalette);
+      // POST the palette to Firebase
+      $http.post(`${firebaseURL}/palettes.json`,
+
+        // Remember to stringify objects/arrays before
+        // sending them to an API
+        JSON.stringify(newPalette)
+
+      // The $http.post() method returns a promise, so you can use then()
+      ).then(
+        () => {
+          //set chosenPalette to be used at edit-palette
+          $scope.setChosenPalette({
+            name: palette.name,
+            colors: palette.colors,
+            uid: $scope.userID,
+            forked: true
+          });
+          $location.url("/edit-palette")
+        },      // Handle resolve
+        (response) => console.log(response)  // Handle reject
+      );
+    };
 
   }
 ]);
