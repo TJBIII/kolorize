@@ -59,7 +59,7 @@
 
 
   <h6>Add from Color Picker</h6>
-  <input type="color" ng-model="colorPicker" ng-change="updateScales()"/>
+  <input type="color" ng-model="colorPicker" ng-change="updateScales(); compliment()"/>
   <button ng-click="add(colorPicker)" class="waves-effect waves-light btn">Add to Palette</button> 
 
 
@@ -93,6 +93,10 @@
   <div class="clear"></div>
 
   <!-- display images from flickr search -->
+  <span ng-if="searchImgResults">
+    <h4>Search Results</h4>
+    <h6>Click an image to extract a palette from</h6>
+  </span>
   <span ng-repeat="imgSrc in searchImgResults">
     <img ng-click="analyze(imgSrc)" ng-src="{{imgSrc}}">
   </span>
