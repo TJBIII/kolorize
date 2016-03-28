@@ -23,10 +23,14 @@ app.controller("BrowseCtrl", [
         console.log("paletteCollection", paletteCollection);
 
         Object.keys(paletteCollection).forEach(key => {
-          paletteCollection[key].id = key;
-          //split colors string into array
-          paletteCollection[key].colors = paletteCollection[key].colors.split(',');
-          $scope.$parent.palettes.push(paletteCollection[key]);
+          //only take palettes not belonging to user
+          if ($scope.userId !== paletteCollection[key].uid){
+
+            paletteCollection[key].id = key;
+            //split colors string into array
+            paletteCollection[key].colors = paletteCollection[key].colors.split(',');
+            $scope.$parent.palettes.push(paletteCollection[key]);
+          }
        })
       },
       // Handle reject() from the promise
@@ -61,6 +65,7 @@ app.controller("BrowseCtrl", [
             uid: $scope.userID,
             forked: true
           });
+          //take user to edit their newly forked palette
           $location.url("/edit-palette")
         },      // Handle resolve
         (response) => console.log(response)  // Handle reject
