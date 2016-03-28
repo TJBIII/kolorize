@@ -7,8 +7,9 @@ app.controller("PageCtrl",
   "$http",
   "authFactory",
   "firebaseURL",
+  "colorspaceFactory",
 
-  function ($scope, $location, $http, authFactory, firebaseURL) {
+  function ($scope, $location, $http, authFactory, firebaseURL, colorspace) {
 
     $scope.palettes = [];
 
@@ -36,6 +37,10 @@ app.controller("PageCtrl",
 
     $scope.setChosenPalette = function (palette) {
       $scope.chosenPalette = palette;
+    }
+
+    $scope.getLightness = function (color) {
+      return colorspace.getLightnessFromHex(color);
     }
 
 

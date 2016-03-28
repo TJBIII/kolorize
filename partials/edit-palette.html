@@ -15,8 +15,11 @@
     <li class="card color-card col s2" ng-repeat="color in $parent.chosenPalette.colors" style="background-color: {{color}}">
       <div class="activator card-image waves-effect waves-block waves-light">
       </div>
-      <div class="card-content">
-        <span class="card-title activator grey-text text-darken-4">Options</span>
+      <div class="card-content reset">
+        <span class="card-title activator grey-text text-darken-4">
+          <span ng-if="getLightness(color) > 51"><i class="material-icons right small">more_horiz</i></span>
+          <span ng-if="getLightness(color) <= 50"><i class="material-icons right small white-icons">more_horiz</i></span>
+        </span>
       </div>
       <div class="card-reveal">
         <span class="card-title grey-text text-darken-4">

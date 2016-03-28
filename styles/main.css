@@ -14,12 +14,20 @@
 }
 
 .row li.color-card {
-  padding-top: 40px;
+  padding-top: 100px;
   padding-bottom: 0;
-  margin:10px;
+  margin: 0;
   cursor: pointer;
 }
 
+.white-icons {
+  color: white;
+}
+
+div.card-content.reset {
+  margin: 0;
+  padding: 0;
+}
 
 .card-reveal a{
   margin: 10px 0;
@@ -35,6 +43,10 @@
   margin: 2.1rem;
 }
 
+input[type="color"] {
+  height: 100px;
+  width: 100px;
+}
 
 .template-border {
   border: 1px solid black;
