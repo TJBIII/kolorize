@@ -39,6 +39,7 @@ app.controller("PageCtrl",
       $scope.chosenPalette = palette;
     }
 
+    //used to decide whether to display black or white menu icon
     $scope.getLightness = function (color) {
       return colorspace.getLightnessFromHex(color);
     }
