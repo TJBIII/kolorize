@@ -16,16 +16,19 @@
       <li class="card color-card col s2" id="{{color}}" ng-repeat="color in palette" style="background-color: {{color}}">
         <div class="activator card-image waves-effect waves-block waves-light">
         </div>
-        <div class="card-content">
-          <span class="card-title activator grey-text text-darken-4">Options</span>
-        </div>
-        <div class="card-reveal">
-          <span class="card-title grey-text text-darken-4">
-            <i class="material-icons right">close</i></span>
-            <a>Tweak</a>
-            <a ng-click="deleteColor(color)">Delete</a>
-            <a>Copy Hex</a> 
-        </div>
+        <div class="card-content reset">
+        <span class="card-title activator grey-text text-darken-4">
+          <span ng-if="getLightness(color) > 51"><i class="material-icons right small">more_horiz</i></span>
+          <span ng-if="getLightness(color) <= 50"><i class="material-icons right small white-icons">more_horiz</i></span>
+        </span>
+      </div>
+      <div class="card-reveal">
+        <span class="card-title grey-text text-darken-4">
+          <i class="material-icons right">close</i></span>
+          <a>Tweak</a>
+          <a ng-click="deleteColor(color)">Delete</a>
+          <a>Copy Hex</a> 
+      </div>
       </li>
     </ul>
   </div>
@@ -70,11 +73,10 @@
     <li>
       <div class="collapsible-header"><i class="material-icons">colorize</i>Color Picker</div>
       <div class="collapsible-body">
-        <p>
-          <h6>Add from Color Picker</h6>
+        <div class="valign-wrapper">
           <input type="color" ng-model="colorPicker" ng-change="updateScales(); compliment(); setLightness()"/>
           <button ng-click="add(colorPicker)" class="waves-effect waves-light btn">Add to Palette</button>
-        </p>
+        </div>
       </div>
     </li>
     <li>

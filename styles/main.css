@@ -46,6 +46,11 @@ div.card-content.reset {
 input[type="color"] {
   height: 100px;
   width: 100px;
+  margin: 10px;
+}
+
+.forked {
+  display: inline;
 }
 
 .template-border {
