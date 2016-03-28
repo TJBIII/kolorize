@@ -7,6 +7,41 @@ app.factory("colorspaceFactory", function () {
       return hex.length == 1 ? "0" + hex : hex;
     }
 
+
+  function hexToRgb (hex) {
+      hex = hex.replace(/[^0-9A-F]/gi, '');
+      var bigint = parseInt(hex, 16);
+      var r = (bigint >> 16) & 255;
+      var g = (bigint >> 8) & 255;
+      var b = bigint & 255;
+
+      return [r, g, b];
+    }
+
+
+    function RGB2HSL(rgbArr){
+      let r = rgbArr[0]/ 255, g = rgbArr[1] / 255, b = rgbArr[2]/ 255;
+      let max = Math.max(r, g, b), min = Math.min(r, g, b);
+      let h, s, l = (max + min) / 2;
+
+      if(max == min){
+          h = s = 0; // achromatic
+      }else{
+          var d = max - min;
+          s = l > 0.5 ? d / (2 - max - min) : d / (max + min);
+          switch(max){
+              case r: h = (g - b) / d + (g < b ? 6 : 0); break;
+              case g: h = (b - r) / d + 2; break;
+              case b: h = (r - g) / d + 4; break;
+          }
+          h *= 60;
+      }
+      // console.log("hsl:", [h,s,l])
+      return [h, s, l];
+    }
+
+
+
   return {
 
     compliment (rgb) {
@@ -88,24 +123,8 @@ app.factory("colorspaceFactory", function () {
 
 
     RGB2HSL(rgbArr){
-      let r = rgbArr[0]/ 255, g = rgbArr[1] / 255, b = rgbArr[2]/ 255;
-      let max = Math.max(r, g, b), min = Math.min(r, g, b);
-      let h, s, l = (max + min) / 2;
-
-      if(max == min){
-          h = s = 0; // achromatic
-      }else{
-          var d = max - min;
-          s = l > 0.5 ? d / (2 - max - min) : d / (max + min);
-          switch(max){
-              case r: h = (g - b) / d + (g < b ? 6 : 0); break;
-              case g: h = (b - r) / d + 2; break;
-              case b: h = (r - g) / d + 4; break;
-          }
-          h *= 60;
-      }
       // console.log("hsl:", [h,s,l])
-      return [h, s, l];
+      return RGB2HSL(rgbArr);
     },
 
 
@@ -114,7 +133,7 @@ app.factory("colorspaceFactory", function () {
       //console.log(rgb);
       rgb = rgb.map(colorValue => Number(colorValue))
       // console.log("rgb", rgb); 
-      return rgbToHsl(rgb);
+      return RGB2HSL(rgb);
     },
 
 
@@ -134,13 +153,7 @@ app.factory("colorspaceFactory", function () {
 
 
     hexToRgb(hex) {
-      hex = hex.replace(/[^0-9A-F]/gi, '');
-      var bigint = parseInt(hex, 16);
-      var r = (bigint >> 16) & 255;
-      var g = (bigint >> 8) & 255;
-      var b = bigint & 255;
-
-      return [r, g, b];
+      return hexToRgb(hex);
     },
 
 
@@ -182,6 +195,24 @@ app.factory("colorspaceFactory", function () {
         }
 
         return [Math.round(r * 255), Math.round(g * 255), Math.round(b * 255)];
+    },
+
+    getHSLFromHex (hex) {
+      let rgb = hexToRgb(hex);
+
+      let hsl = RGB2HSL(rgb);
+
+      return hsl;
+    },
+
+
+    getLightnessFromHex (hex) {
+      let rgb = hexToRgb(hex);
+
+      let hsl = RGB2HSL(rgb);
+
+      //multiply by 100 to be in set [0,100]
+      return hsl[2] * 100;
     }
 
   };

@@ -24,6 +24,8 @@ app.controller("NewPaletteCtrl",
     $scope.imageUploaded = false;
     $scope.k = 3;
 
+    $scope.pickerLightness;
+
     $scope.searchTerm;
     $scope.searchImgResults;
 
@@ -106,6 +108,25 @@ app.controller("NewPaletteCtrl",
       $scope.colorPicker = color;
       $scope.updateScales();
       $scope.compliment();
+    }
+
+    $scope.setLightness = function () {
+      $scope.pickerLightness = colorspaceFactory.getLightnessFromHex($scope.colorPicker);
+    }
+
+    $scope.calcFromLightness = function () {
+      let hex = $scope.colorPicker;
+      let hsl = colorspaceFactory.getHSLFromHex(hex);
+      let h = hsl[0];
+      let s = hsl[1] * 100;
+      let l = parseInt($scope.pickerLightness);
+
+      let rgb = colorspaceFactory.hslToRgb([h,s,l]);
+
+      let hexColor = colorspaceFactory.rgbToHex(rgb);
+      console.log("hexColor", hexColor);
+
+      return hexColor;
     }
 
 

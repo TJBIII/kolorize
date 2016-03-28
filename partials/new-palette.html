@@ -34,7 +34,7 @@
 
   <h4 ng-if="saturationScale">Saturation Scale</h4>
     <ul ng-model="saturationScale">
-      <li class="color" ng-click="add(color)" ng-repeat="color in saturationScale" style="background-color: {{color}}">
+      <li class="color" ng-click="add(color)" ng-repeat="color in saturationScale track by $index" style="background-color: {{color}}">
         {{color}}
       </li>
     </ul>
@@ -59,12 +59,18 @@
 
 
   <h6>Add from Color Picker</h6>
-  <input type="color" ng-model="colorPicker" ng-change="updateScales(); compliment()"/>
-  <button ng-click="add(colorPicker)" class="waves-effect waves-light btn">Add to Palette</button> 
+  <input type="color" ng-model="colorPicker" ng-change="updateScales(); compliment(); setLightness()"/>
+  <button ng-click="add(colorPicker)" class="waves-effect waves-light btn">Add to Palette</button>
+  <h4>Lightness</h4>
+  <form action="#">
+    <p class="range-field">
+      <input ng-model="pickerLightness" ng-change="setColor(calcFromLightness())" type="range" min="0" max="100" />
+    </p>
+  </form>
 
 
   <ul>
-    <li class="color" ng-click="setColor(color)" ng-repeat="color in clusterColors" style="background-color: {{color}}">
+    <li class="color" ng-click="setColor(color); setLightness()" ng-repeat="color in clusterColors" style="background-color: {{color}}">
       {{color}}
     </li>
   </ul>
@@ -84,7 +90,7 @@
   <span ng-if="imageUploaded">
     <form action="#">
       <p class="range-field">
-        <input ng-model="$parent.k" type="range" id="test5" min="3" max="8" />
+        <input ng-model="$parent.k" type="range" min="3" max="8" />
       </p>
     </form>
     <button ng-click="processImage()" class="waves-effect waves-light btn">Process</button>
