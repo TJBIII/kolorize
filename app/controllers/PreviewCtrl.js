@@ -9,7 +9,7 @@ app.controller("PreviewCtrl",
 
   function ($scope, $location, $http, firebaseURL) {
 
-    $scope.chosenTemplate = 'partials/starter-template.html';
+    $scope.chosenTemplate = 'previews/starter-template.html';
     $scope.blurMode = false;
 
 
@@ -24,6 +24,7 @@ app.controller("PreviewCtrl",
     };
 
 
+    //loading modal
     $(document).ready(function(){
       // the "href" attribute of .modal-trigger must specify the modal ID that wants to be triggered
       $('.modal-trigger').leanModal({
@@ -85,6 +86,9 @@ app.controller("PreviewCtrl",
 
 
     $scope.generatePreviews = function() {
+      //remove old previews (if any)
+      $('#output').html('');
+
       //array of colors from the palette
       //only take the first 3 colors
       let colors = $scope.$parent.chosenPalette.colors.slice(0, 3);
@@ -137,8 +141,7 @@ app.controller("PreviewCtrl",
         var time = end - start;
         console.log('Execution time: ' + time);
 
-        //remove old previews (if any) and place new ones on the page
-        $('#output').html('');
+        //place new previews on the page-footer
         imgs.forEach((element) => $('#output').append(element));
 
         //close the loader modal and reset progress to zero
