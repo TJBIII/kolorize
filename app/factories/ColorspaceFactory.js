@@ -15,7 +15,7 @@ app.factory("colorspaceFactory", function () {
       let temphsv=RGB2HSV(temprgb);
       // console.log("temphsv", temphsv);
       temphsv[0]=HueShift(temphsv[0],180.0);
-      console.log(HSV2RGB(temphsv));
+      // console.log(HSV2RGB(temphsv));
       return HSV2RGB(temphsv);
 
       function RGB2HSV(rgb) {
@@ -104,7 +104,7 @@ app.factory("colorspaceFactory", function () {
           }
           h *= 60;
       }
-      console.log("hsl:", [h,s,l])
+      // console.log("hsl:", [h,s,l])
       return [h, s, l];
     },
 
