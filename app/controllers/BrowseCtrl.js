@@ -1,6 +1,6 @@
 "use strict";
 
-app.controller("PaletteCtrl", [
+app.controller("BrowseCtrl", [
   "$scope",
   "$location",
   "paletteFactory",
@@ -15,7 +15,7 @@ app.controller("PaletteCtrl", [
     $scope.search = {};
 
     // Invoke the promise that reads from Firebase
-    paletteFactory.getUsersPalettes().then(
+    paletteFactory.getAllPalettes().then(
       // Handle resolve() from the promise
       paletteCollection => {
         console.log("paletteCollection", paletteCollection);

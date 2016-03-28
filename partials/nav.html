@@ -4,7 +4,10 @@
       <a href="#" class="brand-logo">Kolorize</a>
       <ul id="nav-mobile" class="right hide-on-small-and-down">
         <li><a href="#/about">About</a></li>
-        <span ng-if="isAuthenticated()"><li><a href="#/palettes">Palettes</a></li></span>
+        <span ng-if="isAuthenticated()">
+        <li><a href="#/palettes">Palettes</a></li>
+        <li><a href="#/browse">Browse</a></li>
+        </span>
         <li>
             <span ng-if="isAuthenticated()"><a href="#" ng-click="logout()">Logout</a></span>
             <span ng-if="!isAuthenticated()"><a href="#/login">Login</a></span>
