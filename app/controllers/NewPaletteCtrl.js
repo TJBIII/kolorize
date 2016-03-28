@@ -31,15 +31,10 @@ app.controller("NewPaletteCtrl",
 
 
     $scope.updateScales = function () {
-      let hslcolorPicker = colorspaceFactory.RGB2HSL(colorspaceFactory.hexToRgb($scope.colorPicker));
+      let hslcolorPicker = colorspaceFactory.hexToHsl($scope.colorPicker);
 
       let hslSaturationScale = colorscaleFactory.saturationScaleHSL(hslcolorPicker, 0.1, 10);
-      console.log("hslSaturationScale", hslSaturationScale);
-
-      let rgbSaturationScale = hslSaturationScale.map((hslArr) => colorspaceFactory.hslToRgb(hslArr));
-
-      // console.log("rgbSaturationScale", rgbSaturationScale);   
-      let hexSaturationScale = rgbSaturationScale.map((rgbArr) => colorspaceFactory.rgbToHex(rgbArr));
+      let hexSaturationScale = hslSaturationScale.map((hslArr) => colorspaceFactory.hslToHex(hslArr));
 
       console.log("hexscale", hexSaturationScale);
 
