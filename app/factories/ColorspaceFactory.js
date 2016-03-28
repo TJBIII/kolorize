@@ -42,6 +42,54 @@ app.factory("colorspaceFactory", function () {
 
 
 
+        /**
+     * Converts an HSL color value to RGB. Conversion formula
+     * adapted from http://en.wikipedia.org/wiki/HSL_color_space.
+     * Assumes h, s, and l are contained in the set [0, 1] and
+     * returns r, g, and b in the set [0, 255].
+     *
+     * 
+     * @return  Array           The RGB representation
+     */
+    function hslToRgb (hslArr) {
+
+        //scale so h, s, and l are in the set [0,1]
+        let h = hslArr[0]/360,
+            s = hslArr[1]/100,
+            l = hslArr[2]/100;
+
+        let r, g, b;
+
+        if(s == 0){
+            r = g = b = l; // achromatic
+        }else{
+            var hue2rgb = function hue2rgb(p, q, t){
+                if(t < 0) t += 1;
+                if(t > 1) t -= 1;
+                if(t < 1/6) return p + (q - p) * 6 * t;
+                if(t < 1/2) return q;
+                if(t < 2/3) return p + (q - p) * (2/3 - t) * 6;
+                return p;
+            }
+
+            var q = l < 0.5 ? l * (1 + s) : l + s - l * s;
+            var p = 2 * l - q;
+            r = hue2rgb(p, q, h + 1/3);
+            g = hue2rgb(p, q, h);
+            b = hue2rgb(p, q, h - 1/3);
+        }
+
+        return [Math.round(r * 255), Math.round(g * 255), Math.round(b * 255)];
+    }
+
+
+    function rgbToHex(point) {
+      var hexColor = "#" + componentToHex(point[0]) + componentToHex(point[1]) + componentToHex(point[2]);
+      return hexColor;
+    }
+
+
+
   return {
 
     compliment (rgb) {
@@ -122,7 +170,7 @@ app.factory("colorspaceFactory", function () {
     },
 
 
-    RGB2HSL(rgbArr){
+    rgbToHsl(rgbArr){
       // console.log("hsl:", [h,s,l])
       return RGB2HSL(rgbArr);
     },
@@ -147,8 +195,7 @@ app.factory("colorspaceFactory", function () {
 
 
     rgbToHex(point) {
-      var hexColor = "#" + componentToHex(point[0]) + componentToHex(point[1]) + componentToHex(point[2]);
-      return hexColor;
+      return rgbToHex(point);
     },
 
 
@@ -157,63 +204,23 @@ app.factory("colorspaceFactory", function () {
     },
 
 
-    /**
-     * Converts an HSL color value to RGB. Conversion formula
-     * adapted from http://en.wikipedia.org/wiki/HSL_color_space.
-     * Assumes h, s, and l are contained in the set [0, 1] and
-     * returns r, g, and b in the set [0, 255].
-     *
-     * 
-     * @return  Array           The RGB representation
-     */
     hslToRgb (hslArr) {
-
-        //scale so h, s, and l are in the set [0,1]
-        let h = hslArr[0]/360,
-            s = hslArr[1]/100,
-            l = hslArr[2]/100;
-
-        let r, g, b;
-
-        if(s == 0){
-            r = g = b = l; // achromatic
-        }else{
-            var hue2rgb = function hue2rgb(p, q, t){
-                if(t < 0) t += 1;
-                if(t > 1) t -= 1;
-                if(t < 1/6) return p + (q - p) * 6 * t;
-                if(t < 1/2) return q;
-                if(t < 2/3) return p + (q - p) * (2/3 - t) * 6;
-                return p;
-            }
-
-            var q = l < 0.5 ? l * (1 + s) : l + s - l * s;
-            var p = 2 * l - q;
-            r = hue2rgb(p, q, h + 1/3);
-            g = hue2rgb(p, q, h);
-            b = hue2rgb(p, q, h - 1/3);
-        }
-
-        return [Math.round(r * 255), Math.round(g * 255), Math.round(b * 255)];
+      return hslToRgb(hslArr);
     },
 
-    getHSLFromHex (hex) {
-      let rgb = hexToRgb(hex);
-
-      let hsl = RGB2HSL(rgb);
-
-      return hsl;
+    hexToHsl (hex) {
+      return RGB2HSL(hexToRgb(hex));
     },
 
+    hslToHex (hslArr) {
+      return rgbToHex(hslToRgb(hslArr));
+
+    },
 
     getLightnessFromHex (hex) {
-      let rgb = hexToRgb(hex);
-
-      let hsl = RGB2HSL(rgb);
-
+      let hsl = RGB2HSL(hexToRgb(hex));
       //multiply by 100 to be in set [0,100]
       return hsl[2] * 100;
     }
-
   };
 });
