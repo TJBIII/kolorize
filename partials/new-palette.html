@@ -63,7 +63,6 @@
   <button ng-click="add(colorPicker)" class="waves-effect waves-light btn">Add to Palette</button> 
 
 
-  <h6>Add from Image</h6>
   <ul>
     <li class="color" ng-click="setColor(color)" ng-repeat="color in clusterColors" style="background-color: {{color}}">
       {{color}}
@@ -71,6 +70,12 @@
   </ul>
   <div class="clear"></div>
 
+  <input type="text" ng-model="searchTerm" placeholder="Search Flickr...">
+  <button ng-click="flickrSearch()" class="waves-effect waves-light btn">Search</button>
+
+  <div class="clear"></div>
+
+  <h6>Upload Image</h6>
   <input type="file" id="imageLoader" name="imageLoader"/>
   <div>
     <canvas id="imageCanvas" width=300 height=300></canvas>
@@ -85,9 +90,9 @@
     <button ng-click="processImage()" class="waves-effect waves-light btn">Process</button>
   </span>
 
-  <input type="text" ng-model="searchTerm" placeholder="Search...">
-  <button ng-click="flickrSearch()" class="waves-effect waves-light btn">Search</button>
-  
+  <div class="clear"></div>
+
+  <!-- display images from flickr search -->
   <span ng-repeat="imgSrc in searchImgResults">
     <img ng-click="analyze(imgSrc)" ng-src="{{imgSrc}}">
   </span>

@@ -104,7 +104,7 @@ app.factory("colorspaceFactory", function () {
           }
           h *= 60;
       }
-      console.log("hsl:", [h,s,l])
+      // console.log("hsl:", [h,s,l])
       return [h, s, l];
     },
 
