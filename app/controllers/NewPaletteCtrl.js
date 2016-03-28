@@ -69,7 +69,8 @@ app.controller("NewPaletteCtrl",
       let newPalette = {
         name: $scope.paletteName,
         colors: $scope.palette.join(','),
-        uid: user.uid
+        uid: user.uid,
+        forked: false
       };
       console.log("newPalette", newPalette);
 

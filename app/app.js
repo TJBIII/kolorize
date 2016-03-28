@@ -53,6 +53,11 @@ app.config(["$routeProvider",
         controller: "PreviewCtrl",
         resolve: { isAuth }
       }).
+      when("/browse", {
+        templateUrl: "partials/browse.html",
+        controller: "BrowseCtrl",
+        resolve: { isAuth }
+      }).
       otherwise({
         redirectTo: "/"
       });
