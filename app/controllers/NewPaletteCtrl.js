@@ -29,6 +29,15 @@ app.controller("NewPaletteCtrl",
 
     $scope.searchTerm;
     $scope.searchImgResults;
+    $scope.flickrLoader = false;
+
+
+
+    $(document).ready(function(){
+      $('.collapsible').collapsible({
+        accordion : false // A setting that changes the collapsible behavior to expandable instead of the default accordion style
+      });
+    });
 
 
     $scope.updateScales = function () {
@@ -169,10 +178,12 @@ app.controller("NewPaletteCtrl",
 
     $scope.flickrSearch = () => {
       console.log("searching flickr");
+      $scope.flickrLoader = true;
 
       let tags = $scope.searchTerm.replace(/\s/, ",");
       
       $http.get(`https://api.flickr.com/services/rest/?method=flickr.photos.search&api_key=411834a7e0dbf2349b1e95012621e5e2&tags=${tags}&format=json&nojsoncallback=1&per_page=20&media=photos&sort=interestingness-desc&safe_search=2`).then( (response) => {
+          $scope.flickrLoader = false;
           console.log("response", response);
           //data is an array of photo objects
           let data = response.data.photos.photo;

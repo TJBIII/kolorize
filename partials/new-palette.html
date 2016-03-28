@@ -50,23 +50,69 @@
     </ul>
   </span>
 
-
   <div class="clear"></div>
 
+  <span ng-if="colorPicker !== '#ffffff'">
+    <h4>Lightness Slider</h4>
+    <form action="#">
+      <p class="range-field">
+        <input ng-model="$parent.pickerLightness" ng-change="setColor(calcFromLightness())" type="range" min="0" max="100" />
+      </p>
+    </form>
+  </span>
 
 
 
 
 
-  <h6>Add from Color Picker</h6>
+
+<ul class="collapsible" data-collapsible="accordion">
+    <li>
+      <div class="collapsible-header"><i class="material-icons">colorize</i>Color Picker</div>
+      <div class="collapsible-body">
+        <p>
+          <h6>Add from Color Picker</h6>
+          <input type="color" ng-model="colorPicker" ng-change="updateScales(); compliment(); setLightness()"/>
+          <button ng-click="add(colorPicker)" class="waves-effect waves-light btn">Add to Palette</button>
+        </p>
+      </div>
+    </li>
+    <li>
+      <div class="collapsible-header"><i class="material-icons">add_a_photo</i>Upload Image</div>
+      <div class="collapsible-body">
+        <form action="#">
+          <div class="file-field input-field">
+            <div class="btn">
+              <span>File</span>
+              <input type="file" id="imageLoader" name="imageLoader">
+            </div>
+            <div class="file-path-wrapper">
+              <input class="file-path validate" type="text">
+            </div>
+          </div>
+        </form>
+      </div>
+    </li>
+    <li>
+      <div class="collapsible-header"><i class="material-icons">search</i>Search Flickr</div>
+      <div class="collapsible-body">
+        <p>
+          <input type="text" ng-model="searchTerm" placeholder="Search Flickr...">
+          <button ng-click="flickrSearch()" class="waves-effect waves-light btn">Search</button>
+        </p>
+      </div>
+    </li>
+  </ul>
+
+  <span ng-if="flickrLoader">
+    <div ng-include="'partials/indeterminate-loader'"></div>
+  </span>
+
+
+
+  <!-- <h6>Add from Color Picker</h6>
   <input type="color" ng-model="colorPicker" ng-change="updateScales(); compliment(); setLightness()"/>
-  <button ng-click="add(colorPicker)" class="waves-effect waves-light btn">Add to Palette</button>
-  <h4>Lightness</h4>
-  <form action="#">
-    <p class="range-field">
-      <input ng-model="pickerLightness" ng-change="setColor(calcFromLightness())" type="range" min="0" max="100" />
-    </p>
-  </form>
+  <button ng-click="add(colorPicker)" class="waves-effect waves-light btn">Add to Palette</button> -->
 
 
   <ul>
@@ -76,13 +122,35 @@
   </ul>
   <div class="clear"></div>
 
+
+<!--   <h6>Search Flickr</h6>
   <input type="text" ng-model="searchTerm" placeholder="Search Flickr...">
   <button ng-click="flickrSearch()" class="waves-effect waves-light btn">Search</button>
+  
+  <span ng-if="flickrLoader">
+    <div ng-include="'partials/indeterminate-loader'"></div>
+  </span>
+
+  
+  <div class="clear"></div>
+ -->
+<!--   <h6>Upload Image</h6>
+  <form action="#">
+    <div class="file-field input-field">
+      <div class="btn">
+        <span>File</span>
+        <input type="file" id="imageLoader" name="imageLoader">
+      </div>
+      <div class="file-path-wrapper">
+        <input class="file-path validate" type="text">
+      </div>
+    </div>
+  </form>
+-->
 
   <div class="clear"></div>
+ 
 
-  <h6>Upload Image</h6>
-  <input type="file" id="imageLoader" name="imageLoader"/>
   <div>
     <canvas id="imageCanvas" width=300 height=300></canvas>
   </div>
