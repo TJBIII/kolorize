@@ -1,15 +1,20 @@
 <section class="container">
-  <h1>Create New Palette</h1>
+  
+  <div class="row center">
+    <div class="col s12 l6">
+      <h1>Create</h1>
+    </div>
 
+    <div class="col s12 l6">
+      <a href="#/edit-palette"><button class="waves-effect waves-light btn-large create-btn" ng-click="savePalette()">Save Palette</button></a>
+    </div>
+  </div>
+
+
+  <!-- <h1>Create New Palette</h1>
+  <button class="waves-effect waves-light btn" ng-click="savePalette()">Save Palette</button> -->
+  
   <input type="text" ng-model="paletteName" placeholder="New Palette Name">
-
-
-  <button class="waves-effect waves-light btn" ng-click="savePalette()">Save Palette</button>
-  <!-- <ul ui-sortable ng-model="palette">
-    <li class="color" ng-repeat="color in palette" style="background-color: {{color}}">
-      {{color}}
-    </li>
-  </ul> -->
 
   <div class="row">
     <ul ui-sortable ng-model="palette">
