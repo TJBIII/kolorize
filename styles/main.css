@@ -91,6 +91,10 @@ h1.header {
   text-shadow: 2px 2px 1px black;
 }
 
+.multi-color {
+  padding-top: 40px;
+}
+
 /********color change on homepage button*********/
 .color-change-btn {
   color: #333;
@@ -98,7 +102,7 @@ h1.header {
   -moz-animation: color-change 10s infinite;
   -o-animation: color-change 10s infinite;
   -ms-animation: color-change 10s infinite;
-  animation: color-change 12s infinite;
+  animation: color-change 15s infinite;
 }
 
 @-webkit-keyframes color-change {

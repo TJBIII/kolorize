@@ -1,19 +1,21 @@
-<nav role="navigation" class="blue-grey lighten-2">
-  <div class="container">
-    <div class="nav-wrapper">
-      <a href="#/" class="brand-logo">Kolorize</a>
-      <ul id="nav-mobile" class="right hide-on-small-and-down">
-        <li><a href="#/about">About</a></li>
-        <span ng-if="isAuthenticated()">
-        <li><a href="#/palettes">Palettes</a></li>
-        <li><a href="#/browse">Browse</a></li>
-        </span>
-        <li>
-            <span ng-if="isAuthenticated()"><a href="#" ng-click="logout()">Logout</a></span>
-            <span ng-if="!isAuthenticated()"><a href="#/login">Login</a></span>
-          </a>
-        </li>
-      </ul>
+<div ng-class="{'navbar-fixed': !isAuthenticated()}">
+  <nav role="navigation" class="blue-grey lighten-2">
+    <div class="container">
+      <div class="nav-wrapper">
+        <a href="#/" class="brand-logo">Kolorize</a>
+        <ul id="nav-mobile" class="right hide-on-small-and-down">
+          <li><a href="#/about">About</a></li>
+          <span ng-if="isAuthenticated()">
+          <li><a href="#/palettes">Palettes</a></li>
+          <li><a href="#/browse">Browse</a></li>
+          </span>
+          <li>
+              <span ng-if="isAuthenticated()"><a href="#/" ng-click="logout()">Logout</a></span>
+              <span ng-if="!isAuthenticated()"><a href="#/login">Login</a></span>
+            </a>
+          </li>
+        </ul>
+      </div>
     </div>
-  </div>
-</nav>
+  </nav>
+</div>

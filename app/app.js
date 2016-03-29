@@ -81,7 +81,7 @@ app.run([
     appRef.onAuth(authData => {
       if (!authData) {
         console.log("onAuth detected unauthenticated client");
-        $location.path("/login");
+        $location.path("/");
       }
     });
   }
