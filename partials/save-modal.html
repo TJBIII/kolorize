@@ -1,0 +1,11 @@
+ <!-- Modal Structure -->
+  <div id="save-modal" class="modal">
+    <div class="modal-content">
+      <h1>Wait...</h1>
+      <p>We noticed you haven't saved this palette. Do you want to save it to your palettes page or discard it?
+    </div>
+    <div class="modal-footer">
+      <button class="waves-effect waves-light btn-large create-btn" ng-click="savePalette(); closeSaveModal()">Save</button>
+      <a href="#/palettes"><button class="waves-effect waves-light btn-large create-btn" ng-click="closeSaveModal()">Discard</button></a>
+    </div>
+  </div>
