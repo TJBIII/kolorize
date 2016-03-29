@@ -12,7 +12,7 @@
 
 <div class="row">
   <ul ui-sortable ng-model="$parent.chosenPalette.colors">
-    <li class="card color-card col s2" ng-repeat="color in $parent.chosenPalette.colors" style="background-color: {{color}}">
+    <li ng-class="palette.length > 3 ? (palette.length > 5 ? 's1' : 's2') : 's3'" class="card color-card col s2" ng-repeat="color in $parent.chosenPalette.colors" style="background-color: {{color}}">
       <div class="activator card-image waves-effect waves-block waves-light">
       </div>
       <div class="card-content reset">

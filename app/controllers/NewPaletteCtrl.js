@@ -170,8 +170,8 @@ app.controller("NewPaletteCtrl",
       reader.onload = function(event){
           var img = new Image();
           img.onload = function(){
-              // canvas.width = img.width;
-              // canvas.height = img.height;
+              canvas.width = 300;
+              canvas.height = 300;
               // ctx.drawImage(img,0,0);
               imgProcess.fitImageOn(canvas, img, ctx);
           }

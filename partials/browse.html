@@ -21,16 +21,18 @@
     <div ng-repeat="palette in palettes | filter: search.name">
     <h4>{{palette.name || "Unamed Palette"}}</h4>
       <div class="col s8">
-        <div ng-repeat="color in palette.colors">
-          <div class="color" style="background-color: {{color}}"></div>
+        <div class="row">
+          <div ng-repeat="color in palette.colors">
+            <div ng-class="palette.colors.length > 4 ? 's1' : 's2'" class="color col" style="background-color: {{color}}"></div>
+          </div>
         </div>
       </div>
 
       <div class="col s4">
         <a href="#/preview" ng-click="setChosenPalette(palette)"><button class="waves-effect waves-light btn grey lighten-1">Preview</button></a>
-        <span ng-if="userId === palette.uid">
+        <!-- <span ng-if="userId === palette.uid">
           <a href="#/edit-palette" ng-click="setChosenPalette(palette)"><button class="waves-effect waves-light btn grey lighten-1">Edit</button></a>
-        </span>
+        </span> -->
         <span ng-if="userId !== palette.uid">
           <a href="#/palettes" ng-click="fork(palette)"><button class="waves-effect waves-light btn grey lighten-1">Fork</button></a>
         </span>
