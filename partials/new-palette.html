@@ -197,13 +197,15 @@
   <div class="clear"></div>
 
   <!-- display images from flickr search -->
-  <span id="searchResults" ng-if="searchImgResults">
+<div class="search-results" id="searchResults">
+  <span ng-if="searchImgResults">
     <h4>Search Results</h4>
     <h6>Click an image to extract a palette from</h6>
   </span>
   <span ng-repeat="imgSrc in searchImgResults">
-    <img ng-click="analyze(imgSrc)" ng-src="{{imgSrc}}">
+    <img ng-click="analyze(imgSrc); scrollTo('imageCanvas')" ng-src="{{imgSrc}}">
   </span>
+</div>
 
 
 

@@ -11,8 +11,9 @@ app.controller("NewPaletteCtrl",
   "imgProcessFactory",
   "kmeansFactory",
   "colorscaleFactory",
+  "$anchorScroll",
 
-  function ($scope, $http, firebaseURL, authFactory, $location, colorspace, imgProcess, kmeans, colorscale) {
+  function ($scope, $http, firebaseURL, authFactory, $location, colorspace, imgProcess, kmeans, colorscale, $anchorScroll ) {
 
     $scope.colorPicker = "#ffffff";
     $scope.pickerLightness;
@@ -207,7 +208,9 @@ app.controller("NewPaletteCtrl",
           let data = response.data.photos.photo;
 
           $scope.searchImgResults = data.map((obj) => `https://farm${obj.farm}.staticflickr.com/${obj.server}/${obj.id}_${obj.secret}_m.jpg`);
-          
+
+          //scroll down to the search results
+          $scope.scrollTo("searchResults");
         }, (error) => console.log("error", error))
     };
 
@@ -238,6 +241,11 @@ app.controller("NewPaletteCtrl",
 
       $scope.imageUploaded = true;
     }
+
+
+    $scope.scrollTo= function(idStr) {
+      document.getElementById(idStr).scrollIntoView()
+    };
 
 }
 
