@@ -18,12 +18,12 @@
 
   <div class="row">
     <ul ui-sortable ng-model="palette">
-      <li class="card color-card col s2" id="{{color}}" ng-repeat="color in palette" style="background-color: {{color}}">
+      <li ng-class="palette.length > 3 ? (palette.length > 5 ? 's1' : 's2') : 's3'" class="card color-card col" id="{{color}}" ng-repeat="color in palette" style="background-color: {{color}}">
         <div class="activator card-image waves-effect waves-block waves-light">
         </div>
         <div class="card-content reset">
         <span class="card-title activator grey-text text-darken-4">
-          <span ng-if="getLightness(color) > 51"><i class="material-icons right small">more_horiz</i></span>
+          <span ng-if="getLightness(color) > 50"><i class="material-icons right small">more_horiz</i></span>
           <span ng-if="getLightness(color) <= 50"><i class="material-icons right small white-icons">more_horiz</i></span>
         </span>
       </div>
@@ -42,7 +42,7 @@
 
   <h4 ng-if="saturationScale">Saturation Scale</h4>
     <ul ng-model="saturationScale">
-      <li class="color" ng-click="add(color)" ng-repeat="color in saturationScale track by $index" style="background-color: {{color}}">
+      <li class="saturation-color" ng-click="add(color)" ng-repeat="color in saturationScale track by $index" style="background-color: {{color}}">
         {{color}}
       </li>
     </ul>
@@ -71,10 +71,40 @@
 
 
 
+  <span ng-if="clusterColors">
+    <h4>Cluster Colors</h4>
+    <ul>
+      <li class="color cluster-color" ng-click="setColor(color); setLightness()" ng-repeat="color in clusterColors" style="background-color: {{color}}">
+        {{color}}
+      </li>
+    </ul>
+  </span>
 
 
+    <div class="clear"></div>
 
-<ul class="collapsible" data-collapsible="accordion">
+
+ 
+
+    <div>
+      <canvas id="imageCanvas" width=0 height=0></canvas>
+    </div>
+          
+    <span ng-if="imageUploaded">
+      <form action="#">
+        <p class="range-field">
+          <input ng-model="$parent.k" type="range" min="3" max="8" />
+        </p>
+      </form>
+      <button ng-click="processImage()" class="waves-effect waves-light btn">Process</button>
+    </span>
+
+
+  <span ng-if="flickrLoader">
+    <div ng-include="'partials/indeterminate-loader'"></div>
+  </span>
+
+  <ul class="collapsible" data-collapsible="accordion">
     <li>
       <div class="collapsible-header"><i class="material-icons">colorize</i>Color Picker</div>
       <div class="collapsible-body">
@@ -122,13 +152,6 @@
   <button ng-click="add(colorPicker)" class="waves-effect waves-light btn">Add to Palette</button> -->
 
 
-  <ul>
-    <li class="color" ng-click="setColor(color); setLightness()" ng-repeat="color in clusterColors" style="background-color: {{color}}">
-      {{color}}
-    </li>
-  </ul>
-  <div class="clear"></div>
-
 
 <!--   <h6>Search Flickr</h6>
   <input type="text" ng-model="searchTerm" placeholder="Search Flickr...">
@@ -155,11 +178,11 @@
   </form>
 -->
 
-  <div class="clear"></div>
+<!--   <div class="clear"></div>
  
 
   <div>
-    <canvas id="imageCanvas" width=300 height=300></canvas>
+    <canvas id="imageCanvas" width=0 height=0></canvas>
   </div>
         
   <span ng-if="imageUploaded">
@@ -169,18 +192,20 @@
       </p>
     </form>
     <button ng-click="processImage()" class="waves-effect waves-light btn">Process</button>
-  </span>
+  </span> -->
 
   <div class="clear"></div>
 
   <!-- display images from flickr search -->
+<div class="search-results" id="searchResults">
   <span ng-if="searchImgResults">
     <h4>Search Results</h4>
     <h6>Click an image to extract a palette from</h6>
   </span>
   <span ng-repeat="imgSrc in searchImgResults">
-    <img ng-click="analyze(imgSrc)" ng-src="{{imgSrc}}">
+    <img ng-click="analyze(imgSrc); scrollTo('imageCanvas')" ng-src="{{imgSrc}}">
   </span>
+</div>
 
 
 
