@@ -4,14 +4,14 @@ app.factory("imgProcessFactory", () => {
 
   return {
 
-    processImg (ctx) {
+    processImg (ctx, sw, sh) {
       //https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D
 
       //create points array to store [R,G,B] formated point color values
       var points = [];
 
       //getImageData().data is a read-only 1D array in RGBA order
-      let data = ctx.getImageData(0, 0, 200, 200).data;
+      let data = ctx.getImageData(0, 0, sw, sh).data;
       // console.log("data", data);
       for (var i = 0; i < data.length; i += 4){
         //i will always be at the index of the R value in RGBA sequence
@@ -65,6 +65,8 @@ app.factory("imgProcessFactory", () => {
       canvas.height = renderableHeight;
 
       ctx.drawImage(imageObj, 0, 0, renderableWidth, renderableHeight);
+
+      return {sw:renderableWidth, sh:renderableHeight}
     }
     
 

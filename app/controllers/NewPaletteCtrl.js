@@ -162,7 +162,9 @@ app.controller("NewPaletteCtrl",
 
     let canvas = $('#imageCanvas')[0];
     let ctx = canvas.getContext('2d');
-
+    
+    //sw and sh are the width and height of the rectangle from which the ImageData will be extracted.
+    let sw, sh;
 
     function handleImage(e){
       $scope.imageUploaded = true;
@@ -174,7 +176,9 @@ app.controller("NewPaletteCtrl",
               canvas.width = 300;
               canvas.height = 300;
               // ctx.drawImage(img,0,0);
-              imgProcess.fitImageOn(canvas, img, ctx);
+              let size = imgProcess.fitImageOn(canvas, img, ctx);
+              sw = size.sw;
+              sh = size.sh;
           }
           img.src = event.target.result;
       }
@@ -184,7 +188,7 @@ app.controller("NewPaletteCtrl",
 
     $scope.processImage = () => {
       console.log("processing");
-      let points = imgProcess.processImg(ctx);
+      let points = imgProcess.processImg(ctx, sw, sh);
       let k = parseInt($scope.k)
 
       let results = kmeans.kmeans(points, k, 10);
