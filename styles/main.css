@@ -13,6 +13,19 @@ h1 {
 }
 
 
+.cluster-color {
+  margin-bottom: 10px;
+}
+
+.saturation-color {
+  margin: 0 2.5px;
+  height:40px;
+  width: 80px;
+  float: left;
+  display: block;
+  border: 1px solid black;
+}
+
 #palette {
   border: 2px solid black;
   height: 60px;
