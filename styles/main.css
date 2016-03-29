@@ -18,6 +18,7 @@ h1 {
 }
 
 .saturation-color {
+  text-align: center;
   margin: 0 2.5px;
   height:40px;
   width: 80px;
@@ -59,6 +60,17 @@ div.card-content.reset {
 .create-btn {
   text-align: center;
   margin: 2.1rem;
+}
+
+.modal-btn {
+  text-align: center;
+  background-color: #fff;
+  color: black;
+}
+
+.modal-btn:hover {
+  background-color: #eee;
+  color: black;
 }
 
 input[type="color"] {
