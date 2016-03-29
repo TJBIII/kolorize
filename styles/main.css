@@ -1,3 +1,8 @@
+h1 {
+  font-family: 'Orbitron', sans-serif;
+}
+
+
 .color {
   margin: 0 2.5px;
   height:40px;
@@ -14,12 +19,20 @@
 }
 
 .row li.color-card {
-  padding-top: 40px;
+  padding-top: 100px;
   padding-bottom: 0;
-  margin:10px;
+  margin: 0;
   cursor: pointer;
 }
 
+.white-icons {
+  color: white;
+}
+
+div.card-content.reset {
+  margin: 0;
+  padding: 0;
+}
 
 .card-reveal a{
   margin: 10px 0;
@@ -35,6 +48,16 @@
   margin: 2.1rem;
 }
 
+input[type="color"] {
+  height: 100px;
+  width: 100px;
+  margin: 10px;
+}
+
+.forked {
+  background-color: #fff;
+  color: #bbb;
+}
 
 .template-border {
   border: 1px solid black;
@@ -62,6 +85,59 @@
   filter: none;
   -webkit-filter: none;
 }
+
+
+h1.header {
+  text-shadow: 2px 2px 1px black;
+}
+
+.multi-color {
+  padding-top: 40px;
+}
+
+/********color change on homepage button*********/
+.color-change-btn {
+  color: #333;
+  -webkit-animation: color-change 10s infinite;
+  -moz-animation: color-change 10s infinite;
+  -o-animation: color-change 10s infinite;
+  -ms-animation: color-change 10s infinite;
+  animation: color-change 15s infinite;
+}
+
+@-webkit-keyframes color-change {
+    0% { background-color: red; }
+    50% { background-color: blue; }
+    100% { background-color: red; }
+}
+@-moz-keyframes color-change {
+    0% { color: red; }
+    50% { color: blue; }
+    100% { color: red; }
+}
+@-ms-keyframes color-change {
+    0% { color: red; }
+    50% { color: blue; }
+    100% { color: red; }
+}
+@-o-keyframes color-change {
+    0% { color: red; }
+    50% { color: blue; }
+    100% { color: red; }
+}
+@keyframes color-change {
+    0% { background-color: #81d4fa; }
+    12% { background-color: #ffcc80; }
+    24% { background-color: #ffe082; }
+    36% { background-color: #eeeeee; }
+    48% { background-color: #EF9A9A; }
+    60% { background-color: #c5e1a5; }
+    72% { background-color: #80cbc4; }
+    84% { background-color: #b39ddb; }
+    100% { background-color: #81d4fa; }
+
+}
+/****************************/
 
 /* Styles for html templates
 .navbar {

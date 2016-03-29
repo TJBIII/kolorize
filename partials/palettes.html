@@ -1,8 +1,8 @@
-<article class="palette-list">
+<section class="container palette-list">
 
   <div class="row">
     <div class="col s12 l6">
-      <h1>Palettes</h1>
+      <h1>My Palettes</h1>
     </div>
 
     <div class="col s12 l6">
@@ -23,7 +23,15 @@
 
   <div class="row">
     <div ng-repeat="palette in palettes | filter: search.name">
-    <h4>{{palette.name || "Unamed Palette"}}</h4>
+      <div class="col s12">
+        <h4>{{palette.name || "Unamed Palette"}}
+          <span ng-if="palette.forked">
+            <div class="chip forked">
+              Forked
+            </div>
+          </span>
+        </h4>
+      </div>
       <div class="col s8">
         <div ng-repeat="color in palette.colors">
           <div class="color" style="background-color: {{color}}"></div>
@@ -43,5 +51,5 @@
 
   </section>
 
-</article>
+</section>
 

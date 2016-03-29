@@ -1,16 +1,37 @@
-<section>
-  <h1>HTML Preview</h1>
+<section class="container">
+
+  <div class="row center">
+    <div class="col s12 l6">
+      <h1>Preview</h1>
+    </div>
+
+    <div class="col s12 l6">
+      <a href="#/edit-palette"><button class="waves-effect waves-light btn-large create-btn"><i class="material-icons right">palette</i>Edit {{$parent.chosenPalette.name}}</button></a>
+    </div>
+  </div>
 
 
-<!--   <div ng-repeat="color in $parent.chosenPalette.colors">
-    <div class="color" style="background-color: {{color}}">{{color}}</div>
-  </div> -->
 
-  <ul ui-sortable ng-model="$parent.chosenPalette.colors">
-    <li class="color" ng-repeat="color in $parent.chosenPalette.colors" style="background-color: {{color}}">
-      {{color}}
-    </li>
-  </ul>
+  <div class="row">
+    <ul ui-sortable ng-model="$parent.chosenPalette.colors">
+      <li class="card color-card col s2" ng-repeat="color in $parent.chosenPalette.colors" style="background-color: {{color}}">
+        <div class="activator card-image waves-effect waves-block waves-light">
+        </div>
+        <div class="card-content reset">
+          <span class="card-title activator grey-text text-darken-4">
+            <span ng-if="getLightness(color) > 51"><i class="material-icons right small">more_horiz</i></span>
+            <span ng-if="getLightness(color) <= 50"><i class="material-icons right small white-icons">more_horiz</i></span>
+          </span>
+        </div>
+        <div class="card-reveal">
+          <span class="card-title grey-text text-darken-4">
+            <i class="material-icons right">close</i></span>
+            <a>Tweak</a>
+            <a>Copy Hex</a> 
+        </div>
+      </li>
+    </ul>
+  </div>
 
   <div class="clear"></div>
   <h4>Templates</h4> 

@@ -39,7 +39,6 @@ app.controller("BrowseCtrl", [
 
 
     $scope.fork = function (palette) {
-
       let newPalette = {
         name: palette.name,
         colors: palette.colors.join(','),
@@ -57,17 +56,7 @@ app.controller("BrowseCtrl", [
 
       // The $http.post() method returns a promise, so you can use then()
       ).then(
-        () => {
-          //set chosenPalette to be used at edit-palette
-          $scope.setChosenPalette({
-            name: palette.name,
-            colors: palette.colors,
-            uid: $scope.userID,
-            forked: true
-          });
-          //take user to edit their newly forked palette
-          $location.url("/edit-palette")
-        },      // Handle resolve
+        () => $location.url("#/palettes"), //take user to their palettes page
         (response) => console.log(response)  // Handle reject
       );
     };

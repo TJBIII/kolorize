@@ -43,7 +43,7 @@ app.controller("LoginCtrl",
       authFactory
         .authenticate($scope.account)
         .then(() => {
-          $location.path("/");
+          $location.path("/palettes");
           $scope.$apply();  // Needed for $location.path() to succeed
         });
 

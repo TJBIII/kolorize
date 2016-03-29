@@ -31,6 +31,9 @@ app.controller("NewPaletteCtrl",
     $scope.searchImgResults;
     $scope.flickrLoader = false;
 
+    //used for the save modal if user tries to navigate away before saving
+    $scope.saveAlert = true;
+
 
 
     $(document).ready(function(){
@@ -39,6 +42,18 @@ app.controller("NewPaletteCtrl",
       });
     });
 
+
+    $scope.$on('$locationChangeStart', function( event ) {
+      if ($scope.saveAlert) {
+        $('#save-modal').openModal();
+        event.preventDefault();
+      }
+    })
+
+    $scope.closeSaveModal = function () {
+      $('#save-modal').closeModal();
+      $scope.saveAlert = false;
+    }
 
     $scope.updateScales = function () {
       let hslcolorPicker = colorspace.hexToHsl($scope.colorPicker);
@@ -74,6 +89,9 @@ app.controller("NewPaletteCtrl",
     
 
     $scope.savePalette = function () {
+      //don't need to show the save alert modal
+      $scope.saveAlert = false;
+
       let user = authFactory.getUser();
       let newPalette = {
         name: $scope.paletteName,
