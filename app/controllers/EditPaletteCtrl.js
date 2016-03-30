@@ -12,26 +12,6 @@ app.controller("EditPaletteCtrl",
     $scope.colorPicker = "#ffffff";
     $scope.palette = $scope.$parent.chosenPalette;
 
-
-
-    $scope.add = function () {
-      //dont allow more than 8 colors in a palette
-      if ($scope.palette.colors.length >= 8){
-        console.log("only 8 colors per palette allowed");
-        return
-      }
-      //dont allow duplicate colors
-      for (let color in $scope.palette.colors){
-        if ($scope.colorPicker === $scope.palette.colors[color]){
-          return;
-        }
-      }
-      //add the color to the palette
-      $scope.palette.colors.push($scope.colorPicker);
-    }
-
-
-
     $scope.updateFirebase = function () {
       if ($scope.palette.colors.length > 0){
         console.log("updating", $scope.palette.id);
@@ -77,7 +57,6 @@ app.controller("EditPaletteCtrl",
       });
 
     };
-
 
     $scope.deleteColor = function (color) {
       //remove color from chosenPalette array

@@ -48,6 +48,14 @@ app.controller("NewPaletteCtrl",
       );
     };
 
+    $scope.deleteColor = function (hexStr) {
+      // console.log("color to delete", color);
+      let colorIdx = $scope.palette.colors.indexOf(hexStr);
+      if (colorIdx >= 0) {
+        $scope.palette.colors.splice(colorIdx, 1);
+      }
+    }
+
 
 
     //if the user navigates away before saving open the save alert modal

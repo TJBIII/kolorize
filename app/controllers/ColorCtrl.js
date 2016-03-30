@@ -38,33 +38,6 @@ app.controller("ColorCtrl",
     });
 
 
-    // $scope.savePalette = function () {
-    //   //don't need to show the save alert modal
-    //   $scope.$parent.$parent.saveAlert = false;
-
-    //   let user = authFactory.getUser();
-    //   let newPalette = {
-    //     name: $scope.paletteName,
-    //     colors: $scope.colors.join(','),
-    //     uid: user.uid,
-    //     forked: false
-    //   };
-    //   console.log("newPalette", newPalette);
-
-    //   // POST the palette to Firebase
-    //   $http.post(`${firebaseURL}/palettes.json`,
-
-    //     // Remember to stringify objects/arrays before
-    //     // sending them to an API
-    //     JSON.stringify(newPalette)
-
-    //   // The $http.post() method returns a promise, so you can use then()
-    //   ).then(
-    //     () => $location.url("/palettes"),      // Handle resolve
-    //     (response) => console.log(response)  // Handle reject
-    //   );
-    // };
-
 
     $scope.updateScales = function () {
       let hslcolorPicker = colorspace.hexToHsl($scope.colorPicker);
@@ -98,18 +71,6 @@ app.controller("ColorCtrl",
       $scope.colors.push(newColor);
     }
     
-
-
-    $scope.deleteColor = function (hexStr) {
-      // console.log("color to delete", color);
-      let colorIdx = $scope.colors.indexOf(hexStr);
-      if (colorIdx >= 0) {
-        $scope.colors.splice(colorIdx, 1);
-      }
-      // $scope.$apply();
-    }
-
-
     $scope.setColor = function (color) {
       $scope.colorPicker = color;
       $scope.updateScales();
