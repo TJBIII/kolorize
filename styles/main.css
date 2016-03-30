@@ -100,6 +100,10 @@ input[type="color"] {
   clear: both;
 }
 
+.colorBox {
+  background-color: #badace;
+}
+
 .search-results {
   height: 200px;
 }
