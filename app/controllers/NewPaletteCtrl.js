@@ -14,11 +14,9 @@ app.controller("NewPaletteCtrl",
     $scope.$parent.saveAlert = true;
 
     //reset the palette if one was being edited
-    $scope.$parent.chosenPalette = { colors: [],
-                            name:"" };
+    $scope.$parent.chosenPalette = { colors: [], name:"" };
 
     $scope.palette = $scope.$parent.chosenPalette;
-
 
 
     $scope.savePalette = function () {
@@ -55,8 +53,6 @@ app.controller("NewPaletteCtrl",
         $scope.palette.colors.splice(colorIdx, 1);
       }
     }
-
-
 
     //if the user navigates away before saving open the save alert modal
     $scope.$on('$locationChangeStart', function( event ) {
