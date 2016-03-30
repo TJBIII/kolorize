@@ -33,18 +33,20 @@ app.controller("EditPaletteCtrl",
 
 
     $scope.updateFirebase = function () {
-      // console.log("palette", $scope.palette.id);
-      let id = $scope.palette.id,
-          colorsStr = $scope.palette.colors.join(',');
+      if ($scope.palette.colors.length > 0){
+        console.log("updating", $scope.palette.id);
+        let id = $scope.palette.id,
+            colorsStr = $scope.palette.colors.join(',');
 
-      let updatedPalette = {
-        name: $scope.palette.name,
-        colors: colorsStr
-      };
+        let updatedPalette = {
+          name: $scope.palette.name,
+          colors: colorsStr
+        };
 
-      let paletteRef = new Firebase(`${firebaseURL}palettes/${id}`);
-      // Modify the name and colors but leave everything else unchanged
-      paletteRef.update(updatedPalette);
+        let paletteRef = new Firebase(`${firebaseURL}palettes/${id}`);
+        // Modify the name and colors but leave everything else unchanged
+        paletteRef.update(updatedPalette);
+      }
     }
 
 
