@@ -226,9 +226,13 @@ app.controller("NewPaletteCtrl",
 
 
       img.onload = function() {
-        canvas.width = img.width;
-        canvas.height = img.height;
-        ctx.drawImage( img, 0, 0 );
+        canvas.width = 300;
+        canvas.height = 300;
+        let size = imgProcess.fitImageOn(canvas, img, ctx);
+        sw = size.sw;
+        sh = size.sh;
+
+
         localStorage.setItem( "savedImageData", canvas.toDataURL("image/png") );
         console.log("onload");
         $scope.processImage();
