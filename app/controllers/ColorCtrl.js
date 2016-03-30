@@ -18,7 +18,7 @@ app.controller("ColorCtrl",
     $scope.pickerLightness;
     $scope.pickerSaturation;
 
-    $scope.palette = [];
+    $scope.colors = [];
     $scope.paletteName = "";
     $scope.clusterColors = null;
     $scope.saturationScale = null;
@@ -45,7 +45,7 @@ app.controller("ColorCtrl",
       let user = authFactory.getUser();
       let newPalette = {
         name: $scope.paletteName,
-        colors: $scope.palette.join(','),
+        colors: $scope.colors.join(','),
         uid: user.uid,
         forked: false
       };
@@ -85,26 +85,26 @@ app.controller("ColorCtrl",
 
     $scope.add = function (newColor) {
       //dont allow more than 8 colors in a palette
-      if ($scope.palette.length >= 8){
+      if ($scope.colors.length >= 8){
         console.log("only 8 colors per palette allowed");
         return
       }
       //dont allow duplicate colors
-      for (let color in $scope.palette){
-        if (newColor === $scope.palette[color]){
+      for (let color in $scope.colors){
+        if (newColor === $scope.colors[color]){
           return;
         }
       }
-      $scope.palette.push(newColor);
+      $scope.colors.push(newColor);
     }
     
 
 
     $scope.deleteColor = function (hexStr) {
       // console.log("color to delete", color);
-      let colorIdx = $scope.palette.indexOf(hexStr);
+      let colorIdx = $scope.colors.indexOf(hexStr);
       if (colorIdx >= 0) {
-        $scope.palette.splice(colorIdx, 1);
+        $scope.colors.splice(colorIdx, 1);
       }
       // $scope.$apply();
     }
@@ -134,9 +134,6 @@ app.controller("ColorCtrl",
 
       return hexColor;
     }
-
-
-
 
     let imageLoader = $('#imageLoader');
 

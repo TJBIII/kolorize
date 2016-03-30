@@ -16,8 +16,8 @@
   <input type="text" ng-model="paletteName" placeholder="New Palette Name">
 
   <div class="row">
-    <ul ui-sortable ng-model="palette">
-      <li ng-class="palette.length > 3 ? (palette.length > 5 ? 's1-half' : 's2') : 's3'" class="card color-card col" id="{{color}}" ng-repeat="color in palette" style="background-color: {{color}}">
+    <ul ui-sortable ng-model="colors">
+      <li ng-class="colors.length > 3 ? (colors.length > 5 ? 's1-half' : 's2') : 's3'" class="card color-card col" id="{{color}}" ng-repeat="color in colors" style="background-color: {{color}}">
         <div class="activator card-image waves-effect waves-block waves-light">
         </div>
         <div class="card-content reset">
