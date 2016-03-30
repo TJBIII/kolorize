@@ -39,6 +39,14 @@ h1 {
   cursor: pointer;
 }
 
+
+.row .col.s1-half {
+    width: 12%;
+    margin-left: auto;
+    left: auto;
+    right: auto;
+}
+
 .white-icons {
   color: white;
 }
