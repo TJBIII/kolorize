@@ -17,13 +17,38 @@ app.controller("NewPaletteCtrl",
     $scope.$parent.chosenPalette = { colors: [],
                             name:"" };
 
+    $scope.palette = $scope.$parent.chosenPalette;
 
-    //set up the collapsible menu
-    $(document).ready(function(){
-      $('.collapsible').collapsible({
-        accordion : false // A setting that changes the collapsible behavior to expandable instead of the default accordion style
-      });
-    });
+
+
+    $scope.savePalette = function () {
+      //don't need to show the save alert modal
+      $scope.$parent.saveAlert = false;
+
+      let user = authFactory.getUser();
+      let newPalette = {
+        name: $scope.palette.name,
+        colors: $scope.palette.colors.join(','),
+        uid: user.uid,
+        forked: false
+      };
+      console.log("newPalette", newPalette);
+
+      // POST the palette to Firebase
+      $http.post(`${firebaseURL}/palettes.json`,
+
+        // Remember to stringify objects/arrays before
+        // sending them to an API
+        JSON.stringify(newPalette)
+
+      // The $http.post() method returns a promise, so you can use then()
+      ).then(
+        () => $location.url("/palettes"),      // Handle resolve
+        (response) => console.log(response)  // Handle reject
+      );
+    };
+
+
 
     //if the user navigates away before saving open the save alert modal
     $scope.$on('$locationChangeStart', function( event ) {

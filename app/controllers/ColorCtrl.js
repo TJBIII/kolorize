@@ -19,7 +19,7 @@ app.controller("ColorCtrl",
     $scope.pickerSaturation;
 
     $scope.colors = $scope.chosenPalette.colors;
-    $scope.paletteName = "";
+    $scope.paletteName = $scope.chosenPalette.name;
     $scope.clusterColors = null;
     $scope.saturationScale = null;
     $scope.complimentaryColor = null;
@@ -38,32 +38,32 @@ app.controller("ColorCtrl",
     });
 
 
-    $scope.savePalette = function () {
-      //don't need to show the save alert modal
-      $scope.$parent.$parent.saveAlert = false;
+    // $scope.savePalette = function () {
+    //   //don't need to show the save alert modal
+    //   $scope.$parent.$parent.saveAlert = false;
 
-      let user = authFactory.getUser();
-      let newPalette = {
-        name: $scope.paletteName,
-        colors: $scope.colors.join(','),
-        uid: user.uid,
-        forked: false
-      };
-      console.log("newPalette", newPalette);
+    //   let user = authFactory.getUser();
+    //   let newPalette = {
+    //     name: $scope.paletteName,
+    //     colors: $scope.colors.join(','),
+    //     uid: user.uid,
+    //     forked: false
+    //   };
+    //   console.log("newPalette", newPalette);
 
-      // POST the palette to Firebase
-      $http.post(`${firebaseURL}/palettes.json`,
+    //   // POST the palette to Firebase
+    //   $http.post(`${firebaseURL}/palettes.json`,
 
-        // Remember to stringify objects/arrays before
-        // sending them to an API
-        JSON.stringify(newPalette)
+    //     // Remember to stringify objects/arrays before
+    //     // sending them to an API
+    //     JSON.stringify(newPalette)
 
-      // The $http.post() method returns a promise, so you can use then()
-      ).then(
-        () => $location.url("/palettes"),      // Handle resolve
-        (response) => console.log(response)  // Handle reject
-      );
-    };
+    //   // The $http.post() method returns a promise, so you can use then()
+    //   ).then(
+    //     () => $location.url("/palettes"),      // Handle resolve
+    //     (response) => console.log(response)  // Handle reject
+    //   );
+    // };
 
 
     $scope.updateScales = function () {
