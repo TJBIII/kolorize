@@ -12,47 +12,21 @@ app.controller("EditPaletteCtrl",
     $scope.colorPicker = "#ffffff";
     $scope.palette = $scope.$parent.chosenPalette;
 
-
-
-    $scope.add = function () {
-      //dont allow more than 8 colors in a palette
-      if ($scope.palette.colors.length >= 8){
-        console.log("only 8 colors per palette allowed");
-        return
-      }
-      //dont allow duplicate colors
-      for (let color in $scope.palette.colors){
-        if ($scope.colorPicker === $scope.palette.colors[color]){
-          return;
-        }
-      }
-      //add the color to the palette
-      $scope.palette.colors.push($scope.colorPicker);
-      //update the palette on firebaseURL
-      // $scope.updatePalette();
-    }
-
-
-
     $scope.updateFirebase = function () {
-    
-      console.log("palette", $scope.palette.id);
+      if ($scope.palette.colors.length > 0){
+        console.log("updating", $scope.palette.id);
+        let id = $scope.palette.id,
+            colorsStr = $scope.palette.colors.join(',');
 
-      let id = $scope.palette.id;
+        let updatedPalette = {
+          name: $scope.palette.name,
+          colors: colorsStr
+        };
 
-      let colorsStr = $scope.palette.colors.join(',');
-
-
-      let updatedPalette = {
-        name: $scope.palette.name,
-        colors: colorsStr
-      };
-
-
-
-      let paletteRef = new Firebase(`${firebaseURL}palettes/${id}`);
-      // Modify the name and colors but leave everything else unchanged
-      paletteRef.update(updatedPalette);
+        let paletteRef = new Firebase(`${firebaseURL}palettes/${id}`);
+        // Modify the name and colors but leave everything else unchanged
+        paletteRef.update(updatedPalette);
+      }
     }
 
 
@@ -83,7 +57,6 @@ app.controller("EditPaletteCtrl",
       });
 
     };
-
 
     $scope.deleteColor = function (color) {
       //remove color from chosenPalette array

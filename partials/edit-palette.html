@@ -1,49 +1,43 @@
 <section class="container">
-  <h1>Edit</h1>
+
+  <div class="row center">
+    <div class="col s12 l6">
+      <h1>Edit Palette</h1>
+    </div>
+
+    <div class="col s12 l6">
+      <a href="#/palettes"><button class="waves-effect waves-light btn-large create-btn">Done</button></a>
+    </div>
+  </div>
 
   <input type="text" ng-model="palette.name" placeholder="Palette Name" ng-blur="updateFirebase()">
-  <!-- <input type="text" ng-model="palette.name" placeholder="Palette Name" > -->
 
-  <!-- <ul ui-sortable ng-model="$parent.chosenPalette.colors">
-    <li class="color" ng-repeat="color in $parent.chosenPalette.colors" style="background-color: {{color}}">
-      {{color}}
-    </li>
-  </ul> -->
-
-<div class="row">
-  <ul ui-sortable ng-model="$parent.chosenPalette.colors">
-    <li ng-class="$parent.chosenPalette.colors.length > 3 ? ($parent.chosenPalette.colors.length > 5 ? 's1-half' : 's2') : 's3'" class="card color-card col s2" ng-repeat="color in $parent.chosenPalette.colors" style="background-color: {{color}}">
-      <div class="activator card-image waves-effect waves-block waves-light">
-      </div>
-      <div class="card-content reset">
-        <span class="card-title activator grey-text text-darken-4">
-          <span ng-if="getLightness(color) > 51"><i class="material-icons right small">more_horiz</i></span>
-          <span ng-if="getLightness(color) <= 50"><i class="material-icons right small white-icons">more_horiz</i></span>
-        </span>
-      </div>
-      <div class="card-reveal">
-        <span class="card-title grey-text text-darken-4">
-          <i class="material-icons right">close</i></span>
-          <a>Tweak</a>
-          <a ng-click="deleteColor(color)">Delete</a>
-          <a>Copy Hex</a> 
-      </div>
-    </li>
-  </ul>
-</div>
+  <div class="row">
+    <ul ui-sortable ng-model="palette.colors">
+      <li ng-class="palette.colors.length > 3 ? (palette.colors.length > 5 ? 's1-half' : 's2') : 's3'" class="card color-card col s2" ng-repeat="color in palette.colors" style="background-color: {{color}}">
+        <div class="activator card-image waves-effect waves-block waves-light">
+        </div>
+        <div class="card-content reset">
+          <span class="card-title activator grey-text text-darken-4">
+            <span ng-if="getLightness(color) >= 51"><i class="material-icons right small">more_horiz</i></span>
+            <span ng-if="getLightness(color) <= 50"><i class="material-icons right small white-icons">more_horiz</i></span>
+          </span>
+        </div>
+        <div class="card-reveal">
+          <span class="card-title grey-text text-darken-4">
+            <i class="material-icons right">close</i></span>
+            <a>Tweak</a>
+            <a ng-click="deleteColor(color)">Delete</a>
+            <a>Copy Hex</a> 
+        </div>
+      </li>
+    </ul>
+  </div>
 
   <div class="clear"></div>
 
-  <a ng-click="deletePalette(palette)"><button>Delete Palette</button></a>
+  <a ng-click="deletePalette(palette)"><button class="waves-effect waves-light btn">Delete Palette</button></a>
 
-<!-- copied from new-palette html -->
-  <h6>Add from Color Picker</h6>
-  <input type="color" ng-model="colorPicker"/>
-  <button ng-click="add()">Add to Palette</button> 
+  <span  ng-include="'partials/new-color.html'"></span>
 
-
-  <h6>Add from Image</h6>
-  <input type="file" id="imageLoader" name="imageLoader"/>
-  <canvas id="imageCanvas"></canvas>
-<!-- end copied from new-palette html -->
 </section>

@@ -8,8 +8,11 @@ app.controller("PageCtrl",
   "authFactory",
   "firebaseURL",
   "colorspaceFactory",
+  "imgProcessFactory",
+  "kmeansFactory",
+  "colorscaleFactory",
 
-  function ($scope, $location, $http, authFactory, firebaseURL, colorspace) {
+  function ($scope, $location, $http, authFactory, firebaseURL, colorspace,  imgProcess, kmeans, colorscale) {
 
     $scope.palettes = [];
 
@@ -31,9 +34,9 @@ app.controller("PageCtrl",
     };
 
 
-    //defualt palette;
-    $scope.chosenPalette = { colors: ['#2a4d69','#4b86b4','#adcbe3','#e7eff6'],
-                            name: "Default" };
+    //defualt empty palette;
+    $scope.chosenPalette = { colors: [],
+                            name:"" };
 
     $scope.setChosenPalette = function (palette) {
       $scope.chosenPalette = palette;
@@ -43,6 +46,9 @@ app.controller("PageCtrl",
     $scope.getLightness = function (color) {
       return Math.round(colorspace.getLightnessFromHex(color));
     }
+
+    //used to decide whether to display save alert modal on new-palette page
+    $scope.saveAlert;
 
 
   }
