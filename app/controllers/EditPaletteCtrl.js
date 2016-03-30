@@ -28,27 +28,19 @@ app.controller("EditPaletteCtrl",
       }
       //add the color to the palette
       $scope.palette.colors.push($scope.colorPicker);
-      //update the palette on firebaseURL
-      // $scope.updatePalette();
     }
 
 
 
     $scope.updateFirebase = function () {
-    
-      console.log("palette", $scope.palette.id);
-
-      let id = $scope.palette.id;
-
-      let colorsStr = $scope.palette.colors.join(',');
-
+      // console.log("palette", $scope.palette.id);
+      let id = $scope.palette.id,
+          colorsStr = $scope.palette.colors.join(',');
 
       let updatedPalette = {
         name: $scope.palette.name,
         colors: colorsStr
       };
-
-
 
       let paletteRef = new Firebase(`${firebaseURL}palettes/${id}`);
       // Modify the name and colors but leave everything else unchanged
