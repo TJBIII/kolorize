@@ -10,7 +10,7 @@
       </div>
       <div class="card-content reset">
         <span class="card-title activator grey-text text-darken-4">
-          <span ng-if="getLightness(color) > 51"><i class="material-icons right small">more_horiz</i></span>
+          <span ng-if="getLightness(color) >= 51"><i class="material-icons right small">more_horiz</i></span>
           <span ng-if="getLightness(color) <= 50"><i class="material-icons right small white-icons">more_horiz</i></span>
         </span>
       </div>
@@ -27,7 +27,7 @@
 
   <div class="clear"></div>
 
-  <a ng-click="deletePalette(palette)"><button>Delete Palette</button></a>
+  <a ng-click="deletePalette(palette)"><button class="waves-effect waves-light btn">Delete Palette</button></a>
 
   <h4 ng-if="saturationScale">Saturation Scale</h4>
     <ul ng-model="saturationScale">

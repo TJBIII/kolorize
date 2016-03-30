@@ -34,7 +34,7 @@ app.controller("PageCtrl",
     };
 
 
-    //defualt palette;
+    //defualt empty palette;
     $scope.chosenPalette = { colors: [],
                             name:"" };
 
