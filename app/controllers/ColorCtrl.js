@@ -18,7 +18,7 @@ app.controller("ColorCtrl",
     $scope.pickerLightness;
     $scope.pickerSaturation;
 
-    $scope.colors = [];
+    $scope.colors = $scope.chosenPalette.colors;
     $scope.paletteName = "";
     $scope.clusterColors = null;
     $scope.saturationScale = null;

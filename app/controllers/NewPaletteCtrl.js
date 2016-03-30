@@ -13,6 +13,10 @@ app.controller("NewPaletteCtrl",
     //used for the save modal if user tries to navigate away before saving
     $scope.$parent.saveAlert = true;
 
+    //reset the palette if one was being edited
+    $scope.$parent.chosenPalette = { colors: [],
+                            name:"" };
+
 
     //set up the collapsible menu
     $(document).ready(function(){
