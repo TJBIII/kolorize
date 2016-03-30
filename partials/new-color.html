@@ -1,42 +1,50 @@
 <div ng-controller="ColorCtrl">
-  <div class="colorBox">
+  <span ng-if="saturationScale">
+  <div class="colorBox z-depth-1 center">
     <span ng-if="saturationScale">
-      <h4>Saturation Scale</h4>
-        <ul ng-model="saturationScale">
+      <div class="row">
+        <div class="col s12">
+          <h4>Saturation Scale</h4>
+        </div>
+        <ul class="saturation" ng-model="saturationScale">
           <li class="saturation-color" ng-click="add(color)" ng-repeat="color in saturationScale track by $index" style="background-color: {{color}}">
             {{color}}
           </li>
         </ul>
+      </div>
     
       <div class="clear"></div>
 
-      <button ng-click="setColor(complimentaryColor)" class="waves-effect waves-light btn-large create-btn"><i class="material-icons left">swap_vert</i>Swap</button>
+      <button ng-click="setColor(complimentaryColor)" class="waves-effect waves-light btn-large swap-btn"><i class="material-icons left">swap_vert</i>Swap</button>
 
       <div class="clear"></div>
     </span>
 
 
     <span ng-if="complimentaryColor">
-      <h4>Complimentary Color</h4>
-      <ul>
-        <li class="color" ng-click="add(complimentaryColor)" style="background-color: {{complimentaryColor}}">
+        <div class="compliment" ng-click="add(complimentaryColor)" style="background-color: {{complimentaryColor}}">
           {{complimentaryColor}}
-        </li>
-      </ul>
+        </div>
+      <h4>Complimentary Color</h4>
       <div class="clear"></div>
     </span>
 
 
     <span ng-if="colorPicker !== '#ffffff'">
       <h4>Lightness Slider</h4>
-      <form action="#">
-        <p class="range-field">
-          <input ng-model="$parent.pickerLightness" ng-change="setColor(calcFromLightness())" type="range" min="0" max="100" />
-        </p>
-      </form>
+      <div class="row">
+        <div class="col s10 offset-s1">
+          <form action="#">
+            <p class="range-field">
+              <input ng-model="$parent.$parent.pickerLightness" ng-change="setColor(calcFromLightness())" type="range" min="0" max="100" />
+            </p>
+          </form>
+        </div>
+      </div>
     </span>
 
   </div>
+  </span>
 
 
   <span ng-if="clusterColors">

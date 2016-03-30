@@ -17,6 +17,10 @@ h1 {
   margin-bottom: 10px;
 }
 
+.saturation {
+  margin-left: 10px;
+}
+
 .saturation-color {
   text-align: center;
   margin: 0 2.5px;
@@ -25,6 +29,15 @@ h1 {
   float: left;
   display: block;
   border: 1px solid black;
+}
+
+.compliment {
+  margin: 0 auto;
+  height:40px;
+  width: 80px;
+  display: block;
+  border: 1px solid black;
+
 }
 
 #palette {
@@ -70,6 +83,10 @@ div.card-content.reset {
   margin: 2.1rem;
 }
 
+.swap-btn {
+  text-align: center;
+}
+
 .modal-btn {
   text-align: center;
   background-color: #fff;
@@ -101,7 +118,8 @@ input[type="color"] {
 }
 
 .colorBox {
-  background-color: #badace;
+  /*background-color: #eee;*/
+  padding: 10px;
 }
 
 .search-results {
