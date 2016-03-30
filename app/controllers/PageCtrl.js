@@ -8,8 +8,11 @@ app.controller("PageCtrl",
   "authFactory",
   "firebaseURL",
   "colorspaceFactory",
+  "imgProcessFactory",
+  "kmeansFactory",
+  "colorscaleFactory",
 
-  function ($scope, $location, $http, authFactory, firebaseURL, colorspace) {
+  function ($scope, $location, $http, authFactory, firebaseURL, colorspace,  imgProcess, kmeans, colorscale) {
 
     $scope.palettes = [];
 
@@ -43,6 +46,9 @@ app.controller("PageCtrl",
     $scope.getLightness = function (color) {
       return Math.round(colorspace.getLightnessFromHex(color));
     }
+
+    //used to decide whether to display save alert modal on new-palette page
+    $scope.saveAlert;
 
 
   }
