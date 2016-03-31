@@ -42,38 +42,40 @@
       </div>
       <h4>Lightness Slider</h4>
     </span>
-
   </div>
   </span>
+  
+  <div ng-class="{'z-depth-1' : imageUploaded}" class="colorBox center">
+    <span ng-if="clusterColors">
+      <h4>Cluster Colors</h4>
+      <ul>
+        <li class="color cluster-color" ng-click="setColor(color); setLightness()" ng-repeat="color in clusterColors" style="background-color: {{color}}">
+          {{color}}
+        </li>
+      </ul>
+    </span>
 
+    <div class="clear"></div>
 
-  <span ng-if="clusterColors">
-    <h4>Cluster Colors</h4>
-    <ul>
-      <li class="color cluster-color" ng-click="setColor(color); setLightness()" ng-repeat="color in clusterColors" style="background-color: {{color}}">
-        {{color}}
-      </li>
-    </ul>
-  </span>
-
-
-  <div class="clear"></div>
-
-
-   
-
-  <div>
-    <canvas id="imageCanvas" width=0 height=0></canvas>
+    <div>
+      <canvas id="imageCanvas" width=0 height=0></canvas>
+    </div>
+          
+    <span ng-if="imageUploaded">
+      <div class="row">
+        <h5>Number of Clusters: {{$parent.k}}</h5>
+        <div class="col s8 offset-s2">
+          <form action="#">
+            <p class="range-field">
+              <input ng-model="$parent.k" type="range" min="3" max="8" />
+            </p>
+          </form>
+        </div>
+      </div>
+      <button ng-click="processImage()" class="waves-effect waves-light btn">Process</button>
+    </span>
   </div>
-        
-  <span ng-if="imageUploaded">
-    <form action="#">
-      <p class="range-field">
-        <input ng-model="$parent.k" type="range" min="3" max="8" />
-      </p>
-    </form>
-    <button ng-click="processImage()" class="waves-effect waves-light btn">Process</button>
-  </span>
+
 
 
   <span ng-if="flickrLoader">
