@@ -34,7 +34,7 @@ h1 {
 .compliment {
   margin: 0 auto;
   height:40px;
-  width: 80px;
+  width: 200px;
   display: block;
   border: 1px solid black;
 
@@ -85,6 +85,7 @@ div.card-content.reset {
 
 .swap-btn {
   text-align: center;
+  margin-bottom: 20px;
 }
 
 .modal-btn {
