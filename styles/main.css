@@ -13,6 +13,12 @@ h1 {
 }
 
 
+.cluster-color {
+  text-align: center;
+  margin: 0 auto;
+  display: inline-block;
+}
+
 .saturation {
   margin-left: 10px;
 }

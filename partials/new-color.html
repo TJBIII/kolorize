@@ -49,8 +49,8 @@
     <span ng-if="clusterColors">
       <h4>Cluster Colors</h4>
       <div class="row">
-        <div ng-repeat="color in clusterColors">
-          <div ng-class="clusterColors.length > 5 ? 's1' : 's2'" class="color col" ng-click="setColor(color); setLightness()" style="background-color: {{color}}"></div>
+        <div ng-repeat="color in clusterColors" class="cluster-color">
+          <div class="color col" ng-click="setColor(color); setLightness()" style="background-color: {{color}}"></div>
         </div>
       </div>
     </span>
