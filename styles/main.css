@@ -151,7 +151,7 @@ input[type="color"] {
 }
 
 h1.header {
-  height: 200px;
+  text-shadow: 2px 2px 1px black;
 }
 
 .multi-color {
