@@ -11,7 +11,7 @@ app.controller("PreviewCtrl",
 
     $scope.chosenTemplate = 'previews/starter-template.html';
     $scope.blurMode = false;
-    $scope.previews;
+    $scope.previews = [];
 
 
     //hold the list of color permutations
@@ -91,13 +91,13 @@ app.controller("PreviewCtrl",
 
     $scope.generatePreviews = function() {
       //remove old previews (if any)
-      // $('#output').html('');
+      $scope.previews = [];
 
       //array of colors from the palette
       //only take the first 3 colors
       let colors = $scope.$parent.chosenPalette.colors.slice(0, 3);
 
-      //array to hold all of the generated preview images
+      //array to hold all of the generated preview image srcs
       let imgs = [];
 
       console.log("Generating Previews");
@@ -128,9 +128,6 @@ app.controller("PreviewCtrl",
 
           
           let dataUrl = yield processDom();
-          // var img = new Image();
-          // img.src = dataUrl;
-          // imgs.push(img);
           imgs.push(dataUrl);
 
           //update the loader modal progress bar
@@ -147,9 +144,9 @@ app.controller("PreviewCtrl",
         console.log('Execution time: ' + time);
 
         //place new previews on the page-footer
-        // imgs.forEach((element) => $('#output').append(element));
         $scope.previews = imgs;
         $scope.$apply();
+
         //close the loader modal and reset progress to zero
         $('#loader-modal').closeModal();
         $loaderProgress.css('width', `0%`);
