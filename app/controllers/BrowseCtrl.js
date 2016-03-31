@@ -12,7 +12,7 @@ app.controller("BrowseCtrl", [
     //empty palettes in parent scope to push updated data set into below
     $scope.$parent.palettes = [];
 
-    $scope.search = {};
+    $scope.search = "";
 
     $scope.userId = authFactory.getUser().uid;
 
