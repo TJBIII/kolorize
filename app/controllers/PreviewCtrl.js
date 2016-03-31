@@ -139,9 +139,9 @@ app.controller("PreviewCtrl",
           // console.log("percentComplete", percentComplete);
           $loaderProgress.css('width', `${percentComplete}%`);
 
-
         }
-        console.log("done");
+        
+        // console.log("done");
         var end = new Date().getTime();
         var time = end - start;
         console.log('Execution time: ' + time);

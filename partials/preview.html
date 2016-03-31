@@ -10,16 +10,14 @@
     </div>
   </div>
 
-
-
   <div class="row">
-    <ul ui-sortable ng-model="$parent.chosenPalette.colors">
+    <ul class="color-preview" ui-sortable ng-model="$parent.chosenPalette.colors">
       <li ng-class="$parent.chosenPalette.colors.length > 3 ? ($parent.chosenPalette.colors.length > 5 ? 's1-half' : 's2') : 's3'" class="card color-card col" ng-repeat="color in $parent.chosenPalette.colors" style="background-color: {{color}}">
         <div class="activator card-image waves-effect waves-block waves-light">
         </div>
         <div class="card-content reset">
           <span class="card-title activator grey-text text-darken-4">
-            <span ng-if="getLightness(color) > 51"><i class="material-icons right small">more_horiz</i></span>
+            <span ng-if="getLightness(color) >= 51"><i class="material-icons right small">more_horiz</i></span>
             <span ng-if="getLightness(color) <= 50"><i class="material-icons right small white-icons">more_horiz</i></span>
           </span>
         </div>
@@ -34,12 +32,6 @@
   </div>
 
   <div class="clear"></div>
-  <h4>Templates</h4> 
-
-  <button class="waves-effect waves-light btn" ng-click="setTemplate('previews/starter-template.html')">Materialize Starter</button>
-
-  <button class="waves-effect waves-light btn" ng-click="setTemplate('previews/one-page.html')">One-Page Starter</button>
-    
 
   <button data-target="loader-modal" class="modal-trigger waves-effect waves-light btn" ng-click="generatePreviews()">Generate Previews</button>
   
@@ -49,13 +41,17 @@
 
   <div ng-include="'partials/loader.html'"></div>
 
-
   <div id="output">
     <span class="preview" ng-repeat="previewSrc in previews">
       <img ng-click="setModal($index)" ng-src="{{previewSrc}}">
     </span>
   </div>
  
+  <h4>Templates</h4> 
+
+  <button class="waves-effect waves-light btn" ng-click="setTemplate('previews/starter-template.html')">Materialize Starter</button>
+
+  <button class="waves-effect waves-light btn" ng-click="setTemplate('previews/one-page.html')">One-Page Starter</button>
 
   <div id="template-node">
     <div ng-include="chosenTemplate"></div>

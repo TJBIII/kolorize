@@ -133,7 +133,7 @@ input[type="color"] {
   margin: 10px;
 /*  filter: blur(4px);
   -webkit-filter: blur(4px);*/
-}
+} 
 
 
 .blurred {
@@ -146,9 +146,12 @@ input[type="color"] {
   -webkit-filter: none;
 }
 
+.row .color-preview li:nth-child(4) {
+  margin-left: 30px;
+}
 
 h1.header {
-  text-shadow: 2px 2px 1px black;
+  height: 200px;
 }
 
 .multi-color {
