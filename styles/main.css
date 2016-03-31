@@ -127,7 +127,7 @@ input[type="color"] {
   height: 200px;
 }
 
-#output img{
+.preview img{
   max-height: 400px;
   border: 1px solid black;
   margin: 10px;
@@ -141,7 +141,7 @@ input[type="color"] {
   -webkit-filter: blur(4px);
 }
 
-#output img:hover {
+.preview:hover {
   filter: none;
   -webkit-filter: none;
 }

@@ -11,6 +11,11 @@ app.controller("PreviewCtrl",
 
     $scope.chosenTemplate = 'previews/starter-template.html';
     $scope.blurMode = false;
+    $scope.previews;
+
+
+    //hold the list of color permutations
+    let colorPermutations;
 
 
     $scope.toggleBlur = function () {
@@ -36,7 +41,6 @@ app.controller("PreviewCtrl",
     });
          
 
-
     $scope.setTemplate = function (str) {
       $scope.chosenTemplate = str;
     }
@@ -45,7 +49,7 @@ app.controller("PreviewCtrl",
 
 
     let permutator = function (inputArr) {
-      var results = [];
+      let permutations = [];
 
       function permute(arr, memo) {
         var cur, memo = memo || [];
@@ -53,12 +57,12 @@ app.controller("PreviewCtrl",
         for (var i = 0; i < arr.length; i++) {
           cur = arr.splice(i, 1);
           if (arr.length === 0) {
-            results.push(memo.concat(cur));
+            permutations.push(memo.concat(cur));
           }
           permute(arr.slice(), memo.concat(cur));
           arr.splice(i, 0, cur[0]);
         }
-        return results;
+        return permutations;
       }
       return permute(inputArr);
     };
@@ -87,7 +91,7 @@ app.controller("PreviewCtrl",
 
     $scope.generatePreviews = function() {
       //remove old previews (if any)
-      $('#output').html('');
+      // $('#output').html('');
 
       //array of colors from the palette
       //only take the first 3 colors
@@ -99,7 +103,8 @@ app.controller("PreviewCtrl",
       console.log("Generating Previews");
       var start = new Date().getTime();
 
-      let colorPermutations = permutator(colors);
+      colorPermutations = permutator(colors);
+      console.log("colorPermutations", colorPermutations);
       let numColorPermutations = colorPermutations.length;
 
       let currentPermutation;
@@ -118,15 +123,15 @@ app.controller("PreviewCtrl",
 
           //change css for next preview snapshot
           $nav.css('backgroundColor', currentPermutation[0]);
-          $footer.css('backgroundColor',  currentPermutation[1]);
-          $body.css('backgroundColor',  currentPermutation[2]);
+          $body.css('backgroundColor',  currentPermutation[1]);
+          $footer.css('backgroundColor',  currentPermutation[2]);
 
           
           let dataUrl = yield processDom();
-          var img = new Image();
-          img.src = dataUrl;
-          imgs.push(img);
-          // console.log("idx", idx);
+          // var img = new Image();
+          // img.src = dataUrl;
+          // imgs.push(img);
+          imgs.push(dataUrl);
 
           //update the loader modal progress bar
           //idx starts at 0 so add 1 to get number of completed previews
@@ -142,8 +147,9 @@ app.controller("PreviewCtrl",
         console.log('Execution time: ' + time);
 
         //place new previews on the page-footer
-        imgs.forEach((element) => $('#output').append(element));
-
+        // imgs.forEach((element) => $('#output').append(element));
+        $scope.previews = imgs;
+        $scope.$apply();
         //close the loader modal and reset progress to zero
         $('#loader-modal').closeModal();
         $loaderProgress.css('width', `0%`);

@@ -46,11 +46,19 @@
   <button class="waves-effect waves-light btn" ng-click="toggleBlur()">Toggle Blur</button>
 
   <div ng-include="'partials/loader.html'"></div>
+
+
+  <div id="output">
+    <span class="preview" ng-repeat="previewSrc in previews">
+      <img ng-src="{{previewSrc}}">
+    </span>
+  </div>
  
-  <div id="output"></div>
 
   <div id="template-node">
     <div ng-include="chosenTemplate"></div>
   </div>
+
+  <span ng-include="'partials/preview-modal.html'"></span>
 
 </section>
