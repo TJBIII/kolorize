@@ -16,6 +16,9 @@ app.controller("PreviewCtrl",
 
     //hold the list of color permutations
     let colorPermutations;
+    $scope.nav;
+    $scope.body;
+    $scope.footer;
 
 
     $scope.toggleBlur = function () {
@@ -153,6 +156,18 @@ app.controller("PreviewCtrl",
       })
     };
 
+
+    $scope.setModal = function (idx) {
+      console.log("idx", idx);
+      let permutation = colorPermutations[idx];
+      $scope.nav = permutation[0];
+      $scope.body = permutation[1];
+      $scope.footer = permutation[2];
+
+      //open the modal to show the nav, body, and footer colors/hex values
+      $('#preview-modal').openModal();
+
+    }
   }
 
 ]);

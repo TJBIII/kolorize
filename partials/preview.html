@@ -43,14 +43,16 @@
 
   <button data-target="loader-modal" class="modal-trigger waves-effect waves-light btn" ng-click="generatePreviews()">Generate Previews</button>
   
-  <button class="waves-effect waves-light btn" ng-click="toggleBlur()">Toggle Blur</button>
+  <span ng-if="previews.length">
+    <button class="waves-effect waves-light btn" ng-click="toggleBlur()">Toggle Blur</button>
+  </span>
 
   <div ng-include="'partials/loader.html'"></div>
 
 
   <div id="output">
     <span class="preview" ng-repeat="previewSrc in previews">
-      <img ng-src="{{previewSrc}}">
+      <img ng-click="setModal($index)" ng-src="{{previewSrc}}">
     </span>
   </div>
  
