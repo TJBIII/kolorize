@@ -48,11 +48,11 @@
   <div ng-class="{'z-depth-1' : imageUploaded}" class="colorBox center">
     <span ng-if="clusterColors">
       <h4>Cluster Colors</h4>
-      <ul>
-        <li class="color cluster-color" ng-click="setColor(color); setLightness()" ng-repeat="color in clusterColors" style="background-color: {{color}}">
-          {{color}}
-        </li>
-      </ul>
+      <div class="row">
+        <div ng-repeat="color in clusterColors">
+          <div ng-class="clusterColors.length > 5 ? 's1' : 's2'" class="color col" ng-click="setColor(color); setLightness()" style="background-color: {{color}}"></div>
+        </div>
+      </div>
     </span>
 
     <div class="clear"></div>
