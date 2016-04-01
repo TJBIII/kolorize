@@ -131,6 +131,7 @@ input[type="color"] {
 
 .preview img{
   max-height: 400px;
+  max-width: 270px;
   border: 1px solid black;
   margin: 10px;
 /*  filter: blur(4px);

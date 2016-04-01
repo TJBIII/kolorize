@@ -50,6 +50,14 @@ app.controller("PageCtrl",
     //used to decide whether to display save alert modal on new-palette page
     $scope.saveAlert;
 
+    $scope.deleteColor = function (hexStr) {
+      // console.log("color to delete", color);
+      let colorIdx = $scope.chosenPalette.colors.indexOf(hexStr);
+      if (colorIdx >= 0) {
+        $scope.chosenPalette.colors.splice(colorIdx, 1);
+      }
+    }
+
 
   }
 ]);

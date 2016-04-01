@@ -46,7 +46,7 @@ app.factory("authFactory", ($http, firebaseURL) => {
       Authenticate the client via Firebase
      */
     storeUser (authData) {
-      console.log("authData",authData);
+      // console.log("authData",authData);
       return new Promise((resolve, reject) => {
         $http.post(`${firebaseURL}/users.json`, JSON.stringify({ uid: authData.uid }))
           .then(() => {
