@@ -34,34 +34,38 @@ app.controller("ColorCtrl",
     let canvas,
         ctx;
 
-
     angular.element(document).ready(function () {
-
       $('.collapsible').collapsible({
         accordion : true
       });
 
       let imageLoader = $('#imageLoader');
-      imageLoader = change(handleImage);
+      imageLoader.change(handleImage);
 
       canvas = $('#imageCanvas')[0];
       ctx = canvas.getContext('2d');
     });
 
 
-
-    $scope.updateScales = function () {
-      let hslcolorPicker = colorspace.hexToHsl($scope.colorPicker);
-
-      let hslSaturationScale = colorscale.saturationScaleHSL(hslcolorPicker, 0.1, 10);
+    let getSaturationScale = function (color) {
+      //return the saturation scale for the input color as an array of hex values
+      let hslcolor = colorspace.hexToHsl(color);
+      let hslSaturationScale = colorscale.saturationScaleHSL(hslcolor, 0.1, 10);
       let hexSaturationScale = hslSaturationScale.map((hslArr) => colorspace.hslToHex(hslArr));
 
-      // console.log("hexscale", hexSaturationScale);
-      $scope.saturationScale = hexSaturationScale;    
+      return hexSaturationScale;
+    }
+
+
+    $scope.updateScales = function () {
+      //update saturationScale on $scope
+        //future version might have lightness or hue scales
+      $scope.saturationScale = getSaturationScale($scope.colorPicker);   
     }
 
 
     $scope.compliment = function () {
+      //updates the complimentaryColor to be the compliment of the colorPicker
       let rgbArr = colorspace.hexToRgb($scope.colorPicker);
       $scope.complimentaryColor = colorspace.rgbToHex(colorspace.compliment(rgbArr));
     }
@@ -92,7 +96,7 @@ app.controller("ColorCtrl",
       $scope.pickerLightness = colorspace.getLightnessFromHex($scope.colorPicker);
     }
 
-    $scope.calcFromLightness = function () {
+    $scope.hexFromLightness = function () {
       let hex = $scope.colorPicker;
       let hsl = colorspace.hexToHsl(hex);
       let h = hsl[0];
