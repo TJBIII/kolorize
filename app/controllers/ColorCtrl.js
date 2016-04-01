@@ -31,8 +31,21 @@ app.controller("ColorCtrl",
     $scope.searchImgResults;
     $scope.flickrLoader = false;
 
-    $('.collapsible').collapsible({
-      accordion : true
+    let canvas,
+        ctx;
+
+
+    angular.element(document).ready(function () {
+
+      $('.collapsible').collapsible({
+        accordion : true
+      });
+
+      let imageLoader = $('#imageLoader');
+      imageLoader = change(handleImage);
+
+      canvas = $('#imageCanvas')[0];
+      ctx = canvas.getContext('2d');
     });
 
 
@@ -93,13 +106,6 @@ app.controller("ColorCtrl",
 
       return hexColor;
     }
-
-    let imageLoader = $('#imageLoader');
-
-    imageLoader.change(handleImage);
-
-    let canvas = $('#imageCanvas')[0];
-    let ctx = canvas.getContext('2d');
     
     //sw and sh are the width and height of the rectangle from which the ImageData will be extracted.
     let sw, sh;
