@@ -3,7 +3,7 @@
 describe('Color Controller', function() {
   beforeEach(module('Kolorize'));
 
-  var $controller;
+  let $controller;
 
   beforeEach(inject(function(_$controller_){
     $controller = _$controller_;
@@ -11,7 +11,7 @@ describe('Color Controller', function() {
 
 
   describe('compliment color', function() {
-    var $scope, controller;
+    let $scope, controller;
 
     beforeEach(function() {
       $scope = {};
@@ -35,7 +35,7 @@ describe('Color Controller', function() {
   });
 
   describe('saturation scale', function() {
-    var $scope, controller;
+    let $scope, controller;
 
     beforeEach(function() {
       $scope = {};
@@ -55,7 +55,7 @@ describe('Color Controller', function() {
 
 
   describe('add color', function() {
-    var $scope, controller;
+    let $scope, controller;
 
     beforeEach(function() {
       $scope = {};
@@ -102,5 +102,29 @@ describe('Color Controller', function() {
   });
 
 
+  describe('set color function', function() {
+    let $scope, controller;
+
+    beforeEach(function() {
+      $scope = {};
+      $scope.chosenPalette = {colors: [], name: 'Test'};
+      controller = $controller('ColorCtrl', {$scope: $scope});
+    });
+
+    it('colorPicker should be white when the page loads', function() {
+      expect($scope.colorPicker).toBe('#ffffff');
+    });
+
+    it('should set colorPicker to the color passed in', function() {
+      $scope.setColor('#badace');
+      expect($scope.colorPicker).toBe('#badace');
+
+      $scope.setColor('#34adce');
+      expect($scope.colorPicker).not.toBe('#ffffff');
+    });
   
+  });
+
+
+
 });
