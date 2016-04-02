@@ -64,7 +64,7 @@ app.controller("PageCtrl",
     }
 
     $scope.clipSuccess = function (color) {
-            console.log('Copied!');
+            // console.log('Copied!');
             Materialize.toast(`Copied ${color} to clipboard`, 2000)
         };
 
