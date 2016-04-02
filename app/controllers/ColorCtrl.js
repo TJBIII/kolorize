@@ -35,15 +35,8 @@ app.controller("ColorCtrl",
         ctx;
 
     angular.element(document).ready(function () {
-      $('.collapsible').collapsible({
-        accordion : true
-      });
-
       let imageLoader = $('#imageLoader');
       imageLoader.change(handleImage);
-
-      canvas = $('#imageCanvas')[0];
-      ctx = canvas.getContext('2d');
     });
 
 
@@ -115,6 +108,8 @@ app.controller("ColorCtrl",
     let sw, sh;
 
     function handleImage(e){
+      canvas = $('#imageCanvas')[0];
+      ctx = canvas.getContext('2d');
       $scope.imageUploaded = true;
       $scope.$apply();
       var reader = new FileReader();
@@ -150,6 +145,9 @@ app.controller("ColorCtrl",
     $scope.flickrSearch = () => {
       console.log("searching flickr");
       $scope.flickrLoader = true;
+
+      canvas = $('#imageCanvas')[0];
+      ctx = canvas.getContext('2d');
 
       let tags = $scope.searchTerm.replace(/\s/, ",");
       
