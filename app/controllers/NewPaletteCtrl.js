@@ -49,6 +49,11 @@ app.controller("NewPaletteCtrl",
 
     //if the user navigates away before saving open the save alert modal
     $scope.$on('$locationChangeStart', function( event ) {
+      if ($scope.palette.colors.length === 0 && $scope.palette.name === "") {
+        //dont show the modal if palette is empty
+        return;
+      }
+
       if ($scope.$parent.saveAlert) {
         $('#save-modal').openModal();
         event.preventDefault();
