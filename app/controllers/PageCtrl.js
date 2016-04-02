@@ -24,6 +24,11 @@ app.controller("PageCtrl",
       return authFactory.isAuthenticated();
     };
 
+    $scope.getUserID = () => {
+      let userData = authFactory.getUser();
+      return userData.uid;
+    }
+
     /*
       Attempt to register a new user account.
       If successful, immediately log user in.

@@ -6,7 +6,9 @@
     </div>
 
     <div class="col s12 l6">
-      <a href="#/edit-palette"><button class="waves-effect waves-light btn-large create-btn"><i class="material-icons right">palette</i>Edit {{$parent.chosenPalette.name}}</button></a>
+      <span ng-if="$parent.chosenPalette.uid === $parent.getUserID()">
+        <a href="#/edit-palette"><button class="waves-effect waves-light btn-large create-btn"><i class="material-icons right">palette</i>Edit {{$parent.chosenPalette.name}}</button></a>
+      </span> 
     </div>
   </div>
 

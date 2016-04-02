@@ -112,10 +112,20 @@ app.controller("PreviewCtrl",
 
       let currentPermutation;
 
-      let $nav = $('.navbar');
-      let $footer = $('footer.page-footer');
-      let $body = $('.templateBody');
+      let $nav = $('.navbar'),
+          $body = $('.templateBody'),
+          $footer = $('footer.page-footer');
+
       let $loaderProgress = $('#loader-progress');
+
+      let $navText = $('nav .nav-text');
+
+      let navBG,
+          navColor,
+          bodyBG,
+          bodyColor,
+          footerBG,
+          footerColor;
 
 
       //pass generator function to getPreviews
@@ -124,10 +134,23 @@ app.controller("PreviewCtrl",
 
           currentPermutation = colorPermutations[idx];
 
+          navBG = currentPermutation[0];
+          navColor = ($scope.getLightness(navBG) < 50) ? 'white' : 'black';
+
+          bodyBG = currentPermutation[1];
+          bodyColor = $scope.getLightness(bodyBG) < 50 ? 'white' : 'black';
+
+          footerBG = currentPermutation[2];
+          footerColor = $scope.getLightness(footerBG) < 50 ? 'white' : 'black';
+
+
           //change css for next preview snapshot
-          $nav.css('backgroundColor', currentPermutation[0]);
-          $body.css('backgroundColor',  currentPermutation[1]);
-          $footer.css('backgroundColor',  currentPermutation[2]);
+          $nav.css('backgroundColor', navBG);
+          $navText.css('color', navColor);
+
+          $body.css({'backgroundColor': bodyBG, 'color': bodyColor});
+          
+          $footer.css({'backgroundColor': footerBG, 'color': footerColor});
 
           
           let dataUrl = yield processDom();

@@ -10,10 +10,10 @@ let app = angular.module("Kolorize", ["ngRoute", "firebase", "ui.sortable"])
  */
 let isAuth = (authFactory) => new Promise((resolve, reject) => {
   if (authFactory.isAuthenticated()) {
-    console.log("User is authenticated, resolve route promise");
+    // console.log("User is authenticated, resolve route promise");
     resolve();
   } else {
-    console.log("User is not authenticated, reject route promise");
+    // console.log("User is not authenticated, reject route promise");
     reject();
   }
 });
