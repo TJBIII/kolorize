@@ -4,16 +4,20 @@
     <span ng-if="saturationScale">
       <div class="row">
         <div class="col s12">
-          <h4>Saturation Scale</h4>
+          <h6>Saturation Scale</h6>
         </div>
-        <ul class="saturation" ng-model="saturationScale">
+        <div ng-repeat="color in saturationScale" class="saturation-color uppercase">
+          <div class="color-small" ng-click="add(color);" style="background-color: {{color}}"></div>
+          <div> {{color}} </div>
+        </div>
+        <!-- <ul class="saturation" ng-model="saturationScale">
           <li class="saturation-color" ng-click="add(color)" ng-repeat="color in saturationScale track by $index" style="background-color: {{color}}">
             {{color}}
           </li>
-        </ul>
+        </ul> -->
       </div>
     
-      <div class="clear"></div>
+      <!-- <div class="clear"></div> -->
 
       <button ng-click="setColor(complimentaryColor)" class="waves-effect waves-light btn-large swap-btn"><i class="material-icons left">swap_vert</i>Swap</button>
 
@@ -22,11 +26,11 @@
 
 
     <span ng-if="complimentaryColor">
-        <div class="compliment" ng-click="add(complimentaryColor)" style="background-color: {{complimentaryColor}}">
-          {{complimentaryColor}}
-        </div>
-      <h4>Complimentary Color</h4>
-      <div class="clear"></div>
+      <h6>Complimentary Color</h6>
+      <div class="compliment" ng-click="add(complimentaryColor)" style="background-color: {{complimentaryColor}}">
+      </div>
+      <div class="uppercase"> {{complimentaryColor}}</div>
+      <!-- <div class="clear"></div> -->
     </span>
 
 
@@ -40,7 +44,7 @@
           </form>
         </div>
       </div>
-      <h4>Lightness Slider</h4>
+      <h6>Lightness Slider</h6>
     </span>
   </div>
   </span>
@@ -50,7 +54,7 @@
       <h4>Cluster Colors</h4>
       <div class="row">
         <div ng-repeat="color in clusterColors" class="cluster-color">
-          <div class="color col" ng-click="setColor(color); setLightness()" style="background-color: {{color}}"></div>
+          <div class="color" ng-click="setColor(color); setLightness()" style="background-color: {{color}}"></div>
         </div>
       </div>
     </span>
