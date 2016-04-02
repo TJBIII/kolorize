@@ -147,7 +147,9 @@ app.controller("PreviewCtrl",
           //change css for next preview snapshot
           $nav.css('backgroundColor', navBG);
           $navText.css('color', navColor);
+
           $body.css({'backgroundColor': bodyBG, 'color': bodyColor});
+          
           $footer.css({'backgroundColor': footerBG, 'color': footerColor});
 
           
