@@ -12,6 +12,15 @@ h1 {
   border: 1px solid black;
 }
 
+.color-small {
+  margin: 0 2.5px;
+  height:40px;
+  width: 75px;
+  float: left;
+  display: block;
+  border: 1px solid black;
+}
+
 
 .cluster-color {
   text-align: center;
@@ -25,12 +34,12 @@ h1 {
 
 .saturation-color {
   text-align: center;
-  margin: 0 2.5px;
-  height:40px;
-  width: 80px;
-  float: left;
-  display: block;
-  border: 1px solid black;
+  margin: 0 auto;
+  display: inline-block;
+}
+
+.uppercase {
+  text-transform: uppercase;
 }
 
 .compliment {
@@ -83,6 +92,15 @@ div.card-content.reset {
 .create-btn {
   text-align: center;
   margin: 2.1rem;
+}
+
+.generate-btn {
+  margin-bottom: 20px;
+  width: 230px;
+}
+
+.template-btn {
+  margin-bottom: 10px;
 }
 
 .swap-btn {
@@ -149,6 +167,25 @@ input[type="color"] {
   -webkit-filter: none;
 }
 
+.row .color-preview li:nth-child(-n+3) {
+  border-top: 3px solid black;
+  border-bottom: 3px solid black;
+  border-radius: 0;
+}
+
+.row .color-preview li:nth-child(-n+3):active {
+  border: none;
+  border-radius: 0;
+}
+
+.row .color-preview li:nth-child(1) {
+  border-left: 3px solid black;
+}
+
+.row .color-preview li:nth-child(3) {
+  border-right: 3px solid black;
+}
+
 .row .color-preview li:nth-child(4) {
   margin-left: 30px;
 }
@@ -204,17 +241,3 @@ h1.header {
 
 }
 /****************************/
-
-/* Styles for html templates
-.navbar {
-  background-color: black;
-}
-
-
-.templateBody {
-  background-color: lightgray;
-}
-
-footer.page-footer {
-  background-color: orange;
-}

@@ -33,15 +33,17 @@
     </ul>
   </div>
 
-  <div class="clear"></div>
+  <div class="row">
+    <div class="col s12">
+      <button data-target="loader-modal" class="modal-trigger waves-effect waves-light btn generate-btn" ng-click="generatePreviews()">Generate Previews</button>
+    </div>
+    <div class="col s12 ">
+      <span ng-if="previews.length">
+        <button class="waves-effect waves-light btn generate-btn" ng-click="toggleBlur()">Toggle Blur</button>
+      </span>
+    </div>
+  </div>
 
-  <button data-target="loader-modal" class="modal-trigger waves-effect waves-light btn" ng-click="generatePreviews()">Generate Previews</button>
-  
-  <span ng-if="previews.length">
-    <button class="waves-effect waves-light btn" ng-click="toggleBlur()">Toggle Blur</button>
-  </span>
-
-  <div ng-include="'partials/loader.html'"></div>
 
   <div id="output">
     <span class="preview" ng-repeat="previewSrc in previews">
@@ -49,16 +51,26 @@
     </span>
   </div>
  
-  <h4>Templates</h4> 
+  <div class="row">
+    <div class="col s12">
+      <h4>Templates</h4>
+    </div>
 
-  <button class="waves-effect waves-light btn" ng-click="setTemplate('previews/starter-template.html')">Materialize Starter</button>
+    <div class="col s12">
 
-  <button class="waves-effect waves-light btn" ng-click="setTemplate('previews/one-page.html')">One-Page Starter</button>
+      <button class="waves-effect waves-light btn template-btn" ng-click="setTemplate('previews/starter-template.html')">Materialize Starter</button>
+
+      <button class="waves-effect waves-light btn template-btn" ng-click="setTemplate('previews/one-page.html')">One-Page Starter</button>
+    </div>
+  </div>
+
+  <div class="clear"></div>
 
   <div id="template-node">
     <div ng-include="chosenTemplate"></div>
   </div>
 
   <span ng-include="'partials/preview-modal.html'"></span>
+  <span ng-include="'partials/loader.html'"></span>
 
 </section>
