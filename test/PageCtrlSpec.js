@@ -50,10 +50,44 @@ describe('Page Controller', function() {
 
     it('should return the correct Lightness value', function() {
       expect($scope.getLightness('#ffffff')).toBe(100);
-      expect($scope.getLightness('#000000')).toBe(0);      
+      expect($scope.getLightness('#000000')).toBe(0);
+      expect($scope.getLightness('#5497ff')).toBe(66);
+      expect($scope.getLightness('#c77700')).toBe(39);
+      expect($scope.getLightness('#2e1c00')).toBe(9);
+    }); 
+  });
+
+  describe('delete color function', function() {
+    var $scope, controller;
+
+    beforeEach(function() {
+      $scope = {};
+      controller = $controller('PageCtrl', {$scope: $scope});
     });
 
-    
+    it('should remove only one color from chosenPalette', function() {
+      $scope.chosenPalette.colors = ['#f64051','#3a5356','#98767c','#a18f5b'];
+      expect($scope.chosenPalette.colors.length).toBe(4);
+      $scope.deleteColor('#f64051');
+      expect($scope.chosenPalette.colors.length).toBe(3);
+    });
+
+    it('should not do anything if the color to delete is not in the palette', function() {
+      $scope.chosenPalette.colors = ['#f64051','#3a5356','#98767c','#a18f5b'];
+      $scope.deleteColor('#ffffff');
+      $scope.deleteColor('#63bfa8');
+      expect($scope.chosenPalette.colors.length).toBe(4);
+      expect($scope.chosenPalette.colors).toEqual(['#f64051','#3a5356','#98767c','#a18f5b']);
+    });
+
+    it('should preserve the order of the other colors', function() {
+      $scope.chosenPalette.colors = ['#f64051','#3a5356','#98767c','#a18f5b'];
+      $scope.deleteColor('#98767c');
+      expect($scope.chosenPalette.colors).toEqual(['#f64051','#3a5356','#a18f5b']);
+      $scope.deleteColor('#f64051');
+      expect($scope.chosenPalette.colors).toEqual(['#3a5356','#a18f5b']);
+    });
   });
+
 
 });
