@@ -58,14 +58,6 @@ app.controller("EditPaletteCtrl",
 
     };
 
-    $scope.deleteColor = function (color) {
-      //remove color from chosenPalette array
-      let colorIndex = $scope.palette.colors.indexOf(color);
-      if (colorIndex >= 0) {
-        $scope.palette.colors.splice(colorIndex, 1);
-      }
-    }
-
   }
 
 ]);
