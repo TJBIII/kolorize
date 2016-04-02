@@ -28,7 +28,7 @@
             <i class="material-icons right">close</i></span>
             <a>Tweak</a>
             <a ng-click="deleteColor(color)">Delete</a>
-            <a>Copy Hex</a> 
+            <a clipboard on-copied="$parent.clipSuccess()" text="color">Copy Hex</a> 
         </div>
       </li>
     </ul>

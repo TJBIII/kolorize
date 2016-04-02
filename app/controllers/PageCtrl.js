@@ -63,6 +63,10 @@ app.controller("PageCtrl",
       }
     }
 
+    $scope.clipSuccess = function () {
+            console.log('Copied!');
+        };
+
 
   }
 ]);
