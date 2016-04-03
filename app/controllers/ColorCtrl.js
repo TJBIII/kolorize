@@ -122,10 +122,12 @@ app.controller("ColorCtrl",
               let size = imgProcess.fitImageOn(canvas, img, ctx);
               sw = size.sw;
               sh = size.sh;
+              $scope.processImage();
+              $scope.$apply();  
           }
           img.src = event.target.result;
       }
-      reader.readAsDataURL(e.target.files[0]);     
+      reader.readAsDataURL(e.target.files[0]); 
     }
 
 
