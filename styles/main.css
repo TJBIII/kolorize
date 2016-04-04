@@ -93,6 +93,10 @@ div.card-content.reset {
   margin: 2.1rem;
 }
 
+.delete-btn {
+  margin-bottom: 20px;
+}
+
 .generate-btn {
   margin-bottom: 20px;
   width: 230px;
@@ -122,6 +126,12 @@ input[type="color"] {
   height: 100px;
   width: 100px;
   margin: 10px;
+}
+
+.login {
+  width: 400px;
+  margin: 40px auto;
+
 }
 
 .forked {
