@@ -140,11 +140,7 @@ app.factory("kmeansFactory", () => {
           // console.log("results.length", results.length);
         }
       }
-
       return results
     }
   }
-
-
-
 });

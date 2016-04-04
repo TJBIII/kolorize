@@ -28,6 +28,5 @@ app.controller("PaletteCtrl", [
       // Handle reject() from the promise
       err => console.log(err)
     );
-
   }
 ]);

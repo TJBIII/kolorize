@@ -57,7 +57,5 @@ app.controller("EditPaletteCtrl",
       });
 
     };
-
   }
-
 ]);

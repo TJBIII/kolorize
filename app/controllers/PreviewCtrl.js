@@ -20,7 +20,7 @@ app.controller("PreviewCtrl",
     $scope.body;
     $scope.footer;
 
-
+    //toggle blur on preview images
     $scope.toggleBlur = function () {
       if ($scope.blurMode){
         $('#output').children().removeClass('blurred');
@@ -50,14 +50,14 @@ app.controller("PreviewCtrl",
 
     const node = document.getElementById('template-node');
 
-
+    //produce all possible permutations of the input array
     let permutator = function (inputArr) {
       let permutations = [];
 
       function permute(arr, memo) {
         var cur, memo = memo || [];
 
-        for (var i = 0; i < arr.length; i++) {
+        for (let i = 0; i < arr.length; i++) {
           cur = arr.splice(i, 1);
           if (arr.length === 0) {
             permutations.push(memo.concat(cur));
@@ -71,14 +71,14 @@ app.controller("PreviewCtrl",
     };
 
 
-
+    //async task
     let processDom = function () {
       //return promise, which is fulfilled with corresponding data URL
       //(PNG image base64-encoded data URL)
       return domtoimage.toPng(node);
     }
 
-
+    //takes a generator function as a parameter, then executes it and calls 'next' on the returned iterator until it's complete. Waits for that promise to resolve and passes the resolve value back (http://www.tivix.com/blog/making-promises-in-a-synchronous-manner)
     let getPreviews = function(fn) {
       let iterator = fn();
       let loop = result => {
@@ -88,8 +88,6 @@ app.controller("PreviewCtrl",
 
       loop(iterator.next());
     };
-
-
 
 
     $scope.generatePreviews = function() {
@@ -104,7 +102,7 @@ app.controller("PreviewCtrl",
       let imgs = [];
 
       console.log("Generating Previews");
-      var start = new Date().getTime();
+      let start = new Date().getTime();
 
       colorPermutations = permutator(colors);
       console.log("colorPermutations", colorPermutations);
@@ -165,8 +163,8 @@ app.controller("PreviewCtrl",
         }
         
         // console.log("done");
-        var end = new Date().getTime();
-        var time = end - start;
+        let end = new Date().getTime();
+        let time = end - start;
         console.log('Execution time: ' + time);
 
         //place new previews on the page-footer
@@ -181,7 +179,7 @@ app.controller("PreviewCtrl",
 
 
     $scope.setModal = function (idx) {
-      console.log("idx", idx);
+      // console.log("idx", idx);
       let permutation = colorPermutations[idx];
       $scope.nav = permutation[0];
       $scope.body = permutation[1];
@@ -189,8 +187,6 @@ app.controller("PreviewCtrl",
 
       //open the modal to show the nav, body, and footer colors/hex values
       $('#preview-modal').openModal();
-
     }
   }
-
 ]);

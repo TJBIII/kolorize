@@ -46,7 +46,5 @@ app.controller("LoginCtrl",
           $location.path("/palettes");
           $scope.$apply();  // Needed for $location.path() to succeed
         });
-
-
   }
 ]);
