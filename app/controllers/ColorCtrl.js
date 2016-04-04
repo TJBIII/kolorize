@@ -159,7 +159,9 @@ app.controller("ColorCtrl",
           //data is an array of photo objects
           let data = response.data.photos.photo;
 
-          $scope.searchImgResults = data.map((obj) => `https://farm${obj.farm}.staticflickr.com/${obj.server}/${obj.id}_${obj.secret}_m.jpg`);
+          $scope.searchImgResults = data.map( function (obj){ 
+              return {src: `https://farm${obj.farm}.staticflickr.com/${obj.server}/${obj.id}_${obj.secret}_m.jpg`}
+              });
 
           //scroll down to the search results
           $scope.scrollTo("searchResults");

@@ -1,6 +1,6 @@
 "use strict";
 
-let app = angular.module("Kolorize", ["ngRoute", "firebase", "ui.sortable", "angular-clipboard"])
+let app = angular.module("Kolorize", ["ngRoute", "firebase", "ui.sortable", "angular-clipboard", "akoenig.deckgrid"])
   .constant('firebaseURL', "https://kolorize.firebaseio.com/");
 
 
