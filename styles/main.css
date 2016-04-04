@@ -129,9 +129,14 @@ input[type="color"] {
 }
 
 .login {
-  width: 400px;
+  width: 480px;
   margin: 40px auto;
+  border: 2px solid grey;
+  padding: 30px;
+}
 
+.generate-previews {
+  margin-bottom: 65px;
 }
 
 .forked {
@@ -167,8 +172,8 @@ input[type="color"] {
 
 
 .blurred {
-  filter: blur(4px);
-  -webkit-filter: blur(4px);
+  filter: blur(6px);
+  -webkit-filter: blur(6px);
 }
 
 .preview:hover {
@@ -207,6 +212,9 @@ h1.header {
   padding-top: 40px;
 }
 
+.palette-group {
+  margin: 20px 0;
+}
 /********color change on homepage button*********/
 .color-change-btn {
   color: #333;
