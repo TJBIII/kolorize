@@ -93,6 +93,10 @@ div.card-content.reset {
   margin: 2.1rem;
 }
 
+.delete-btn {
+  margin-bottom: 20px;
+}
+
 .generate-btn {
   margin-bottom: 20px;
   width: 230px;
@@ -122,6 +126,17 @@ input[type="color"] {
   height: 100px;
   width: 100px;
   margin: 10px;
+}
+
+.login {
+  width: 480px;
+  margin: 40px auto;
+  border: 2px solid grey;
+  padding: 30px;
+}
+
+.generate-previews {
+  margin-bottom: 65px;
 }
 
 .forked {
@@ -157,8 +172,8 @@ input[type="color"] {
 
 
 .blurred {
-  filter: blur(4px);
-  -webkit-filter: blur(4px);
+  filter: blur(6px);
+  -webkit-filter: blur(6px);
 }
 
 .preview:hover {
@@ -197,6 +212,9 @@ h1.header {
   padding-top: 40px;
 }
 
+.palette-group {
+  margin: 20px 0;
+}
 /********color change on homepage button*********/
 .color-change-btn {
   color: #333;

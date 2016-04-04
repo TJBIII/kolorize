@@ -1,13 +1,15 @@
-<section class="container">
-  <h1 class="center">Login or Register</h1>
-  <div class="input-field">
-    <input id="email" type="text" autofocus="true" ng-model="account.email" />
-    <label for="email">Email</label>
+<section class="container center">
+  <div class="login">
+    <h2 class="center">Login or Register</h2>
+      <div class="input-field">
+        <input id="email" type="text" autofocus="true" ng-model="account.email" />
+        <label for="email">Email</label>
+      </div>
+      <div class="input-field">
+        <input id="password" type="password" ng-model="account.password" />
+        <label for="password">Password</label>
+      </div>
+    <button class="waves-effect waves-light grey lighten-1 btn btn-large" ng-click="register()">Register</button>
+    <button class="waves-effect waves-light grey lighten-1 btn btn-large" ng-click="login()">Login</button>
   </div>
-  <div class="input-field">
-    <input id="password" type="password" ng-model="account.password" />
-    <label for="password">Password</label>
-  </div>
-  <button class="waves-effect waves-light btn" ng-click="login()">Login</button>
-  <button class="waves-effect waves-light btn" ng-click="register()">Register</button>
 </section>

@@ -6,7 +6,7 @@
     </div>
 
     <div class="col s12 l6">
-      <a href="#/palettes"><button class="waves-effect waves-light btn-large create-btn">Done</button></a>
+      <a href="#/palettes"><button class="waves-effect waves-light grey lighten-1 btn-large create-btn">Done</button></a>
     </div>
   </div>
 
@@ -26,7 +26,6 @@
         <div class="card-reveal">
           <span class="card-title grey-text text-darken-4">
             <i class="material-icons right">close</i></span>
-            <a>Tweak</a>
             <a ng-click="deleteColor(color)">Delete</a>
             <a clipboard on-copied="$parent.clipSuccess(color)" text="color">Copy Hex</a> 
         </div>
@@ -36,7 +35,7 @@
 
   <div class="clear"></div>
 
-  <a ng-click="deletePalette(palette)"><button class="waves-effect waves-light btn">Delete Palette</button></a>
+  <a ng-click="deletePalette(palette)"><button class="waves-effect waves-light grey lighten-1 btn delete-btn">Delete Palette</button></a>
 
   <span  ng-include="'partials/new-color.html'"></span>
 

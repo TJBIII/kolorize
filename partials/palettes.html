@@ -5,12 +5,10 @@
       <h1>My Palettes</h1>
     </div>
 
-    <div class="col s12 l6">
-      <a href="#/new-palette"><button class="waves-effect waves-light btn-large create-btn"><i class="material-icons right">palette</i>Create New Palette</button></a>
+    <div class="col s12 l6 center">
+      <a href="#/new-palette"><button class="waves-effect waves-light grey lighten-1 btn-large create-btn"><i class="material-icons right">palette</i>Create New Palette</button></a>
     </div>
   </div>
-
-
 
   <section>
     <div class="row">
@@ -20,35 +18,32 @@
       </div>
     </div>
 
-
-  <div class="row">
-    <div ng-repeat="palette in palettes | filter: {name : search}">
-      <div class="col s12">
-        <h4>{{palette.name || "Unamed Palette"}}
-          <span ng-if="palette.forked">
-            <div class="chip forked">
-              Forked
+    <div class="row">
+      <div ng-repeat="palette in palettes | filter: {name : search}">
+        <div class="col s12">
+          <h4>{{palette.name || "Unamed Palette"}}
+            <span ng-if="palette.forked">
+              <div class="chip forked">
+                Forked
+              </div>
+            </span>
+          </h4>
+        </div>
+        <div class="col s8">
+          <div class="row">
+            <div ng-repeat="color in palette.colors">
+              <div ng-class="palette.colors.length > 4 ? 's1' : 's2'" class="color col" style="background-color: {{color}}"></div>
             </div>
-          </span>
-        </h4>
-      </div>
-      <div class="col s8">
-        <div class="row">
-          <div ng-repeat="color in palette.colors">
-            <div ng-class="palette.colors.length > 4 ? 's1' : 's2'" class="color col" style="background-color: {{color}}"></div>
           </div>
         </div>
+        <div class="col s4">
+          <a href="#/preview" ng-click="setChosenPalette(palette)"><button class="waves-effect waves-light btn grey lighten-1">Preview</button></a>
+          <a href="#/edit-palette" ng-click="setChosenPalette(palette)"><button class="waves-effect waves-light btn grey lighten-1">Edit</button></a>
+        </div>
+        <!-- clear before the next palette -->
+        <div class="clear"></div>
       </div>
-      <div class="col s4">
-        <a href="#/preview" ng-click="setChosenPalette(palette)"><button class="waves-effect waves-light btn grey lighten-1">Preview</button></a>
-        <a href="#/edit-palette" ng-click="setChosenPalette(palette)"><button class="waves-effect waves-light btn grey lighten-1">Edit</button></a>
-      </div>
-      <!-- clear before the next palette -->
-      <div class="clear"></div>
     </div>
-
-
-  </div>
 
   </section>
 
