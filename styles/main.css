@@ -2,7 +2,6 @@ h1 {
   font-family: 'Orbitron', sans-serif;
 }
 
-
 .color {
   margin: 0 5.5px;
   height:40px;
@@ -240,12 +239,12 @@ h1.header {
     100% { background-color: #81d4fa; }
 
 }
-/****************************/
+
 
 /*********   DECKGRID   *******************/
 .deckgrid[deckgrid]::before {
     /* Specifies that the grid should have a maximum of 4 columns. Each column will have the classes 'column' and 'column-1-4' */
-    content: '4 .column.column-1-4';
+    content: '3 .column.column-1-3';
     font-size: 0; /* See https://github.com/akoenig/angular-deckgrid/issues/14#issuecomment-35728861 */
     visibility: hidden;
 }
@@ -254,17 +253,14 @@ h1.header {
     float: left;
 }
 
-.deckgrid .column-1-4 {
-    width: 25%;
+.deckgrid .column-1-3 {
+    width: 33%;
 }
 
 .deckgrid img {
   height: auto;
   width: 100%;
-  /*padding: 0;
-  margin: 0;*/
 }
-
 
 .deckgrid .column-1-1 {
     width: 100%;
@@ -276,35 +272,14 @@ h1.header {
     }
 }
 
-
-
 .photo {
-    background:#fff url(/styles/spinner.gif) center 30px no-repeat;
+    background:#fff url(/styles/spinner.gif) center 5px no-repeat;
     border:1px solid rgba(0, 0, 0, .15);
     border-radius:3px;
-    margin:0 10px 10px 0;
+    margin:0 -2px -8px 0;
     position:relative;
 }
-
-.photo .photo-index {
-    background:rgba(0, 0, 0, .9);
-    color:#fff;
-    position:absolute;
-    height:100%;
-    text-align:center;
-    width:100%;
-    z-index:99;
-}
-
-/*.photo .photo-index p:first-child {
-    margin-top:10px;
-}*/
 
 .photo .photo-wrapper {
     min-height:60px;
 }
-
-/*.photo .photo-description {
-    padding:15px;
-}*/
-
