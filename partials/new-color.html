@@ -6,33 +6,22 @@
         <div class="col s12">
           <h6>Saturation Scale</h6>
         </div>
-        <div ng-repeat="color in saturationScale" class="saturation-color uppercase">
+        <div ng-repeat="color in saturationScale track by $index" class="saturation-color uppercase">
           <div class="color-small" ng-click="add(color);" style="background-color: {{color}}"></div>
           <div> {{color}} </div>
         </div>
-        <!-- <ul class="saturation" ng-model="saturationScale">
-          <li class="saturation-color" ng-click="add(color)" ng-repeat="color in saturationScale track by $index" style="background-color: {{color}}">
-            {{color}}
-          </li>
-        </ul> -->
       </div>
     
-      <!-- <div class="clear"></div> -->
-
       <button ng-click="setColor(complimentaryColor)" class="waves-effect waves-light btn-large swap-btn"><i class="material-icons left">swap_vert</i>Swap</button>
-
       <div class="clear"></div>
     </span>
-
 
     <span ng-if="complimentaryColor">
       <h6>Complimentary Color</h6>
       <div class="compliment" ng-click="add(complimentaryColor)" style="background-color: {{complimentaryColor}}">
       </div>
       <div class="uppercase"> {{complimentaryColor}}</div>
-      <!-- <div class="clear"></div> -->
     </span>
-
 
     <span ng-if="colorPicker !== '#ffffff'">
       <div class="row">
@@ -54,7 +43,7 @@
       <h4>Cluster Colors</h4>
       <div class="row">
         <div ng-repeat="color in clusterColors" class="cluster-color">
-          <div class="color" ng-click="setColor(color); setLightness()" style="background-color: {{color}}"></div>
+          <div class="color" ng-click="setColor(color); setLightness()" ng-dblclick="add(color)" style="background-color: {{color}}"></div>
         </div>
       </div>
     </span>
@@ -136,10 +125,16 @@
       <h4>Search Results</h4>
       <h6>Click an image to extract a palette from</h6>
     </span>
-    <span ng-repeat="imgSrc in searchImgResults">
-      <img ng-click="analyze(imgSrc); scrollTo('imageCanvas')" ng-src="{{imgSrc}}">
-    </span>
+    <div deckgrid class="deckgrid" source="searchImgResults">
+      <div class="photo">
+        <div class="photo-wrapper">
+          <img src="" data-ng-src="{{card.src}}" ng-click="mother.analyze(card.src); mother.scrollTo('imageCanvas')">
+        </div>
+      </div>
+    </div>
   </div>
+
+
 </div>
 
 <script>$('.collapsible').collapsible();</script>
