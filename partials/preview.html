@@ -4,7 +4,6 @@
     <div class="col s12 l6">
       <h1>Preview</h1>
     </div>
-
     <div class="col s12 l6">
       <span ng-if="$parent.chosenPalette.uid === $parent.getUserID()">
         <a href="#/edit-palette"><button class="waves-effect waves-light grey lighten-1 btn-large create-btn"><i class="material-icons right">palette</i>Edit {{$parent.chosenPalette.name}}</button></a>
@@ -43,7 +42,6 @@
     </div>
   </div>
 
-
   <div id="output">
     <span class="preview" ng-repeat="previewSrc in previews">
       <img ng-click="setModal($index)" ng-src="{{previewSrc}}">
@@ -54,10 +52,8 @@
     <div class="col s12">
       <h4>Templates</h4>
     </div>
-
     <div class="col s12">
       <button class="waves-effect waves-light grey lighten-1 btn template-btn" ng-click="setTemplate('previews/starter-template.html')">Materialize Starter</button>
-      
       <button class="waves-effect waves-light grey lighten-1 btn template-btn" ng-click="setTemplate('previews/one-page.html')">One-Page Starter</button>
     </div>
   </div>
