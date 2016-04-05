@@ -215,6 +215,21 @@ h1.header {
 .palette-group {
   margin: 20px 0;
 }
+
+.plot {
+  margin: 20px auto;
+  height: 450px;
+  width: 600px;
+}
+
+.frame-group {
+  display: inline-block;
+}
+
+.frame-btn {
+  float: left;
+  margin: 2px;
+}
 /********color change on homepage button*********/
 .color-change-btn {
   color: #333;

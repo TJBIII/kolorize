@@ -1,17 +1,43 @@
-<section class="container" style="margin: 50px auto 0 auto">
-  <div id="highChart" style="height: 450px; width: 600px"></div>
+<section class="container">
+  <div class="plot">
+    <div id="highChart" style="height: 450px; width: 600px"></div>
+  </div>
 </section>
 
-<section class="center">
+<section class="container">
     <!-- <button class="btn" ng-click="clearInterval()">Stop</button> -->
+  <h5>Select a Frame</h5>
+</section>
+
+<section>
   <div class="center">
     <br>
-    <div style="display:inline-block" ng-repeat="frame in frames track by $index">
-      <button style="float: left" class="btn" ng-click="setFrame($index)">F{{ $index }}</button>
+    <div class="frame-group" ng-repeat="frame in frames track by $index">
+      <button class="btn frame-btn grey lighten-1" ng-click="setFrame($index)">F{{ $index }}</button>
     </div>
   </div>
-
-
   <!-- <video src="data/flickrsearch.webm" autoplay loop width="600" type='video/webm;codecs="vp8, vorbis"'></video> -->
+</section>
 
+<section class="container">
+  <div class="row">
+    <div class="col s12 center">
+      <h4>K-Means Overview</h4>
+      <p>In general, K-Means attemps to divide <i>n</i> points into <i>k</i> clusters, where each <i>n<sub>i</sub></i> is assigned to the cluster with the nearest mean. The algorithm will take in <i>k</i> as a parameter and return the clusters. 
+    </div>
+    <div class="col l5 s12">
+      <h5>Initialization - Forgy Method</h5>
+      <p>A common initialization method, and the one used in this implementation, is the Forgy method. To start, <i>k</i> points are selected at random and used as the starting cluster centers.</p>
+    </div>
+    <div class="col l7 s12">
+      <h5>Clustering - Lloyd's Algorithm</h5>
+      <p>
+        <b>1. Assignment-</b> Assign each of the <i>n</i> points to the closest mean (cluster center).
+        <br>
+        <b>2. Update-</b> Compute a new center for each cluster by averaging all of the points assigned to it.
+        <br>
+        <b>3. Check-</b> If the cluster centers have moved by more than some amount, repeat. If the centers have moved less than some minimum difference, stop.
+      </p>
+    </div>
+  </div>
 </section>
