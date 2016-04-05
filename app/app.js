@@ -36,6 +36,10 @@ app.config(["$routeProvider",
         templateUrl: "partials/login.html",
         controller: "LoginCtrl"
       }).
+      when("/about", {
+        templateUrl: "partials/about.html",
+        controller: "AboutCtrl"
+      }).
       when("/palettes", {
         templateUrl: "partials/palettes.html",
         controller: "PaletteCtrl",

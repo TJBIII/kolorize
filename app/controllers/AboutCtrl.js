@@ -200,16 +200,16 @@ let rawData = [ga0, ga1, ga2, ga3, ga4, ga5, ga6, ga7, ga8, ga9, ga10, ga11];
         });
 
 
-    var intervalID = window.setInterval(updateChart, 2000);
+    // var intervalID = window.setInterval(updateChart, 2000);
 
-    $scope.clearInterval = function () {
-      console.log("clearing");
-      window.clearInterval(intervalID);
-      // clear();
-    }
+    // $scope.clearInterval = function () {
+    //   console.log("clearing");
+    //   window.clearInterval(intervalID);
+    //   // clear();
+    // }
 
     $scope.setFrame = function (idx) {
-      $scope.clearInterval();
+      // $scope.clearInterval();
 
       let data = rawData[idx];
 

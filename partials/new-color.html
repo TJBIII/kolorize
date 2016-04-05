@@ -12,7 +12,7 @@
         </div>
       </div>
     
-      <button ng-click="setColor(complimentaryColor)" class="waves-effect waves-light btn-large swap-btn"><i class="material-icons left">swap_vert</i>Swap</button>
+      <button ng-click="setColor(complimentaryColor)" class="waves-effect waves-light btn-large grey lighten-1 swap-btn"><i class="material-icons left">swap_vert</i>Swap</button>
       <div class="clear"></div>
     </span>
 
@@ -65,7 +65,7 @@
           </form>
         </div>
       </div>
-      <button ng-click="processImage()" class="waves-effect waves-light btn">Process</button>
+      <button ng-click="processImage()" class="waves-effect waves-light grey lighten-1 btn">Process</button>
     </span>
   </div>
 
@@ -79,7 +79,7 @@
       <div class="collapsible-body">
         <div class="valign-wrapper">
           <input type="color" ng-model="colorPicker" ng-change="updateScales(); compliment(); setLightness()"/>
-          <button ng-click="add(colorPicker)" class="waves-effect waves-light btn">Add to Palette</button>
+          <button ng-click="add(colorPicker)" class="waves-effect waves-light grey lighten-1 btn">Add to Palette</button>
         </div>
       </div>
     </li>
@@ -104,7 +104,7 @@
       <div class="collapsible-body">
         <p>
           <input type="text" ng-model="searchTerm" placeholder="Search Flickr...">
-          <button ng-click="flickrSearch()" class="waves-effect waves-light btn">Search</button>
+          <button ng-click="flickrSearch()" class="waves-effect waves-light grey lighten-1 btn">Search</button>
         </p>
       </div>
     </li>
