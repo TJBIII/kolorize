@@ -64,6 +64,5 @@ app.controller("NewPaletteCtrl",
       $('#save-modal').closeModal();
       $scope.$parent.saveAlert = false;
     }
-}
-
+  }
 ]);

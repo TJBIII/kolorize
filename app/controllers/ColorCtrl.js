@@ -26,7 +26,7 @@ app.controller("ColorCtrl",
     $scope.imageUploaded = false;
     $scope.k = 3;
 
-
+    //flickr search variables
     $scope.searchTerm;
     $scope.searchImgResults;
     $scope.flickrLoader = false;
@@ -40,11 +40,15 @@ app.controller("ColorCtrl",
     });
 
 
+    let hslcolor,
+        hslSaturationScale,
+        hexSaturationScale;
+
     let getSaturationScale = function (color) {
       //return the saturation scale for the input color as an array of hex values
-      let hslcolor = colorspace.hexToHsl(color);
-      let hslSaturationScale = colorscale.saturationScaleHSL(hslcolor, 0.1, 10);
-      let hexSaturationScale = hslSaturationScale.map((hslArr) => colorspace.hslToHex(hslArr));
+      hslcolor = colorspace.hexToHsl(color);
+      hslSaturationScale = colorscale.saturationScaleHSL(hslcolor, 0.1, 10);
+      hexSaturationScale = hslSaturationScale.map((hslArr) => colorspace.hslToHex(hslArr));
 
       return hexSaturationScale;
     }
@@ -89,16 +93,25 @@ app.controller("ColorCtrl",
       $scope.pickerLightness = colorspace.getLightnessFromHex($scope.colorPicker);
     }
 
+
+    let hex,
+        hsl,
+        h,
+        s,
+        l,
+        rgb,
+        hexColor;
+
     $scope.hexFromLightness = function () {
-      let hex = $scope.colorPicker;
-      let hsl = colorspace.hexToHsl(hex);
-      let h = hsl[0];
-      let s = hsl[1] * 100;
-      let l = parseInt($scope.pickerLightness);
+      hex = $scope.colorPicker;
+      hsl = colorspace.hexToHsl(hex);
+      h = hsl[0];
+      s = hsl[1] * 100;
+      l = parseInt($scope.pickerLightness);
 
-      let rgb = colorspace.hslToRgb([h,s,l]);
+      rgb = colorspace.hslToRgb([h,s,l]);
 
-      let hexColor = colorspace.rgbToHex(rgb);
+      hexColor = colorspace.rgbToHex(rgb);
       // console.log("hexColor", hexColor);
 
       return hexColor;
@@ -112,13 +125,12 @@ app.controller("ColorCtrl",
       ctx = canvas.getContext('2d');
       $scope.imageUploaded = true;
       $scope.$apply();
-      var reader = new FileReader();
+      let reader = new FileReader();
       reader.onload = function(event){
-          var img = new Image();
+          let img = new Image();
           img.onload = function(){
               canvas.width = 300;
               canvas.height = 300;
-              // ctx.drawImage(img,0,0);
               let size = imgProcess.fitImageOn(canvas, img, ctx);
               sw = size.sw;
               sh = size.sh;
@@ -162,7 +174,6 @@ app.controller("ColorCtrl",
           $scope.searchImgResults = data.map( function (obj){ 
               return {src: `https://farm${obj.farm}.staticflickr.com/${obj.server}/${obj.id}_${obj.secret}_m.jpg`}
               });
-
           //scroll down to the search results
           $scope.scrollTo("searchResults");
         }, (error) => console.log("error", error))
@@ -204,7 +215,5 @@ app.controller("ColorCtrl",
     $scope.scrollTo= function(idStr) {
       document.getElementById(idStr).scrollIntoView()
     };
-
-}
-
+  }
 ]);
