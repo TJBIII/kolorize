@@ -1,0 +1,17 @@
+<section class="container" style="margin: 50px auto 0 auto">
+  <div id="highChart" style="height: 450px; width: 600px"></div>
+</section>
+
+<section class="center">
+    <button class="btn" ng-click="clearInterval()">Stop</button>
+  <div class="center">
+    <br>
+    <div style="display:inline-block" ng-repeat="frame in frames track by $index">
+      <button style="float: left" class="btn" ng-click="setFrame($index)">F{{ $index }}</button>
+    </div>
+  </div>
+
+
+  <!-- <video src="data/flickrsearch.webm" autoplay loop width="600" type='video/webm;codecs="vp8, vorbis"'></video> -->
+
+</section>
