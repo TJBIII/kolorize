@@ -16,7 +16,7 @@
 
     <div class="row">
       <div class="palette-group" ng-repeat="palette in palettes | filter: {name: search}">
-      <h4>{{palette.name || "Unamed Palette"}}</h4>
+      <h4>{{palette.name || "Unamed Palette"}} <span><h6>By {{ palette.uName }}</h6></span></h4>
         <div class="col s8">
           <div class="row">
             <div ng-repeat="color in palette.colors">

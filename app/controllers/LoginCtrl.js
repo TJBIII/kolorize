@@ -14,7 +14,7 @@ app.controller("LoginCtrl",
     let ref = new Firebase(firebaseURL);
 
     // Variables on $scope for use in DOM
-    $scope.account = { email: "", password: "" };
+    $scope.account = { email: "", password: "", name: ""};
     $scope.message = "";
 
     /*
@@ -30,6 +30,9 @@ app.controller("LoginCtrl",
           console.log(`Error creating user: ${error}`);
         } else {
           console.log(`Created user account with uid: ${authData.uid}`);
+          //add the new user's information to firebase
+          let userObj = { uid: authData.uid, name: $scope.account.name}
+          authFactory.storeUser(userObj);
           $scope.login();
         }
       });
