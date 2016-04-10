@@ -32,7 +32,7 @@ app.controller("LoginCtrl",
         } else {
           console.log(`Created user account with uid: ${authData.uid}`);
           //add the new user's information to firebase
-          let userObj = { uid: authData.uid, uName: $scope.account.userName}
+          let userObj = { uid: authData.uid, uName: $scope.account.userName, name: $scope.account.name}
           authFactory.storeUser(userObj);
           $scope.login();
         }
