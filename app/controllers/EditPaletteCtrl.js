@@ -49,6 +49,8 @@ app.controller("EditPaletteCtrl",
       })
       .done(function() {
         console.log("palette deleted from firebase");
+        //empty chosen palette since it was just deleted
+        $scope.$parent.chosenPalette = {};
         $location.path("/palettes");
         $scope.$apply();
       })
