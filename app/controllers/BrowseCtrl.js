@@ -43,6 +43,8 @@ app.controller("BrowseCtrl", [
             $scope.$parent.palettes.push(paletteCollection[key]);
           }
        })
+        //randomize the order of the palettes
+        $scope.$parent.shuffle($scope.$parent.palettes)
       },
       // Handle reject() from the promise
       err => console.log(err)

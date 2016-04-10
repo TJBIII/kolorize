@@ -28,6 +28,10 @@ app.controller("PageCtrl",
       return userData.uid;
     }
 
+    $scope.isActive = function(viewLocation) {
+      return $location.path().indexOf(viewLocation) === 0;
+    }
+
     /*
       Attempt to register a new user account.
       If successful, immediately log user in.
@@ -65,6 +69,26 @@ app.controller("PageCtrl",
     $scope.clipSuccess = function (color) {
             // console.log('Copied!');
             Materialize.toast(`Copied ${color} to clipboard`, 2000)
+    };
+
+    //https://github.com/coolaj86/knuth-shuffle
+    $scope.shuffle = function (array) {
+      var currentIndex = array.length, temporaryValue, randomIndex;
+
+      // While there remain elements to shuffle...
+      while (0 !== currentIndex) {
+
+        // Pick a remaining element...
+        randomIndex = Math.floor(Math.random() * currentIndex);
+        currentIndex -= 1;
+
+        // And swap it with the current element.
+        temporaryValue = array[currentIndex];
+        array[currentIndex] = array[randomIndex];
+        array[randomIndex] = temporaryValue;
+      }
+
+      return array;
     };
   }
 ]);
