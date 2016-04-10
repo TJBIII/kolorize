@@ -19,7 +19,7 @@
         <label for="password">Password</label>
       </div>
     <div class="center">
-      <button ng-if="registerMode" class="waves-effect waves-light grey lighten-1 btn btn-large" ng-click="register()">Sign Up</button>
+      <button ng-if="registerMode" class="waves-effect waves-light grey lighten-1 btn btn-large" ng-click="validate()">Sign Up</button>
       <button ng-if="!registerMode" class="waves-effect waves-light grey lighten-1 btn btn-large" ng-click="login()">Login</button>
       <a href="" ng-click="registerMode = !registerMode">
         <h5 ng-if="!registerMode">Don't have an account?</h5>

@@ -22,7 +22,7 @@ app.controller("BrowseCtrl", [
 
     userFactory.getUserInfo()
     .then((userInfo) => {
-      // console.log("userInfo", userInfo[Object.keys(userInfo)].uName);
+      console.log("userInfo", userInfo[Object.keys(userInfo)].uName);
       uName = userInfo[Object.keys(userInfo)].uName
     });
     
