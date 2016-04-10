@@ -7,8 +7,9 @@ app.controller("NewPaletteCtrl",
   "firebaseURL",
   "authFactory",
   "$location",
+  "userFactory",
 
-  function ($scope, $http, firebaseURL, authFactory, $location) {
+  function ($scope, $http, firebaseURL, authFactory, $location, userFactory) {
 
     //used for the save modal if user tries to navigate away before saving
     $scope.$parent.saveAlert = true;
@@ -17,6 +18,15 @@ app.controller("NewPaletteCtrl",
     $scope.$parent.chosenPalette = { colors: [], name:"" };
 
     $scope.palette = $scope.$parent.chosenPalette;
+
+    //hold the username
+    let uName;
+
+    userFactory.getUserInfo()
+    .then((userInfo) => {
+      // console.log("userInfo", userInfo[Object.keys(userInfo)].uName);
+      uName = userInfo[Object.keys(userInfo)].uName
+    });
 
 
     $scope.savePalette = function () {
@@ -28,7 +38,8 @@ app.controller("NewPaletteCtrl",
         name: $scope.palette.name,
         colors: $scope.palette.colors.join(','),
         uid: user.uid,
-        forked: false
+        forked: false,
+        uName: uName
       };
       console.log("newPalette", newPalette);
 

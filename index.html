@@ -14,7 +14,7 @@
 
   <div ng-controller="PageCtrl">
     <nav ng-include="'partials/nav.html'"></nav>
-    <div ng-view></div>
+    <div ng-view autoscroll="true"></div>
   </div>
 
 
@@ -38,6 +38,7 @@
   <script src="app/factories/ColorscaleFactory.js"></script>
   <script src="app/factories/ImgProcessFactory.js"></script>
   <script src="app/factories/KmeansFactory.js"></script>
+  <script src="app/factories/UserFactory.js"></script>
 
   <script src="app/controllers/PageCtrl.js"></script>
   <script src="app/controllers/LoginCtrl.js"></script>

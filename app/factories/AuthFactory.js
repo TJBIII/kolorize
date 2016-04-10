@@ -45,10 +45,10 @@ app.factory("authFactory", ($http, firebaseURL) => {
     /*
       Authenticate the client via Firebase
      */
-    storeUser (authData) {
+    storeUser (userObj) {
       // console.log("authData",authData);
       return new Promise((resolve, reject) => {
-        $http.post(`${firebaseURL}/users.json`, JSON.stringify({ uid: authData.uid }))
+        $http.post(`${firebaseURL}/users.json`, JSON.stringify(userObj))
           .then(() => {
             resolve();
           });
