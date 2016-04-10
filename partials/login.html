@@ -1,23 +1,28 @@
 <section class="container center">
-  <div class="login">
-    <h2 class="center">Login or Register</h2>
-      <div class="input-field">
-        <input id="name" type="text" autofocus="true" ng-model="account.name" />
+  <div class="login grey lighten-4">
+    <h2 ng-if="!registerMode" class="center">Login</h2>
+    <h2 ng-if="registerMode" class="center">Sign Up</h2>
+      <div ng-if="registerMode" class="input-field">
+        <input id="name" type="text" autofocus="true" ng-model="account.name" class="validate" />
         <label for="name">Full Name</label>
       </div>
-      <div class="input-field">
-        <input id="username" type="text" ng-model="account.username" />
+      <div ng-if="registerMode" class="input-field">
+        <input id="username" type="text" ng-model="account.username"/>
         <label for="username">Username</label>
       </div>
       <div class="input-field">
-        <input id="email" type="text" ng-model="account.email" />
-        <label for="email">Email</label>
+        <input id="email" type="email" ng-model="account.email" class="validate"/>
+        <label for="email" data-error="Invalid">Email</label>
       </div>
       <div class="input-field">
-        <input id="password" type="password" ng-model="account.password" />
+        <input id="password" type="password" ng-model="account.password" class="validate"/>
         <label for="password">Password</label>
       </div>
-    <button class="waves-effect waves-light grey lighten-1 btn btn-large" ng-click="register()">Register</button>
-    <button class="waves-effect waves-light grey lighten-1 btn btn-large" ng-click="login()">Login</button>
+    <button ng-if="registerMode" class="waves-effect waves-light grey lighten-1 btn btn-large" ng-click="register()">Sign Up</button>
+    <button ng-if="!registerMode" class="waves-effect waves-light grey lighten-1 btn btn-large" ng-click="login()">Login</button>
+    <a href="" ng-click="registerMode = !registerMode">
+      <h5 ng-if="!registerMode">Don't have an account?</h5>
+      <h5 ng-if="registerMode">Already have an account?</h5>
+    </a>
   </div>
 </section>

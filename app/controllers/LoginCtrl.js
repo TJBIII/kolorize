@@ -16,6 +16,7 @@ app.controller("LoginCtrl",
     // Variables on $scope for use in DOM
     $scope.account = { email: "", password: "", name: "", userName: ""};
     $scope.message = "";
+    $scope.registerMode = false;
 
     /*
       Attempt to register a new user account.

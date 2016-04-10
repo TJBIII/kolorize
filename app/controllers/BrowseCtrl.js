@@ -7,14 +7,25 @@ app.controller("BrowseCtrl", [
   "paletteFactory",
   "firebaseURL",
   "authFactory",
+  "userFactory",
 
-  function ($scope, $http, $location, paletteFactory, firebaseURL, authFactory) {
+  function ($scope, $http, $location, paletteFactory, firebaseURL, authFactory, userFactory) {
     //empty palettes in parent scope to push updated data set into below
     $scope.$parent.palettes = [];
 
     $scope.search = "";
 
     $scope.userId = authFactory.getUser().uid;
+
+    //hold the username
+    let uName;
+
+    userFactory.getUserInfo()
+    .then((userInfo) => {
+      // console.log("userInfo", userInfo[Object.keys(userInfo)].uName);
+      uName = userInfo[Object.keys(userInfo)].uName
+    });
+    
 
     // Invoke the promise that reads from Firebase
     paletteFactory.getAllPalettes().then(
@@ -43,7 +54,8 @@ app.controller("BrowseCtrl", [
         name: palette.name,
         colors: palette.colors.join(','),
         uid: $scope.userId, 
-        forked: true
+        forked: true,
+        uName: uName
       };
 
       console.log("new forked palette", newPalette);

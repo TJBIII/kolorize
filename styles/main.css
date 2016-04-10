@@ -122,6 +122,11 @@ div.card-content.reset {
   color: black;
 }
 
+.btn-large:hover,
+.btn-large:focus {
+  color: #000;
+}
+
 input[type="color"] {
   height: 100px;
   width: 100px;
@@ -234,6 +239,15 @@ h1.header {
 .overview {
   margin-top: 50px;
 }
+
+.other-logo {
+  height: 80px;
+}
+
+.page-header {
+  color: #90a4ae;
+  text-shadow: 2px 2px 1px black;
+}
 /********color change on homepage button*********/
 .color-change-btn {
   color: #333;
@@ -319,4 +333,19 @@ h1.header {
 
 .photo .photo-wrapper {
     min-height:60px;
+}
+
+/* label focus color */
+.input-field input:focus[type] + label {
+   color: #90a4ae;
+}
+/* label underline focus color */
+.input-field input[type]:focus {
+  border-bottom: 1px solid #90a4ae;
+  box-shadow: 0 1px 0 0 #90a4ae;
+}
+/* valid color */
+.input-field input[type].valid {
+  border-bottom: 1px solid #90a4ae;
+  box-shadow: 0 1px 0 0 #90a4ae;
 }

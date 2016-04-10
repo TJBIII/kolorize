@@ -1,4 +1,54 @@
 <section class="container">
+  <h2 class="center">About Kolorize</h2>
+  <h5 class="center">A color palette tool aimed at developers and designers.</h5>
+  <div class="center">
+      <img class="other-logo" src="styles/images/jasmine.png" alt="Jasmine Logo">
+      <img class="other-logo" src="styles/images/angularjs.png" alt="Angular Logo">
+      <img class="other-logo" src="styles/images/firebase2.png" alt="Firebase Logo">
+      <img class="other-logo" src="styles/images/materialize.png" alt="Firebase Logo">
+      <img class="other-logo" src="styles/images/karma.png" alt="Karma Logo">
+  </div>
+  <p>
+    Colors can be added to a palette from a simple color picker or by extracting colors from images. Behind the scenes, a K-Means clustering technique is used for the color extraction. Images can be uploaded from a user's computer or found by searching tags with the Flickr API. Users can save their palettes and also browse and fork palettes created by other users. There is also the ability to preview HTML templates styled with palette colors. Previews of the template are generated with the palette colors cycled through the different sections (navigation/header, body, and footer), so the user can see the different color combinations without having to manually swap out colors in their CSS.
+  </p>
+</section>
+
+<div class="blue-grey lighten-5">
+  <section class="container overview">
+    <div class="row">
+      <div class="col s12 center">
+        <h3>K-Means Overview</h3>
+        <p><b>In general, K-Means attemps to divide <i>n</i> points into <i>k</i> clusters, where each <i>n<sub>i</sub></i> is assigned to the cluster with the nearest mean. The algorithm will take in <i>k</i> as an argument and return a group of clusters.</b></p>
+      </div>
+      <div class="col l5 s12">
+        <h5>Initialization - Forgy Method</h5>
+        <p>A common initialization method, and the one used in this implementation, is the Forgy method. To start, <i>k</i> points are selected at random and used as the starting cluster centers.</p>
+      </div>
+      <div class="col l7 s12">
+        <h5>Clustering - Lloyd's Algorithm</h5>
+        <p>
+          <b>1. Assignment-</b> Assign each of the <i>n</i> points to the closest mean (cluster center).
+          <br>
+          <b>2. Update-</b> Compute a new center for each cluster by averaging all of the points assigned to it.
+          <br>
+          <b>3. Check-</b> If the cluster centers have moved by more than some amount, repeat. If the centers have moved less than some minimum difference, stop.
+        </p>
+      </div>
+      <div class="col s12">
+        <h5>Discussion</h5>
+        <p>To run the algorithm we have to supply <i>k</i>, the number of clusters, which is a problem since we do not know the optimal value for <i>k</i>. K-Means will always return <i>k</i> clusters, but has no way of telling us if that is the correct number of clusters to fit the data to. One way to counter this is to run the algorithm for a range of <i>k</i> values and then compute what is known as a <a href="https://en.wikipedia.org/wiki/Silhouette_(clustering)">Silhouette coefficient</a> for each point in each resulting group of clusters. The average of the Silhoutte coefficients of all <i>n</i> points tells us how well the data has been clustered. In the context of extracting colors from images, the user's choice of how many colors they want from an image trumps having the optimal number of clusters to fit to the set of pixel data. Still, the input values of <i>k</i> are limited to 3 &le; <i>k</i> &le; 8 since they provide reasonable enough results for most images.
+        </p> 
+
+        <p>It is important to keep the assumptions and limitations of any statistical method in mind when working with it. There are several things to watch out for with K-Means besides the assumption of the number of clusters as discussed above. Like other data sets, the clusters can be skewed by outliers. It would be nice to run a smilar K-Medians algorithm where the cluster centers are the <i>median</i> instead of the mean. Unfortunately, when using the pixel data this is not possible. R,G,B arrays do not have total order (as opposed to numbers, which can always be arranged in order from smallest to largest). The lack of natural order for colors prevents us from calculating the median of our clusters, but some advanced methods can still help minimize the effects of outliers. One idea is to use <a href="http://sites.stat.psu.edu/~hlee/PRESENTATION/SAMSI06.pdf">Convex Hull Peeling</a>.</p>
+
+        <p>K-Means is also sensitive to the initial placement of the cluster centers. It is possible for a center to fall into a local minimum, which will yield poor results. Utilizing what is known as a <i>committee machine</i>, where the algorithm is run many times on the same set of data and the results are combined into a single, final answer, is a common workaround. Unevenly sized clusters are also a concern, as it's possible for larger clusters to be split in half and smaller clusters to not be represented. Overall, when applying a simple version of the K-Means algorithm to image data the results are far from ideal in a statistical sense, but still produce acceptable results in the vast majority of cases.</p>
+        
+      </div>
+    </div>
+  </section>
+</div>
+
+<section class="container">
   <div class="plot">
     <div id="highChart" style="height: 450px; width: 600px"></div>
   </div>
@@ -17,37 +67,4 @@
     </div>
   </div>
   <!-- <video src="data/flickrsearch.webm" autoplay loop width="600" type='video/webm;codecs="vp8, vorbis"'></video> -->
-</section>
-
-<section class="container overview">
-  <div class="row">
-    <div class="col s12 center">
-      <h3>K-Means Overview</h3>
-      <p><b>In general, K-Means attemps to divide <i>n</i> points into <i>k</i> clusters, where each <i>n<sub>i</sub></i> is assigned to the cluster with the nearest mean. The algorithm will take in <i>k</i> as an argument and return a group of clusters.</b></p>
-    </div>
-    <div class="col l5 s12">
-      <h5>Initialization - Forgy Method</h5>
-      <p>A common initialization method, and the one used in this implementation, is the Forgy method. To start, <i>k</i> points are selected at random and used as the starting cluster centers.</p>
-    </div>
-    <div class="col l7 s12">
-      <h5>Clustering - Lloyd's Algorithm</h5>
-      <p>
-        <b>1. Assignment-</b> Assign each of the <i>n</i> points to the closest mean (cluster center).
-        <br>
-        <b>2. Update-</b> Compute a new center for each cluster by averaging all of the points assigned to it.
-        <br>
-        <b>3. Check-</b> If the cluster centers have moved by more than some amount, repeat. If the centers have moved less than some minimum difference, stop.
-      </p>
-    </div>
-    <div class="col s12">
-      <h5>Discussion</h5>
-      <p>To run the algorithm we have to supply <i>k</i>, the number of clusters, which is a problem since we do not know the optimal value for <i>k</i>. K-Means will always return <i>k</i> clusters, but has no way of telling us if that is the correct number of clusters to fit the data to. One way to counter this is to run the algorithm for a range of <i>k</i> values and then compute what is known as a <a href="https://en.wikipedia.org/wiki/Silhouette_(clustering)">Silhouette coefficient</a> for each point in each resulting group of clusters. The average of the Silhoutte coefficients of all <i>n</i> points tells us how well the data has been clustered. In the context of extracting colors from images, the user's choice of how many colors they want from an image trumps having the optimal number of clusters to fit to the set of pixel data. Still, the input values of <i>k</i> are limited to 3 &le; <i>k</i> &le; 8 since they provide reasonable enough results for most images.
-      </p> 
-
-      <p>It is important to keep the assumptions and limitations of any statistical method in mind when working with it. There are several things to watch out for with K-Means besides the assumption of the number of clusters as discussed above. Like other data sets, the clusters can be skewed by outliers. It would be nice to run a smilar K-Medians algorithm where the cluster centers are the <i>median</i> instead of the mean. Unfortunately, when using the pixel data this is not possible. R,G,B arrays do not have total order (as opposed to numbers, which can always be arranged in order from smallest to largest). The lack of natural order for colors prevents us from calculating the median of our clusters, but some advanced methods can still help minimize the effects of outliers. One idea is to use <a href="http://sites.stat.psu.edu/~hlee/PRESENTATION/SAMSI06.pdf">Convex Hull Peeling</a>.</p>
-
-      <p>K-Means is also sensitive to the initial placement of the cluster centers. It is possible for a center to fall into a local minimum, which will yield poor results. Utilizing what is known as a <i>committee machine</i>, where the algorithm is run many times on the same set of data and the results are combined into a single, final answer, is a common workaround. Unevenly sized clusters are also a concern, as it's possible for larger clusters to be split in half and smaller clusters to not be represented. Overall, when applying a simple version of the K-Means algorithm to image data the results are far from ideal in a statistical sense, but still produce acceptable results in the vast majority of cases.</p>
-      
-    </div>
-  </div>
 </section>
