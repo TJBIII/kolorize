@@ -1,7 +1,7 @@
 <section class="container palette-list">
 
   <div class="row">
-    <div class="input-field col s12 l6">
+    <div class="input-field col s12 l6 top-input">
       <!-- <h1 class="page-header">My Palettes</h1> -->
       <input ng-model="search" id="search" type="text" >
       <label for="search">Search</label>
@@ -12,13 +12,6 @@
   </div>
 
   <section>
-    <!-- <div class="row">
-      <div class="input-field col s12">
-        <input ng-model="search" id="search" type="text" >
-        <label for="search">Search</label>
-      </div>
-    </div> -->
-
     <div class="row">
       <div ng-repeat="palette in palettes | filter: {name : search}">
         <div class="col s12">

@@ -5,6 +5,7 @@ app.factory("userFactory", function ($q, $http, authFactory, firebaseURL){
     getUserInfo() {
       return $q((resolve, reject) => {// Return a promise for our async XHR
         let user = authFactory.getUser();
+        console.log("user", user);
         $http
           .get(`${firebaseURL}/users.json?orderBy="uid"&equalTo="${user.uid}"`)
           .success(

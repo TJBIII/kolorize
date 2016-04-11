@@ -5,12 +5,22 @@ app.controller("PaletteCtrl", [
   "$location",
   "paletteFactory",
   "firebaseURL",
+  "userFactory",
 
-  function ($scope, $location, paletteFactory, firebaseURL) {
+  function ($scope, $location, paletteFactory, firebaseURL, userFactory) {
     //empty palettes in parent scope to push updated data set into below
     $scope.$parent.palettes = [];
 
     $scope.search = "";
+
+    //holded the logged in user's username
+    $scope.uName;
+
+    userFactory.getUserInfo().then((userInfo) => {
+      console.log("user", userInfo);
+      $scope.uName = userInfo[Object.keys(userInfo)].uName
+    });
+
 
     // Invoke the promise that reads from Firebase
     paletteFactory.getUsersPalettes().then(

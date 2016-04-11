@@ -11,8 +11,9 @@ app.controller("PageCtrl",
   "imgProcessFactory",
   "kmeansFactory",
   "colorscaleFactory",
+  "userFactory",
 
-  function ($scope, $location, $http, authFactory, firebaseURL, colorspace,  imgProcess, kmeans, colorscale) {
+  function ($scope, $location, $http, authFactory, firebaseURL, colorspace,  imgProcess, kmeans, colorscale, userFactory) {
 
     $scope.palettes = [];
 
