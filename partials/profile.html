@@ -16,7 +16,13 @@
 
     <div class="row">
       <div class="palette-group" ng-repeat="palette in palettes | filter: {name: search}">
-      <h4>{{palette.name || "Unamed Palette"}} <span><h6>By: <a href="#/profile/{{palette.uName}}">{{ palette.uName }}</a></h6></span></h4>
+        <h4>{{palette.name || "Unamed Palette"}}
+          <span ng-if="palette.forked">
+            <div class="chip forked">
+              Forked
+            </div>
+          </span>
+          <span><h6>By: <a href="#/profile/{{palette.uName}}">{{ palette.uName }}</a></h6></span></h4>
         <div class="col s8">
           <div class="row">
             <div ng-repeat="color in palette.colors">

@@ -11,9 +11,14 @@
     </div>
   </div>
 
+  <section ng-if="!userPalettes.length">
+    <h2>Welcome {{ uName }}!</h2>
+    <h5> It looks like you haven't created any color palettes yet. Click the "Create New Palette" button above to get started. You can also choose "Browse" from the top menu to see what other users have made.</h5>
+  </section>
+
   <section>
     <div class="row">
-      <div ng-repeat="palette in palettes | filter: {name : search}">
+      <div ng-repeat="palette in userPalettes | filter: {name : search}">
         <div class="col s12">
           <h4>{{palette.name || "Unamed Palette"}}
             <span ng-if="palette.forked">

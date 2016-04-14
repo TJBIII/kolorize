@@ -15,7 +15,12 @@ app.controller("PageCtrl",
 
   function ($scope, $location, $http, authFactory, firebaseURL, colorspace,  imgProcess, kmeans, colorscale, userFactory) {
 
+    //store users palettes separate from other palettes so that they can just be updated
+    // if there are any differences once the data is pulled from firebase. (get rid of waiting times)
+    //hold other users palettes/palettes to browse
     $scope.palettes = [];
+    //hold the logged in user's palettes
+    $scope.userPalettes = [];
 
     // Local variables
     let ref = new Firebase(firebaseURL);

@@ -8,9 +8,6 @@ app.controller("PaletteCtrl", [
   "userFactory",
 
   function ($scope, $location, paletteFactory, firebaseURL, userFactory) {
-    //empty palettes in parent scope to push updated data set into below
-    $scope.$parent.palettes = [];
-
     $scope.search = "";
 
     //holded the logged in user's username
@@ -21,6 +18,7 @@ app.controller("PaletteCtrl", [
       $scope.uName = userInfo[Object.keys(userInfo)].uName
     });
 
+    let userPalettesUpdated = [];
 
     // Invoke the promise that reads from Firebase
     paletteFactory.getUsersPalettes().then(
@@ -32,8 +30,10 @@ app.controller("PaletteCtrl", [
           paletteCollection[key].id = key;
           //split colors string into array
           paletteCollection[key].colors = paletteCollection[key].colors.split(',');
-          $scope.$parent.palettes.push(paletteCollection[key]);
-       })
+          userPalettesUpdated.push(paletteCollection[key]);
+       });
+        //update the parent scope userpalettes array that is being displayed on the page
+        $scope.$parent.userPalettes = userPalettesUpdated;
       },
       // Handle reject() from the promise
       err => console.log(err)
