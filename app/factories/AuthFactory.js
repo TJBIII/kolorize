@@ -46,13 +46,17 @@ app.factory("authFactory", ($http, firebaseURL) => {
       Authenticate the client via Firebase
      */
     storeUser (userObj) {
+      console.log("userObj from authfactory", userObj);
       // console.log("authData",authData);
-      return new Promise((resolve, reject) => {
-        $http.post(`${firebaseURL}/users.json`, JSON.stringify(userObj))
-          .then(() => {
-            resolve();
-          });
-      });
+      // return new Promise((resolve, reject) => {
+      //   $http.post(`${firebaseURL}/users.json`, JSON.stringify(userObj))
+      //     .then(() => {
+      //       resolve();
+      //     });
+      // });
+
+      let userRef = ref.child(`users/${userObj.uName}`);
+      userRef.set(userObj);
     }
 
 

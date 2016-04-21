@@ -1,24 +1,24 @@
 <section class="container palette-list">
 
   <div class="row">
-    <div class="col s12 l6">
-      <h1 class="page-header">My Palettes</h1>
+    <div class="input-field col s12 l6 top-input">
+      <!-- <h1 class="page-header">My Palettes</h1> -->
+      <input ng-model="search" id="search" type="text" >
+      <label for="search">Search</label>
     </div>
     <div class="col s12 l6 center">
       <a href="#/new-palette"><button class="waves-effect waves-light grey lighten-1 btn-large create-btn"><i class="material-icons right">palette</i>Create New Palette</button></a>
     </div>
   </div>
 
+  <section ng-if="!userPalettes.length">
+    <h2>Welcome {{ uName }}!</h2>
+    <h5> It looks like you haven't created any color palettes yet. Click the "Create New Palette" button above to get started. You can also choose "Browse" from the top menu to see what other users have made.</h5>
+  </section>
+
   <section>
     <div class="row">
-      <div class="input-field col s12">
-        <input ng-model="search" id="search" type="text" >
-        <label for="search">Search</label>
-      </div>
-    </div>
-
-    <div class="row">
-      <div ng-repeat="palette in palettes | filter: {name : search}">
+      <div ng-repeat="palette in userPalettes | filter: {name : search}">
         <div class="col s12">
           <h4>{{palette.name || "Unamed Palette"}}
             <span ng-if="palette.forked">

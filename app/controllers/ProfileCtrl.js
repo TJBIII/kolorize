@@ -1,6 +1,6 @@
 "use strict";
 
-app.controller("BrowseCtrl", [
+app.controller("ProfileCtrl", [
   "$scope",
   "$http",
   "$location",
@@ -8,48 +8,59 @@ app.controller("BrowseCtrl", [
   "firebaseURL",
   "authFactory",
   "userFactory",
+  "$routeParams",
 
-  function ($scope, $http, $location, paletteFactory, firebaseURL, authFactory, userFactory) {
-    //empty palettes in parent scope to push updated data set into below
-    $scope.$parent.palettes = [];
+  function ($scope, $http, $location, paletteFactory, firebaseURL, authFactory, userFactory, $routeParams) {
 
     $scope.search = "";
 
-    $scope.userId = authFactory.getUser().uid;
+    let profileName = $routeParams.username;
+    let userInfo;
 
-    //hold the username
-    let uName;
+    //empty palettes in parent scope to push updated data set into below
+    $scope.$parent.palettes = [];
 
-    userFactory.getUserInfo()
-    .then((userInfo) => {
-      console.log("userInfo", userInfo[Object.keys(userInfo)].uName);
-      uName = userInfo[Object.keys(userInfo)].uName
-    });
-    
 
-    // Invoke the promise that reads from Firebase
-    paletteFactory.getAllPalettes().then(
+    $scope.profileuName;
+    $scope.profilename;
+
+
+    userFactory.getUserInfoFromUsername(profileName).then(
+      (userInfo) => {
+        userInfo = userInfo[Object.keys(userInfo)];
+        console.log("uid", userInfo);
+        $scope.profileuName = userInfo.uName;
+        $scope.profilename = userInfo.name;
+      });
+
+
+    paletteFactory.getPalettesByUsername(profileName).then(
       // Handle resolve() from the promise
       paletteCollection => {
         console.log("paletteCollection", paletteCollection);
 
         Object.keys(paletteCollection).forEach(key => {
-          //only take palettes not belonging to user
-          if ($scope.userId !== paletteCollection[key].uid){
-
-            paletteCollection[key].id = key;
-            //split colors string into array
-            paletteCollection[key].colors = paletteCollection[key].colors.split(',');
-            $scope.$parent.palettes.push(paletteCollection[key]);
-          }
+          paletteCollection[key].id = key;
+          //split colors string into array
+          paletteCollection[key].colors = paletteCollection[key].colors.split(',');
+          $scope.$parent.palettes.push(paletteCollection[key]);
        })
-        //randomize the order of the palettes
-        $scope.$parent.shuffle($scope.$parent.palettes)
       },
       // Handle reject() from the promise
       err => console.log(err)
     );
 
+    $scope.userId = authFactory.getUser().uid;
+
+    //hold the current user's username
+    let uName;
+
+    userFactory.getUserInfo()
+    .then((userInfo) => {
+      // console.log("userInfo", userInfo[Object.keys(userInfo)].uName);
+      uName = userInfo[Object.keys(userInfo)].uName
+    });
+    
 
     $scope.fork = function (palette) {
       let newPalette = {
@@ -59,7 +70,6 @@ app.controller("BrowseCtrl", [
         forked: true,
         uName: uName
       };
-
       console.log("new forked palette", newPalette);
       // POST the palette to Firebase
       $http.post(`${firebaseURL}/palettes.json`,

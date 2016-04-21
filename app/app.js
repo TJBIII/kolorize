@@ -55,6 +55,11 @@ app.config(["$routeProvider",
         controller: "EditPaletteCtrl",
         resolve: { isAuth }
       }).
+      when("/profile/:username", {
+        templateUrl: "partials/profile.html",
+        controller: "ProfileCtrl",
+        resolve: { isAuth }
+      }).
       when("/preview", {
         templateUrl: "partials/preview.html",
         controller: "PreviewCtrl",

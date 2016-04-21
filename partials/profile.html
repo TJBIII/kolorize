@@ -1,14 +1,14 @@
 <section class="palette-list container">
-
-<!--   <div class="row">
+  <div class="row">
     <div class="col s12 center">
-      <h1 class="page-header">Browse All Palettes</h1>
+      <h1 class="page-header">{{ profileuName }}</h1>
+      <h4>{{ profilename }}</h4>
     </div>
-  </div> -->
+  </div>
 
   <section>
     <div class="row">
-      <div class="input-field col s12 top-input">
+      <div class="input-field col s12">
         <input ng-model="search" id="search" type="text" >
         <label for="search">Search</label>
       </div>
@@ -16,7 +16,13 @@
 
     <div class="row">
       <div class="palette-group" ng-repeat="palette in palettes | filter: {name: search}">
-      <h4>{{palette.name || "Unamed Palette"}} <span><h6>By: <a href="#/profile/{{palette.uName}}">{{ palette.uName }}</a></h6></span></h4>
+        <h4>{{palette.name || "Unamed Palette"}}
+          <span ng-if="palette.forked">
+            <div class="chip forked">
+              Forked
+            </div>
+          </span>
+          <span><h6>By: <a href="#/profile/{{palette.uName}}">{{ palette.uName }}</a></h6></span></h4>
         <div class="col s8">
           <div class="row">
             <div ng-repeat="color in palette.colors">
