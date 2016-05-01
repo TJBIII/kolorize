@@ -41,12 +41,13 @@ app.controller("LoginCtrl",
     $scope.register = () => {
 
       if (validated) {
-        console.log("validated is true");
+        // console.log("validated is true");
         ref.createUser({
           email    : $scope.account.email,
           password : $scope.account.password
         }, (error, authData) => {
           if (error) {
+            Materialize.toast(`${error}`, 4000);
             console.log(`Error creating user: ${error}`);
           } else {
             console.log(`Created user account with uid: ${authData.uid}`);
@@ -56,7 +57,7 @@ app.controller("LoginCtrl",
             $scope.login();
           }
         });
-      }
+      } 
     };
 
     /*
