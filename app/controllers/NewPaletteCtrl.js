@@ -33,6 +33,11 @@ app.controller("NewPaletteCtrl",
       //don't need to show the save alert modal
       $scope.$parent.saveAlert = false;
 
+      if($scope.palette.colors.length  === 0 ){
+        Materialize.toast("Palette must have at least 1 color before saving.", 4000);
+        return;
+      }
+
       let user = authFactory.getUser();
       let newPalette = {
         name: $scope.palette.name,
@@ -41,7 +46,7 @@ app.controller("NewPaletteCtrl",
         forked: false,
         uName: uName
       };
-      console.log("newPalette", newPalette);
+      // console.log("newPalette", newPalette);
 
       // POST the palette to Firebase
       $http.post(`${firebaseURL}/palettes.json`,
