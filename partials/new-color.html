@@ -45,6 +45,10 @@
         <div ng-repeat="color in clusterColors" class="cluster-color">
           <div class="color" ng-click="setColor(color); setLightness()" ng-dblclick="add(color)" style="background-color: {{color}}"></div>
         </div>
+        <div>
+          <p>Click the color block once for more options above. Double click to add directly to palette.</p>
+          <button ng-click="addAllClusterColors()" class="waves-effect waves-light btn-large grey lighten-1 swap-btn">Add All</button>
+        </div>
       </div>
     </span>
 

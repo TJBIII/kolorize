@@ -24,7 +24,6 @@ app.controller("NewPaletteCtrl",
 
     userFactory.getUserInfo()
     .then((userInfo) => {
-      // console.log("userInfo", userInfo[Object.keys(userInfo)].uName);
       uName = userInfo[Object.keys(userInfo)].uName
     });
 
@@ -46,7 +45,6 @@ app.controller("NewPaletteCtrl",
         forked: false,
         uName: uName
       };
-      // console.log("newPalette", newPalette);
 
       // POST the palette to Firebase
       $http.post(`${firebaseURL}/palettes.json`,

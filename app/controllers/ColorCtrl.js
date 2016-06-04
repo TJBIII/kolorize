@@ -82,6 +82,16 @@ app.controller("ColorCtrl",
       }
       $scope.colors.push(newColor);
     }
+
+    $scope.addAllClusterColors = function () {
+      for (let i = 0; i < $scope.clusterColors.length; i++){
+        if ($scope.colors.length >= 8){
+          break;
+        } else {
+          $scope.add($scope.clusterColors[i]);
+        }
+      }
+    }
     
     $scope.setColor = function (color) {
       $scope.colorPicker = color;
